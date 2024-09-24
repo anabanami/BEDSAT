@@ -1,0 +1,3 @@
+
+# Ignore all files
+*.aux *.bbl *.blg *.brf *.log *.out *.toc *.lof *.bcf *.xml *.tmp
