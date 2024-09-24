@@ -1,0 +1,161 @@
+%----------------------------------------------------------------------------------------
+%   PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+% latexmk -pvc -pdf
+\documentclass[12pt, a4paper, openany]{book}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\usepackage[english]{babel}
+
+\usepackage{cite}
+
+\usepackage{datetime}
+\newdateformat{monthyeardate}{%
+  \monthname[\THEMONTH], \THEYEAR}
+
+\usepackage{graphicx}
+\newenvironment{Figure}
+    {\par\medskip\noindent\minipage{\linewidth}}
+    {\endminipage\par\medskip}
+\usepackage{tabularx}
+
+\newenvironment{abstract}
+{\clearpage \thispagestyle{empty} \null \vfill \begin{center} \bfseries \large Abstract \end{center}}
+{\vfill \null \clearpage}
+
+% Colours:
+\usepackage[table]{xcolor} % for setting colors
+\definecolor{purple}{RGB}{117,77,226}
+
+\usepackage[bookmarksopen,
+  pagebackref,
+  pdfpagelayout=TwoPageRight,
+  colorlinks=true,
+  urlcolor=purple,
+  citecolor=purple,
+  filecolor=purple,
+  linkcolor=purple,
+  ]
+{hyperref}
+
+\usepackage{listings}
+\usepackage{xcolor} % Necessary to define custom colors
+
+\definecolor{softblue}{rgb}{0.3, 0.5, 0.8}
+\definecolor{darkergreen}{rgb}{0, 0.5, 0}
+
+\lstset{
+  basicstyle=\ttfamily\small, % Set the typeface to typewriter and small size
+  breaklines=true, % Enable line breaking
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}, % Marker for line breaks
+  numbers=left, % Line numbers on left
+  numberstyle=\tiny, % Set the size of the numbers
+}
+
+% \lstset{
+%     literate=%
+%     {ö}{{\"o}}1
+%     {Ψ}{{$\Psi$}}1
+%     {Φ}{{$\Phi$}}1
+% }
+
+\lstdefinestyle{mystyleC}{
+    language=C,      
+    commentstyle=\color{softblue},
+    morecomment=[l]{//},  % Line comment
+}
+
+\lstdefinestyle{mystylePython}{
+    language=Python,      
+    commentstyle=\color{darkergreen},
+    morecomment=[l]{//},  % Line comment
+}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\Huge}
+
+\newcommand\II{\(\mathcal{I}\)}
+\newcommand\PT{\(\mathcal{PT}\)}
+\newcommand\PP{\(\mathcal{P}\)}
+\newcommand\TT{\(\mathcal{T}\)}
+\newcommand\CPT{\(\mathcal{CPT}\)}
+\newcommand\CC{\(\mathcal{C}\)}
+
+
+% Required packages
+\usepackage{catchfile}
+
+% Command to execute texcount and capture the word count
+\newcommand\wordcount[1]{
+    \immediate\write18{texcount #1.tex | grep "Words in text" | cut -d: -f2 > #1.wordcount.tmp}
+    \CatchFileDef{\mywordcount}{#1.wordcount.tmp}{}
+    \immediate\write18{rm #1.wordcount.tmp} % to remove the temporary file
+    \mywordcount % to print the word count
+}
+
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+    {\Huge BEDSAT:Antarctica}\\ [1cm] 
+    {\Large random writings}\\ [2cm]
+    {\large Ana Fabela Hinojosa\footnote{ana.fabelah@gmail.com}}\\ [1cm]
+    Supervisors:\\
+    Dr. Felicity McCormack\\
+    Dr Jason Roberts\\
+    Dr Richard Jones\\ [2cm]
+
+
+    \includegraphics[scale=0.3]{logo.jpg}\\ [-0.7cm]
+    \textsc{School of Earth, Atmosphere and Environment}\\ [1cm]
+    \monthyeardate\today
+\end{center}
+\end{titlepage}
+
+
+%----------------------------------------------------------------------------------------
+%   QUOTATION PAGE
+%----------------------------------------------------------------------------------------
+% \vspace*{0.2\textheight}
+
+% \noindent{``El alacrán clavándose el aguijón, harto de ser un alacrán pero necesitando de su alacranidad para acabar con el alacrán''.}\bigbreak
+% % \vspace{-2cm}
+% \hfill Julio Cortázar\bigbreak
+
+\begin{abstract}\label{abstracc}
+Antarctica has been losing ice mass over recent decades, contributing to rising sea levels, but there is significant uncertainty regarding the extent and timing of this ice loss due to unknown ice sheet properties and flow processes. One key factor influencing ice flow and loss is bed topography, typically derived from sparse airborne radar surveys with high uncertainties. These uncertainties impact simulations of the Antarctic Ice Sheet (AIS) evolution under climate change. Given the logistical challenges of surveying Antarctica, alternative approaches, including satellite data integration, are needed. Two common methods for estimating bed topography are the mass conservation (MC) method and geostatistics. The MC method uses satellite-derived surface velocity estimates and physical laws of mass and momentum conservation to calculate ice thickness and bed topography, but it is limited to regions where ice flow exceeds 50 meters per year, mostly near the coast. Its accuracy depends on the spacing of ice thickness measurements and uncertainties in ice velocity and surface mass balance. Geostatistical methods refine bed topography resolution using radar-derived measurements, but like MC, they are more effective near the coast. These methods have advanced our understanding of glacier dynamics and other processes but face limitations, especially in the continent's interior. This project proposes a new method, BedSAT, which leverages the mathematical relationship between ice surface elevation and bed topography to estimate bed topography using high-resolution ice surface elevation data, enhancing ice sheet models and reducing uncertainties in bed topography estimates.
+\end{abstract}
+
+% \chapter*{Acknowledgements}
+
+% \tableofcontents
+
+\include{notes1}
+\wordcount{notes1} words in this section.
+% %
+% \include{complexandcomplicated}
+% % \wordcount{complexandcomplicated} words in this section.
+% % 
+% \include{dynamics}
+% % \wordcount{dynamics} words in this section.
+% %
+% \include{Conclusion}
+% % \wordcount{Conclusion} words in this section.
+% %
+% \appendix
+% \include{appendix}
+% % \wordcount{appendix} words in this section.
+
+\bibliographystyle{unsrturl_mod}
+\bibliography{mybib}
+\end{document}
+
+
