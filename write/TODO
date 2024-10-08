@@ -6,3 +6,19 @@ APPLICATION 5240062
 
 Larour et al. (2011) paper, which lays out the ISSM model that we'll be using, and getting your head around the governing equations of ice sheet models (in that paper, but you could follow the rabbit hole to do some more exploration as well). 
 
+SOFTWARE:
+
+latex
+discord
+zotero
+obsidian (?)
+QGIS
+and then a whole bunch of other things: 
+netcdf
+hdf5
+nco
+cdo
+compilers (?)
+all the python packages
+
+Matlab for ISSM
