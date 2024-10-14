@@ -1,4 +1,25 @@
 \chapter{Ice is weird}
+Ice is described as non-Newtonian because its viscosity $(\nu)$ is not constant. A Newtonian fluid (like water) has a constant viscosity regardless of the flow conditions, while a non-Newtonian fluid's viscosity changes based on factors like strain rate. The viscosity of ice depends on how much it’s deforming (shear rate).
+Ice is a slow, shear-thinning fluid. "shear-thinning" means that the viscosity of ice decreases with increasing strain rate. This means that under more strain forces ice becomes "softer" and flows more easily."Slow" means that the flow of ice occurs at very low velocities, that means that the change in flow velocity (time dependent and convective) are approximately zero
+\begin{equation}
+\rho(\vec{u_t} + \vec{u} \dotp \nabla \vec{u}) \approx 0,
+\end{equation}
+This assumptiongreatly simplifies the Navier-Stokes equations for ice flow.
+The equations we use to are the incompressibility condition (the divergence of the velocity field is zero)
+\begin{equation}
+\nabla \vec{u}) = 0,
+\end{equation}
+the force balance equation, i.e. the pressure gradient, the divergence of the stress tensor (viscous forces within the ice) and the gravitational body force acting on the ice all cancel out
+\begin{equation}
+-\nabla p + \nabla\dot\tau_{ij} + \rho g,
+\end{equation}
+And finally Glen flow law
+\begin{equation}
+D_{ij} = A\tau^{n} \tau_{ij},
+\end{equation}
+where the strain rate tensor $D_{ij}$, which describes how fast the ice is deforming is proportional to the deviatoric stress tensor $\tau_{ij}$ and it's magnitude $\tau$, which accounts for the stress caused by deformation (as opposed to isotropic stress like pressure). is the flow law exponent, which determines how strongly the flow rate depends on stress. For ice, Glen's law uses $n=3$, which implies a nonlinear relationship between stress and strain rate, meaning the flow rate accelerates rapidly with increased stress\cite{modelling_ppt}.
+
+This model does not have time derivatives!?
 
 \section{Ice flow over bedrock perturbations}
 This 1970's rheology paper by Budd explains how bedrock irregularities beneath a glacier affect the surface shape of the ice mass. Budd develops a mathematical model to describe the flow of ice over these undulations, considering the ice as a viscous fluid that deforms under stress. The model predicts that the surface shape of the glacier will mirror the bedrock undulations, but shifted out of phase by approximately $\frac{\pi}{2}$ radians. The paper analyzes the damping of different wavelengths of bedrock undulations, finding that waves with a length roughly three times the ice thickness are minimally damped, while shorter or longer waves are significantly damped out. Finally, the implications of this theory proposes the potential for ice to flow uphill, concluding that bedrock undulations with wavelengths several times the ice thickness are most important in controlling ice motion.
