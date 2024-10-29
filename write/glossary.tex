@@ -1,4 +1,5 @@
 \chapter{Glossary of Key Terms}\label{glossary}
+% https://www.antarcticglaciers.org/glaciers-and-climate/numerical-ice-sheet-models/numerical-modelling-glossary/
 \begin{enumerate}
 \item Temperate ice: Ice at or near its pressure-melting point.
 \item Sliding: The movement of a glacier over its bed by sliding rather than internal deformation.
@@ -12,7 +13,18 @@
 \item Coefficient of sliding friction (µ): The ratio of the shear stress to the normal stress during steady-state sliding.
 \item Regelation: The process of melting under pressure and refreezing at lower pressure, potentially contributing to ice sliding.
 \item Asperity: A protrusion or bump on a surface.RoughnessThe unevenness of a surface, characterized by the size and distribution of asperities.
-\item
+\item Shallow Ice Approximation (SIA): A simplified ice flow model that considers only vertical shear stresses and neglects horizontal stress gradients. Suitable for slow-moving ice in the interior of ice sheets.
+\item Shallow Shelf Approximation (SSA): A simplified ice flow model that neglects vertical shear stresses and assumes depth-independent horizontal velocity. Appropriate for modelling floating ice shelves and fast-flowing ice streams
+\item Blatter-Pattyn Approximation (BP): A higher-order ice flow model that incorporates longitudinal stresses, making it suitable for simulating fast-flowing ice streams and regions with significant vertical shear.
+\item Full-Stokes (FS): The most comprehensive and computationally expensive ice flow model, accounting for all stress components. Essential for accurately simulating ice flow near grounding lines.
+\item Ice Sheet System Model (ISSM): A finite element, thermomechanical ice flow model that incorporates SIA, SSA, BP, and FS formulations to simulate ice sheet behaviour at various complexities and spatial resolutions. 
+\item Finite Element Method (FEM): A numerical method for solving partial differential equations by dividing the domain into smaller elements and approximating the solution within each element.
+\item Adaptive Mesh Refinement: A technique used to refine the mesh in regions of high variability or complexity, enhancing model accuracy and efficiency.
+\item Data Assimilation: The process of incorporating observational data into a model to improve its accuracy and predictive capabilities.
+\item Basal Drag Coefficient: A parameter representing the frictional resistance between the ice sheet base and the underlying bedrock.
+\item Grounding Line: The boundary where the ice sheet transitions from grounded ice to floating ice (ice shelf).
+\item Calving: The process by which icebergs break off from the edge of a glacier or ice sheet
+\item InSAR: Interferometric Synthetic Aperture Radar, a remote sensing technique used to measure ice surface velocity.
 \end{enumerate}
 
     WHAT ARE THESE
@@ -34,3 +46,6 @@
     \item{natural-neighbour interpolation}
     \end{itemize}
     }
+
+
+
