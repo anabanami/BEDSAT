@@ -1,7 +1,3 @@
-%----------------------------------------------------------------------------------------
-%   PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
-%----------------------------------------------------------------------------------------
-
 % latexmk -pvc -pdf
 \documentclass[12pt, a4paper, openany]{book}
 \usepackage[margin=2.5cm]{geometry}
@@ -13,7 +9,7 @@
 \usepackage{braket}
 \usepackage[font=scriptsize,labelfont=bf]{caption}
 \usepackage[english]{babel}
-
+\usepackage{pdflscape} 
 \usepackage{cite}
 
 \usepackage{datetime}
@@ -59,13 +55,6 @@
   numberstyle=\tiny, % Set the size of the numbers
 }
 
-% \lstset{
-%     literate=%
-%     {ö}{{\"o}}1
-%     {Ψ}{{$\Psi$}}1
-%     {Φ}{{$\Phi$}}1
-% }
-
 \lstdefinestyle{mystyleC}{
     language=C,      
     commentstyle=\color{softblue},
@@ -81,13 +70,6 @@
 \titleformat{\chapter}[display]
   {\normalfont\bfseries}{}{0pt}{\Huge}
 
-% \newcommand\II{\(\mathcal{I}\)}
-% \newcommand\PT{\(\mathcal{PT}\)}
-% \newcommand\PP{\(\mathcal{P}\)}
-% \newcommand\TT{\(\mathcal{T}\)}
-% \newcommand\CPT{\(\mathcal{CPT}\)}
-% \newcommand\CC{\(\mathcal{C}\)}
-
 
 % Required packages
 \usepackage{catchfile}
@@ -100,24 +82,23 @@
     \mywordcount % to print the word count
 }
 
-
 \begin{document}
 
 \begin{titlepage}
 \begin{center}
     {\Huge BEDSAT:Antarctica}\\ [1cm] 
-    {\Large random writings}\\ [2cm]
-    {\large Ana Fabela Hinojosa\footnote{ana.fabelah@gmail.com}}\\ [1cm]
+    % {\Large random writings}\\ [2cm]
+    % {\Large random writings}\\ [2cm]
+    \vspace{3cm}
+    {\large Ana Fabela Hinojosa\footnote{ana.fabelahinojosa1@monash.edu}}\\ [1cm]
     Supervisors:\\
     Dr. Felicity McCormack\\
     Dr Jason Roberts\\
     Dr Richard Jones\\ [2cm]
+    \monthyeardate\today\\ [9.5cm]
+    \end{center}
+    \includegraphics[scale=0.12]{monash.jpg}\includegraphics[scale=0.6]{SAEF.png}\\ [1cm]
 
-
-    \includegraphics[scale=0.3]{logo.jpg}\\ [-0.7cm]
-    \textsc{School of Earth, Atmosphere and Environment}\\ [1cm]
-    \monthyeardate\today
-\end{center}
 \end{titlepage}
 
 
@@ -137,9 +118,6 @@ Our model's accuracy (surely?) depends on the spacing of ice thickness measureme
 BedSAT, aims to leverage the mathematical relationship between ice surface elevation (data we have?) and bed topography to estimate the actual bed topography of a surrounding spatial region (in 2D?). 
 \end{abstract}
 
-% The MC method uses satellite-derived surface velocity estimates and physical laws of mass and momentum conservation to calculate ice thickness and bed topography, but it is limited to regions where ice flow exceeds 50 meters per year, mostly near the coast. 
-
-% Geostatistical methods refine bed topography resolution using radar-derived measurements, but like MC, they are more effective near the coast. These methods have advanced our understanding of glacier dynamics and other processes but face limitations, especially in the continent's interior. 
 
 % \chapter*{Acknowledgements}
 
@@ -159,9 +137,10 @@ BedSAT, aims to leverage the mathematical relationship between ice surface eleva
 \include{numerics}
 \wordcount{numerics} words in this section.
 
-
-
-
+\chapter*{Timeline}
+\begin{landscape}
+    \includegraphics[width=\linewidth]{timeline.png}
+\end{landscape}
 
 \include{glossary}
 % \wordcount{glossary} words in this section.
