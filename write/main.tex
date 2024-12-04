@@ -12,6 +12,9 @@
 \usepackage{pdflscape} 
 \usepackage{cite}
 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
 \usepackage{datetime}
 \newdateformat{monthyeardate}{%
   \monthname[\THEMONTH], \THEYEAR}
@@ -86,18 +89,22 @@
 
 \begin{titlepage}
 \begin{center}
-    {\Huge BEDSAT:Antarctica}\\ [1cm] 
-    % {\Large random writings}\\ [2cm]
-    % {\Large random writings}\\ [2cm]
-    \vspace{3cm}
-    {\large Ana Fabela Hinojosa\footnote{ana.fabelahinojosa1@monash.edu}}\\ [1cm]
+    {\Huge BEDSAT: Antarctica}\\ [1cm] 
+    {\Large Exploring what lies beneath using big data and modelling}\\
+    \vspace{5cm}
+    {\large Ana Fabela Hinojosa\footnote{ana.fabelahinojosa1@monash.edu}}\\
+    \monthyeardate\today\\ [1cm]
     Supervisors:\\
     Dr. Felicity McCormack\\
     Dr Jason Roberts\\
     Dr Richard Jones\\ [2cm]
-    \monthyeardate\today\\ [9.5cm]
+    Panel:\\
+    Dr. ??? \\
+    Dr ??? \\
+    Dr ??? \\ [3.5cm]
+    \includegraphics[scale=0.2]{logos.png}
+
     \end{center}
-    \includegraphics[scale=0.12]{monash.jpg}\includegraphics[scale=0.6]{SAEF.png}\\ [1cm]
 
 \end{titlepage}
 
@@ -122,34 +129,42 @@ BedSAT, aims to leverage the mathematical relationship between ice surface eleva
 % \chapter*{Acknowledgements}
 
 % \tableofcontents
-% \include{notes1}
-% \wordcount{notes1} words in this section.
 
-\include{why_it_matters}
-\wordcount{why_it_matters} words in this section.
+\include{literature_review} 
+% INCLUDES research significance
+\wordcount{literature_review} words in this section.
 
-\include{a_review}
-\wordcount{a_review} words in this section.
+% \include{objectives}
+% \wordcount{objectives} words in this section.
 
+% \include{methodology}
+% \wordcount{methodology} words in this section.
+
+% \include{resources}
+% \wordcount{resources} words in this section.
+
+% \include{risk}
+% \wordcount{risk} words in this section.
+
+% progress
 \include{icy_stuff}
 \wordcount{icy_stuff} words in this section.
-
 \include{numerics}
 \wordcount{numerics} words in this section.
 
-\chapter*{Timeline}
 \begin{landscape}
+\section*{Timeline}
     \includegraphics[width=\linewidth]{timeline.png}
 \end{landscape}
 
-\include{glossary}
-% \wordcount{glossary} words in this section.
 % \include{dynamics}
 % % \wordcount{dynamics} words in this section.
 % %
 % \include{Conclusion}
 % % \wordcount{Conclusion} words in this section.
 % %
+% \include{glossary}
+% \wordcount{glossary} words in this section.
 % \appendix
 % \include{appendix}
 % % \wordcount{appendix} words in this section.
