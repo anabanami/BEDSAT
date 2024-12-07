@@ -15,25 +15,45 @@ Several atmospheric circulation patterns govern Antarctic climate variability. T
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section*{The importance of bed topography}
+\section*{Topography of Antarctica}\label{review}
+
 Bed topography is one of the most crucial boundary conditions that influences ice flow and loss from the Antarctic Ice Sheet (AIS)~\cite{Morlighem_2020}. Bed topography datasets are typically generated from airborne radar surveys, which are sparse and unevenly distributed across the Antarctic continent. Interpolation schemes to "gap fill" these sparse datasets yield bed topography estimates that have high uncertainties (i.e. multiple hundreds of metres uncertainty; Morlighem et al., 2020), which propagate in simulations of AIS evolution under climate change~\cite{Castleman_2022}. Given the logistical challenges of accessing large parts of the Antarctic continent, there is a crucial need for alternative approaches that integrate diverse data streams – including satellite data – to derive bed topography.
+
+\subsection*{Critical Factors Influencing Thwaites Glacier's Future Evolution}
+
+% [[Castleman_2022]]
+Thwaites Glacier in West Antarctica represents one of the most significant potential contributors to global sea-level rise (SLR), with an estimated contribution of 0.59 meters. The glacier's future evolution is of particular concern because it could trigger a broader collapse of the West Antarctic Ice Sheet. Understanding the factors that control its stability is therefore crucial for accurate sea-level rise projections.
+
+Research by Castleman et al. \cite{Castleman_2022} demonstrates that two primary factors control Thwaites Glacier's evolution: ocean-driven basal melt rates and bedrock topography. The study reveals that the glacier is highly sensitive to even small changes in bedrock topography within current measurement error bounds, highlighting the critical need for more accurate topographical data.
+
+Current measurement methods rely primarily on ice-penetrating radar, which presents significant challenges. While radar can provide direct measurements along specific tracks, scientists must use interpolation to fill gaps between these tracks. This interpolation introduces statistical uncertainties, particularly in areas where measurements are sparse. These uncertainties significantly affect our ability to model the glacier's future behavior accurately.
+
+To quantify these uncertainties, Castleman et al. \cite{Castleman_2022} employed two-dimensional discrete wavelet transform (DWT) to systematically analyze and modify bedrock topography data. Their method decomposes a bedrock elevation map $B(x,y)$ into four distinct subarrays: $\mathbf{A}_n$ (low-frequency approximation), and three high-frequency components - $\mathbf{H}_n$ (horizontal), $\mathbf{V}_n$ (vertical), and $\mathbf{D}_n$ (diagonal), where $n$ indicates the decomposition level. The researchers selectively amplified the high-frequency components using a multiplier $\alpha > 1$, creating modified arrays $\mathbf{H}'_n = \alpha\mathbf{H}_n$, $\mathbf{V}'_n = \alpha\mathbf{V}_n$, and $\mathbf{D}'_n = \alpha\mathbf{D}_n$. This mathematical approach allowed them to introduce realistic perturbations into bedrock topography models and assess how varying spatial and vertical resolutions affect SLR projections.
+
+One of the study's most significant findings relates to the importance of "pinning points" - bedrock features that can temporarily halt or slow grounding line retreat. While their wavelet-based method could potentially bias results toward more effective pinning points, the study revealed that the location of bedrock features relative to the grounding line and their deviation from mean bed elevation were more significant than feature amplification \cite{Castleman_2022}. Through this analysis, they established crucial requirements for future bedrock measurements: 2 km spatial resolution and $\pm$8 meters vertical accuracy, particularly near the grounding line, to keep SLR uncertainty within $\pm$2 centimeters.
+
+The glacier's vulnerability is further complicated by Marine Ice Sheet Instability (MISI), a feedback mechanism where warmer ocean temperatures accelerate ice shelf melting and calving. This process is particularly concerning for Thwaites Glacier due to its retrograde bedrock slope, which can accelerate grounding line retreat once initiated.
+
+Ocean-driven basal melt rates present another significant source of uncertainty in ice-sheet model simulations. The challenge stems from the stochastic nature of ocean circulation patterns, temporal variability in ocean forcing, and limitations in current ocean models. These factors make it particularly difficult to predict how the ice sheet will respond to future ocean warming scenarios.
+
+This comprehensive study underscores the critical importance of accurate bedrock topography measurements for reliable SLR projections. The findings provide clear guidelines for future mapping efforts and highlight the need for focused attention on grounding line regions where bedrock features have the most significant impact on glacier stability.
+
+% \subsection*{Ockenden_2022}
+% [[Ockenden_2022]]
+
+% >>>>
+
+
+
 
 \subsection*{Currently available data}\label{data}
 \begin{enumerate}
-\item \textbf{The Reference Elevation Model of Antarctica (REMA)} is a time-stamped Digital Surface Model (DSM) of Antarctica of high-resolution (2-meter). REMA version 4.1 DSM strips are a 13-year time series of elevation data derived from satellite imagery using photogrammetric methods\cite{strips_2022}, while REMA version 2 mosaic tiles are made by merging over 12 years of photogrammetric elevation models\cite{mosaics_2022}. 
-\end{enumerate}
+    \item\textbf{Reference Elevation Model of Antarctica (REMA)}\\
+    REMA provides a high-resolution (2-metre) terrain map of nearly the entire continent, allowing for precise measurements of elevation changes over time. REMA supports various remote sensing activities, such as image orthorectification and interferometry, and aids in geodynamic and ice flow modeling, grounding line mapping, and surface process studies. Constructed from hundreds of thousands of Digital Elevation Models (DEMs) derived from high-resolution Maxar satellite imagery (including WorldView and GeoEye data), REMA is calibrated with Cryosat-2 and ICESat altimetry, ensuring high accuracy with uncertainties of less than 1 meter over most areas~\cite{REMA}.
 
+    \item\textbf{ITS\_LIVE Antarctic surface velocities and elevation}\\
+    The NASA-administered ITS\_LIVE website provides automated, high-resolution datasets of Antarctic surface velocities and ice surface elevation change, derived from satellite observations. The datasets are available on annual timesteps from 1985 to present. ITS\_LIVE employs various statistical and computational methods to process data from satellites including Landsat and Sentinel, ensuring precise and timely updates for scientific research~\cite{itslive}.
 
-\section*{Topographic Models of Antarctica: A Review}\label{review}
-Numerical modelling and sedimentary sequence interpretation suggest cyclical periods of ice-sheet expansion and retreat\cite{Young_2011}. Using ice-penetrating radar data to generate a new basal bed topography of the Aurora Subglacial Basin (ASB) in east Antarctica is characterised by a fjord landscape (this land is under $\sim$ under $2-4.5$ km of ice). The ASB has a potentially significant influence on the east Antarctic ice-sheet (EAIS), however there is high uncertainty in estimates of past and present global sea level changes due to the scarcity of bed data\cite{Young_2011}. This uncertainty also limits the accuracy of models used to predict future ice sheet growth or decay.\\
-{\large Methods in\cite{Young_2011}}
-\begin{enumerate}
-    \item A ski-equipped airplane (DC-3T) carried a radar system (HiCARS), which can see through ice. HiCARS sends signals that bounce back to show the thickness of the ice and the shape of the land beneath it.
-    \item The plane flew back and forth over a large area, covering distances of around 1,000 km. The flights took place over two different periods in 2008–2009 and 2009–2010.
-    \item The radar data was cleaned up (processed) to improve accuracy, and they used a special radar system that helps reduce distortions (errors) in the measurements. \textbf{[HOW?]}
-    \item Thickness of the ice was measured using the time it took for the radar signals to travel through the ice and back, assuming the radar signals move through the ice at a specific speed (169 meters per microsecond).
-    \item The height of the land below the ice was calculated by looking at the radar-determined surface of the ice. \textbf{[WHAT?]}
-    \item The radar data was combined with other existing datasets (BEDMAP) to improve the overall picture. They used a computer algorithm to fill in gaps where they didn’t have direct measurements. \textbf{[WHICH?]}
-    \item Determining how rough or uneven the land under the ice was, by using a statistical measure called the ''root mean squared (rms) deviation."
+    \item\textbf{Ice-sheet and Sea-level System Model (ISSM)}~\cite{ISSM}\\
+    ISSM is a finite-element numerical ice sheet model. It has been used to simulate the Antarctic Ice Sheet’s response to various climate scenarios and assess future mass loss contributions to sea level rise [9, 10]. The mesh can be refined to better capture variations in ice flow and driving stresses, enhancing the simulation’s accuracy of surface elevation changes and ice dynamics. This project will involve numerical modeling using advanced mathematical approaches, including the Blatter-Pattyn approximation to the full Stokes equations for ice flow (i.e. conservation of momentum equations). The Blatter-Pattyn approximation strikes a balance between the computationally intensive full Stokes equations and the simpler shallow ice approximation (SIA), retaining vertical shearing and longitudinal stress gradients. This makes it ideal for modeling the dynamics of fast-flowing ice streams and ice shelves at the continental scale, enhancing simulation accuracy while being computationally feasible. Additionally, data assimilation, machine learning, and geostatistics will be employed, with the full Stokes equations used if necessary.
 \end{enumerate}
-In short, Young et al. used advanced radar technology on an airplane to map the ice thickness and the landscape beneath it in a region of Antarctica, combining this data with previous maps for a better overall picture.
