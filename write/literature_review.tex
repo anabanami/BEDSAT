@@ -7,30 +7,25 @@ These changes manifest across multiple interconnected systems. In both polar oce
 
 Antarctica's climate response, however, differs markedly from the Arctic's uniform warming pattern. While West Antarctica has experienced warming in certain regions, East Antarctica has shown minimal overall temperature change in recent decades. These observations carry low confidence due to limited data availability and high variability\cite{O_C_in_changingClimate}. This asymmetric response is partly explained by the Southern Ocean's unique ability to absorb and mix heat into its depths\cite{L_T_C_C}.
  
-%%%%% FELICITY HAS PAPERS ON THE EFFECT IN EAIS DENMAN'S GLACIER ETC
-
 Several atmospheric circulation patterns govern Antarctic climate variability. The Southern Annular Mode (SAM) has maintained a predominantly positive phase during recent summer seasons, resulting in intensified westerly winds around Antarctica - a pattern unprecedented in at least six centuries. While ozone depletion primarily drove SAM variations from the late 1970s through the 1990s, tropical sea surface temperatures have emerged as a dominant influence since 2000\cite{O_C_in_changingClimate}. These tropical ocean temperatures also affect broader Antarctic temperature patterns and Southern Hemisphere mid-latitude circulation\cite{Jacobs_2004}. Additional atmospheric patterns, including the Pacific South American mode and Zonal-wave 3, further modulate Antarctic climate dynamics.
 
-%%%% JESS MACHA EL NINO STUFF?
+\chapter*{Topography of Antarctica}\label{review}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Bed topography is one of the most crucial boundary conditions that influences ice flow and loss from the Antarctic Ice Sheet (AIS)\cite{Morlighem_2020}. Bed topography datasets are typically generated from airborne radar surveys, which are sparse and unevenly distributed across the Antarctic continent. Interpolation schemes to "gap fill" these sparse datasets yield bed topography estimates that have high uncertainties (i.e. multiple hundreds of metres uncertainty; Morlighem et al., 2020), which propagate in simulations of AIS evolution under climate change\cite{Castleman_2022}. Given the logistical challenges of accessing large parts of the Antarctic continent, there is a crucial need for alternative approaches that integrate diverse data streams – including satellite data – to derive bed topography.
 
-\section*{Topography of Antarctica}\label{review}
-
-Bed topography is one of the most crucial boundary conditions that influences ice flow and loss from the Antarctic Ice Sheet (AIS)~\cite{Morlighem_2020}. Bed topography datasets are typically generated from airborne radar surveys, which are sparse and unevenly distributed across the Antarctic continent. Interpolation schemes to "gap fill" these sparse datasets yield bed topography estimates that have high uncertainties (i.e. multiple hundreds of metres uncertainty; Morlighem et al., 2020), which propagate in simulations of AIS evolution under climate change~\cite{Castleman_2022}. Given the logistical challenges of accessing large parts of the Antarctic continent, there is a crucial need for alternative approaches that integrate diverse data streams – including satellite data – to derive bed topography.
-
-\subsection*{Critical Factors Influencing Thwaites Glacier's Future Evolution}
-% [[Castleman_2022]]
+\section*{Critical Factors Influencing Thwaites Glacier's Future Evolution} % [[Castleman_2022]]
 
 Thwaites Glacier in West Antarctica represents one of the most significant potential contributors to global sea-level rise (SLR), with an estimated contribution of 0.59 meters. The glacier's future evolution is of particular concern because it could trigger a broader collapse of the West Antarctic Ice Sheet. Understanding the factors that control its stability is therefore crucial for accurate sea-level rise projections.
 
-Research by Castleman et al. \cite{Castleman_2022} demonstrates that two primary factors control Thwaites Glacier's evolution: ocean-driven basal melt rates and bedrock topography. The study reveals that the glacier is highly sensitive to even small changes in bedrock topography within current measurement error bounds, highlighting the critical need for more accurate topographical data.
+Research by Castleman et al.\cite{Castleman_2022} demonstrates that two primary factors control Thwaites Glacier's evolution: ocean-driven basal melt rates and bedrock topography. The study reveals that the glacier is highly sensitive to even small changes in bedrock topography within current measurement error bounds, highlighting the critical need for more accurate topographical data.
 
 Current measurement methods rely primarily on ice-penetrating radar, which presents significant challenges. While radar can provide direct measurements along specific tracks, scientists must use interpolation to fill gaps between these tracks. This interpolation introduces statistical uncertainties, particularly in areas where measurements are sparse. These uncertainties significantly affect our ability to model the glacier's future behavior accurately.
 
-To quantify these uncertainties, Castleman et al. \cite{Castleman_2022} employed two-dimensional discrete wavelet transform (DWT) to systematically analyze and modify bedrock topography data. Their method decomposes a bedrock elevation map $B(x,y)$ into four distinct subarrays: $\mathbf{A}_n$ (low-frequency approximation), and three high-frequency components - $\mathbf{H}_n$ (horizontal), $\mathbf{V}_n$ (vertical), and $\mathbf{D}_n$ (diagonal), where $n$ indicates the decomposition level. The researchers selectively amplified the high-frequency components using a multiplier $\alpha > 1$, creating modified arrays $\mathbf{H}'_n = \alpha\mathbf{H}_n$, $\mathbf{V}'_n = \alpha\mathbf{V}_n$, and $\mathbf{D}'_n = \alpha\mathbf{D}_n$. This mathematical approach allowed them to introduce realistic perturbations into bedrock topography models and assess how varying spatial and vertical resolutions affect SLR projections.
+To quantify these uncertainties, Castleman et al.\cite{Castleman_2022} employed two-dimensional discrete wavelet transform (DWT) to systematically analyze and modify bedrock topography data. Their method decomposes a bedrock elevation map $B(x,y)$ into four distinct subarrays: $\mathbf{A}_n$ (low-frequency approximation), and three high-frequency components - $\mathbf{H}_n$ (horizontal), $\mathbf{V}_n$ (vertical), and $\mathbf{D}_n$ (diagonal), where $n$ indicates the decomposition level. 
 
-One of the study's most significant findings relates to the importance of "pinning points" - bedrock features that can temporarily halt or slow grounding line retreat. While their wavelet-based method could potentially bias results toward more effective pinning points, the study revealed that the location of bedrock features relative to the grounding line and their deviation from mean bed elevation were more significant than feature amplification \cite{Castleman_2022}. Through this analysis, they established crucial requirements for future bedrock measurements: 2 km spatial resolution and $\pm$8 meters vertical accuracy, particularly near the grounding line, to keep SLR uncertainty within $\pm$2 centimeters.
+The researchers selectively amplified the high-frequency components using a multiplier $\alpha > 1$, creating modified arrays $\mathbf{H}'_n = \alpha\mathbf{H}_n$, $\mathbf{V}'_n = \alpha\mathbf{V}_n$, and $\mathbf{D}'_n = \alpha\mathbf{D}_n$. This mathematical approach allowed them to introduce realistic perturbations into bedrock topography models and assess how varying spatial and vertical resolutions affect SLR projections.
+
+One of the study's most significant findings relates to the importance of "pinning points" - bedrock features that can temporarily halt or slow grounding line retreat. While their wavelet-based method could potentially bias results toward more effective pinning points, the study revealed that the location of bedrock features relative to the grounding line and their deviation from mean bed elevation were more significant than feature amplification\cite{Castleman_2022}. Through this analysis, they established crucial requirements for future bedrock measurements: 2 km spatial resolution and $\pm$8 meters vertical accuracy, particularly near the grounding line, to keep SLR uncertainty within $\pm$2 centimeters.
 
 The glacier's vulnerability is further complicated by Marine Ice Sheet Instability (MISI), a feedback mechanism where warmer ocean temperatures accelerate ice shelf melting and calving. This process is particularly concerning for Thwaites Glacier due to its retrograde bedrock slope, which can accelerate grounding line retreat once initiated.
 
@@ -38,22 +33,71 @@ Ocean-driven basal melt rates present another significant source of uncertainty 
 
 This comprehensive study underscores the critical importance of accurate bedrock topography measurements for reliable SLR projections. The findings provide clear guidelines for future mapping efforts and highlight the need for focused attention on grounding line regions where bedrock features have the most significant impact on glacier stability.
 
-% \subsection*{Ockenden_2022}
-% [[Ockenden_2022]]
+\section*{Ice Sheet Bed Reconstruction through Surface Data Inversion} % [[Ockenden_2022]]
 
-% >>>>
+Understanding the bedrock topography and conditions beneath ice sheets is crucial for predicting marine ice sheet stability and future sea level rise. However, direct measurements through methods like airborne and ground-penetrating radar observations remain sparse, necessitating mathematical approaches to fill these knowledge gaps. Of particular interest is the relationship between surface features and bed conditions, as subtle signatures in surface topography can indicate underlying bedrock features.
 
+\subsection*{Theoretical Framework}
 
+The foundation of modern bed reconstruction methods lies in the shallow-ice-stream equations (SISEs) of motion (MacAyeal, 1989). These equations describe the relationship between ice flow and bed conditions:
+\begin{equation}\partial_{x} (4 h \eta \partial_{x} u + 2 h \eta \partial_y v) + \partial_{y}(h \eta( \partial_{x} v + \partial_{y} u)) - (u/c^{1/m}) = \rho g h ( \partial_{x} (s) \mathrm{cos}(\alpha) - \mathrm{sin}(\alpha))
+\end{equation}\\
+\begin{equation}\partial_{y} (4 h \eta \partial_{y} v + 2 h \eta \partial_x u) + \partial_{x}(h \eta( \partial_{y} u + \partial_{x} v)) - (v/c^{1/m}) = \rho g h ( \partial_{y} (s) \mathrm{cos}(\alpha)
+\end{equation}
 
+where $h$ represents ice thickness, $s$ surface elevation, $(u, v)$ horizontal components of surface velocity, $c$ basal slipperiness, $\eta$ effective ice viscosity, $m$ sliding law parameter, $\rho$ ice density, $\alpha$ mean surface slope in $x$-direction, and $g$ acceleration due to gravity.
 
-\subsection*{Currently available data}\label{data}
+\subsection*{Novel Inversion Methodology}
+
+Ockenden et al. develop an innovative inversion method based on steady-state linear perturbation analysis of the SISEs. Their approach introduces perturbations to study how small changes in ice thickness ($h$), surface elevation ($s$), basal topography ($b$), and ice velocity ($u$) affect ice flow. The method assumes:
 \begin{enumerate}
-    \item\textbf{Reference Elevation Model of Antarctica (REMA)}\\
-    REMA provides a high-resolution (2-metre) terrain map of nearly the entire continent, allowing for precise measurements of elevation changes over time. REMA supports various remote sensing activities, such as image orthorectification and interferometry, and aids in geodynamic and ice flow modeling, grounding line mapping, and surface process studies. Constructed from hundreds of thousands of Digital Elevation Models (DEMs) derived from high-resolution Maxar satellite imagery (including WorldView and GeoEye data), REMA is calibrated with Cryosat-2 and ICESat altimetry, ensuring high accuracy with uncertainties of less than 1 meter over most areas~\cite{REMA}.
-
-    \item\textbf{ITS\_LIVE Antarctic surface velocities and elevation}\\
-    The NASA-administered ITS\_LIVE website provides automated, high-resolution datasets of Antarctic surface velocities and ice surface elevation change, derived from satellite observations. The datasets are available on annual timesteps from 1985 to present. ITS\_LIVE employs various statistical and computational methods to process data from satellites including Landsat and Sentinel, ensuring precise and timely updates for scientific research~\cite{itslive}.
-
-    \item\textbf{Ice-sheet and Sea-level System Model (ISSM)}~\cite{ISSM}\\
-    ISSM is a finite-element numerical ice sheet model. It has been used to simulate the Antarctic Ice Sheet’s response to various climate scenarios and assess future mass loss contributions to sea level rise [9, 10]. The mesh can be refined to better capture variations in ice flow and driving stresses, enhancing the simulation’s accuracy of surface elevation changes and ice dynamics. This project will involve numerical modeling using advanced mathematical approaches, including the Blatter-Pattyn approximation to the full Stokes equations for ice flow (i.e. conservation of momentum equations). The Blatter-Pattyn approximation strikes a balance between the computationally intensive full Stokes equations and the simpler shallow ice approximation (SIA), retaining vertical shearing and longitudinal stress gradients. This makes it ideal for modeling the dynamics of fast-flowing ice streams and ice shelves at the continental scale, enhancing simulation accuracy while being computationally feasible. Additionally, data assimilation, machine learning, and geostatistics will be employed, with the full Stokes equations used if necessary.
+\item A linear viscous medium ($n=1$)
+\item Non-linear sliding law ($m>0$)
+\item Steady-state conditions
+\item Spatially constant zero-order solutions
 \end{enumerate}
+
+The system is linearized around a reference model $(\bar{h}, \bar{s}, \bar{b}, \bar{u}, \bar{v}, \bar{c})$, leading to first-order momentum balance equations:
+\begin{equation}
+4 \eta \bar{h} \partial_{xx} \Delta u + 3 \eta \bar{h} \partial_{xy}^{2} \Delta v + \eta \bar{h} \partial_{yy}^{2}\Delta u -\gamma \Delta u  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_x \Delta s - \rho g \mathrm{sin}(\alpha)\Delta h
+\end{equation}\\
+\begin{equation}
+4 \eta \bar{h} \partial_{yy} \Delta v + 3 \eta \bar{h} \partial_{xy}^{2} \Delta u + \eta \bar{h} \partial_{xx}^{2}\Delta v -\gamma \Delta v  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_y \Delta s
+\end{equation}
+
+\subsection*{Transfer Functions and Implementation}
+The methodology employs transfer functions to describe relationships between bed properties and surface characteristics:
+$$\begin{bmatrix}
+\hat{s} \\
+\hat{u} \\
+\hat{v}
+\end{bmatrix} =\begin{bmatrix}
+T_{sb} & T_{sc} \\
+T_{ub} & T_{uc} \\
+T_{vb} & T_{vc}
+\end{bmatrix}
+\begin{bmatrix}
+\hat{b}\\
+\hat{c}
+\end{bmatrix}$$
+The system is solved using a weighted least-squares approach, minimizing:
+\begin{equation}
+\Sigma s(s_{\mathrm{obs}} - s_{\mathrm{pred}})^2 + \Sigma u(u_{\mathrm{obs}} - u_{\mathrm{pred}})^2 + \Sigma v(v_{\mathrm{obs}} - v_{\mathrm{pred}})^2
+\end{equation}
+
+\subsection*{Application and Limitations}
+The method has been successfully implemented using REMA surface elevation data (8m resolution) and NASA ITS\_LIVE velocity data (120m resolution). It performs particularly well in:
+\begin{itemize}
+\item Areas with moderate topographic gradients in the central trunk of glaciers
+\item Features not aligned with ice flow direction
+\item Medium-wavelength (5-50km) bedrock features
+\end{itemize}
+However, the method faces limitations in cases of:
+\begin{itemize}
+\item Steep topography where shallow-ice-stream approximation breaks down
+\item Features aligned with ice flow direction
+\item Variable slipperiness parameters
+\item Lack of validation data for slipperiness predictions
+\end{itemize}
+This methodology represents a significant advance in our ability to reconstruct bed conditions using surface data, particularly in regions where direct measurements are sparse or unavailable. Its applications to areas like Thwaites Glacier in Antarctica demonstrate its potential for improving our understanding of ice sheet dynamics and their contribution to sea level rise.
+
