@@ -1,4 +1,4 @@
-\chapter*{Antarctica's Landscape}\label{why}
+\chapter{Antarctica's Landscape}\label{why}
 \section*{Climate Impacts and Global Significance}
 
 The polar regions are losing ice, and their oceans are changing rapidly\cite{O_C_in_changingClimate}. The consequences of this polar transition extend to the whole planet and it is crucial for us to understand them to be able to evaluate the costs and benefits of potential mitigation strategies. 
@@ -9,15 +9,35 @@ Antarctica's climate response, however, differs markedly from the Arctic's unifo
  
 To make matters more challenging, there is significant uncertainty in the timing and magnitude of Antarctica's ice loss, largely due to unknowns in ice sheet properties and associated flow processes\cite{IPCC}. Several key physical processes remain poorly constrained in current models. These include bedrock characteristics like ground ``slipperiness'' and roughness, as well as our assumptions of temperature and depth dependent parameters like viscosity, which is often assumed to be constant. Models might also suffer from undesirable three-dimensional effects, where radar profiles may not perfectly align with surface velocity fields, effectively neglecting real transverse ice dynamical effects. Common modeling approximations often break down in regions with variable bed conditions - all of which impact our ability to accurately predict ice sheet behavior\cite{Ockenden_2022}.
 
-\chapter*{Topography of Antarctica}\label{review}
+\chapter{Topography of Antarctica}\label{review}
 
-Bed topography is one of the most crucial boundary conditions that influences ice flow and loss from the Antarctic Ice Sheet (AIS)\cite{Morlighem_2020}. Bed topography datasets are typically generated from airborne radar surveys, which are sparse and unevenly distributed across the Antarctic continent. Interpolation schemes to "gap fill" these sparse datasets yield bed topography estimates that have high uncertainties (i.e. multiple hundreds of metres uncertainty; Morlighem et al., 2020), which propagate in simulations of AIS evolution under climate change\cite{Castleman_2022}. Given the logistical challenges of accessing large parts of the Antarctic continent, there is a crucial need for alternative approaches that integrate diverse and possibly more spatially complete data streams – including satellite data – to derive bed topography.
+Bed topography is one of the most crucial boundary conditions that influences ice flow and loss from the Antarctic Ice Sheet (AIS)\cite{Morlighem_2020}. Bed topography datasets are typically generated from airborne radar surveys, which are sparse and unevenly distributed across the Antarctic continent (see figure \ref{fig:BEDmap}). Interpolation schemes to "gap fill" these sparse datasets yield bed topography estimates that have high uncertainties (i.e. multiple hundreds of metres in elevation uncertainty; Morlighem et al., 2020), which propagate in simulations of AIS evolution under climate change\cite{Castleman_2022}. Given the logistical challenges of accessing large parts of the Antarctic continent, there is a crucial need for alternative approaches that integrate diverse and possibly more spatially complete data streams – including satellite data – to derive bed topography.
 \begin{figure}[H]    % Forces the figure exactly HERE
-    \includegraphics[scale=0.4]{BEDmap3.png}
+    \includegraphics[scale=0.45]{BEDmap3.png}
     \caption{Distribution of BEDmap3 data tracks (Source: bedmap.scar.org).}
+    \label{fig:BEDmap}
 \end{figure}
 
-\section*{A case study:\\Critical Factors Influencing Thwaites Glacier's Future Evolution} % [[Castleman_2022]]
+Obtaining information about the conditions at the base of the ice-sheet currently relies on indirect modelling methods like
+\begin{itemize}
+    \item\textbf{Inversions}
+        \begin{itemize}
+            \item\textbf{Control method inversion}: Basal shear stress distribution information is obtained from remote sensing data and theoretical ice flow models\cite{deRydt_2013}.
+            \item\textbf{Statistical inversion}: Study the simultaneous retrieval (or update) of bed topography and basal slipperiness from surface topography and velocity measurements\cite{deRydt_2013}
+        \end{itemize}
+    \item\textbf{4dvar}: Four-dimensional variational data assimilation - Minimizes the difference between model predictions and observations across a time window. Mainly used to optimize model parameters and initial conditions\cite{Morlighem_Goldberg_2024}.
+
+    \item\textbf{Monte Carlo Mass Conservation}: Random sampling solves mass conservation equations\cite{Brinkerhoff_2016}. 
+
+    \item\textbf{Geostatistics} Statistical methods specialized for analyzing spatially correlated data. In glaciology, it's used to interpolate between sparse measurements and characterize spatial patterns in bed properties, often employing techniques like kriging\cite{Mackie_2020}.
+
+    \item\textbf{EnKF} Ensemble Kalman Filter - A sequential data assimilation method that uses an ensemble of model states to estimate uncertainty and update model parameters based on observations\cite{Morlighem_Goldberg_2024}.
+
+    \item\textbf{linear perturbation analysis} for an outlined example see section \ref{Ockenden_2022}.
+\end{itemize} 
+
+\section{A case study}\label{Castleman_2022}
+\subsection*{Critical Factors Influencing Thwaites Glacier's Future Evolution}
 
 Thwaites Glacier in West Antarctica represents one of the most impactful potential contributors to global sea-level rise (SLR), with an estimated contribution of 0.59 meters. The glacier's future evolution is of particular concern because it could trigger a broader collapse of the West Antarctic Ice Sheet. Understanding the factors that control its stability is therefore crucial for accurate sea-level rise projections.
 
@@ -37,10 +57,10 @@ Ocean-driven basal melt rates present another significant source of uncertainty 
 
 This study underscores the critical importance of accurate bedrock topography measurements for reliable SLR projections. The findings provide clear guidelines for future mapping efforts and highlight the need for focused attention on grounding line regions where bedrock features have the most significant impact on glacier stability.
 
-\section*{Ice Sheet Bed Reconstruction via  Surface Data Inversion} % [[Ockenden_2022]]
+\section{Ice Sheet Bed Reconstruction via  Surface Data Inversion}\label{Ockenden_2022}
 
 Direct observations of ice sheet bed conditions through methods like airborne and ground-penetrating radar or seismic surveying remain sparse, making interpolation and inversion methods necessary for understanding the geophysics. The shape and mechanical properties of the bed significantly influence ice flow behavior, with even small changes in bed conditions potentially causing large variations in predicted ice loss rates. An important observation is that bed features often manifest as subtle signatures in the surface topography above them\cite{Ockenden_2022}.
-The relationship between bed and surface characteristics is core to inversion methods that attempt to reconstruct bed properties from surface observations. Unfortunately, these methods cannot paint a complete picture of the ice sheet model. Inversion methods require careful tuning of parameters like the basal friction coefficient, which are not directly observable, so that modelled velocity matches observations. The mathematical framework for these inversions can be achieved via steady-state linear perturbation analysis of shallow-ice-stream equations\cite{Gudmundsson_2008}.
+The relationship between bed and surface characteristics is core to inversion methods that attempt to reconstruct bed properties from surface observations. Unfortunately, these methods cannot paint a complete picture of the ice sheet model. Inversion methods require careful tuning of parameters which are not directly observable  (e.g. the basal friction coefficient), so that modelled velocity matches observations. The mathematical framework for these inversions can be achieved via steady-state \textbf{linear perturbation analysis} of shallow-ice-stream equations\cite{Gudmundsson_2008}.
 
 \subsection*{Theoretical Framework}
 
@@ -52,9 +72,9 @@ The foundation of modern bed reconstruction methods lies in the shallow-ice-stre
 
 where $h$ represents ice thickness, $s$ surface elevation, $(u, v)$ horizontal components of surface velocity, $c$ basal slipperiness, $\eta$ effective ice viscosity, $m$ sliding law parameter, $\rho$ ice density, $\alpha$ mean surface slope in $x$-direction, and $g$ acceleration due to gravity.
 
-\subsection*{Novel Inversion Methodology}
+\subsection*{Inversion Methodology}
 
-Ockenden et al. develop an innovative inversion method based on steady-state linear perturbation analysis of the SISEs. Their approach introduces perturbations to study how small changes in ice thickness ($h$), surface elevation ($s$), basal topography ($b$), and ice velocity ($u$) affect ice flow. The method assumes:
+The inversion method developed by Ockenden et al. introduces perturbations to study how small changes in ice thickness ($h$), surface elevation ($s$), basal topography ($b$), and ice velocity ($u$) affect ice flow. The method assumes:
 \begin{enumerate}
 \item A linear viscous medium ($n=1$)
 \item Non-linear sliding law ($m>0$)
@@ -62,7 +82,7 @@ Ockenden et al. develop an innovative inversion method based on steady-state lin
 \item Spatially constant zero-order solutions
 \end{enumerate}
 
-The system is linearized around a reference model $(\bar{h}, \bar{s}, \bar{b}, \bar{u}, \bar{v}, \bar{c})$, leading to first-order momentum balance equations:
+The system is linearised around a reference model $(\bar{h}, \bar{s}, \bar{b}, \bar{u}, \bar{v}, \bar{c})$, leading to first-order momentum balance equations:
 \begin{equation}
 4 \eta \bar{h} \partial_{xx} \Delta u + 3 \eta \bar{h} \partial_{xy}^{2} \Delta v + \eta \bar{h} \partial_{yy}^{2}\Delta u -\gamma \Delta u  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_x \Delta s - \rho g \mathrm{sin}(\alpha)\Delta h
 \end{equation}\\
@@ -108,13 +128,4 @@ However, the method faces limitations in cases of:
 \end{itemize}
 This methodology represents a significant advance in our ability to reconstruct bed conditions using surface data, particularly in regions where direct measurements are sparse or unavailable.
 
-
-
-
-% - [ ] inverse / control method, including BedMachine
-% - [ ] 4dvar
-% - [ ] monte carlo mass conservation / geostatistics (Mickey Mackie)
-% - [ ] EnKF
-% - [ ] linear perturbation analysis
-% - others?
 
