@@ -20,18 +20,21 @@ Bed topography is one of the most crucial boundary conditions that influences ic
 
 Obtaining information about the conditions at the base of the ice-sheet currently relies on indirect modelling methods like
 \begin{itemize}
+
     \item\textbf{Inversions}
         \begin{itemize}
-            \item\textbf{Control method inversion}: Basal shear stress distribution information is obtained from remote sensing data and theoretical ice flow models\cite{deRydt_2013}.
-            \item\textbf{Statistical inversion}: Study the simultaneous retrieval (or update) of bed topography and basal slipperiness from surface topography and velocity measurements\cite{deRydt_2013}
+            \item\textbf{Mass conservation}: Used to constrain inverison models and to fill data gaps by taking advantage of the physical laws of conservation of mass and momentum~\cite{Morlighem_2017, Morlighem_2020}. 
+            \item\textbf{Control method inversion}: Basal conditions distribution information is obtained from remote sensing data and theoretical ice flow models\cite{deRydt_2013}.
+            \item\textbf{Statistical inversion}: Study the simultaneous retrieval (or update) of bed topography and basal slipperiness from surface topography and velocity measurements\cite{deRydt_2013}.
         \end{itemize}
+
     \item\textbf{4dvar}: Four-dimensional variational data assimilation - Minimizes the difference between model predictions and observations across a time window. Mainly used to optimize model parameters and initial conditions\cite{Morlighem_Goldberg_2024}.
 
     \item\textbf{Monte Carlo Mass Conservation}: Random sampling solves mass conservation equations\cite{Brinkerhoff_2016}. 
 
     \item\textbf{Geostatistics} Statistical methods specialized for analyzing spatially correlated data. In glaciology, it's used to interpolate between sparse measurements and characterize spatial patterns in bed properties, often employing techniques like kriging\cite{Mackie_2020}.
 
-    \item\textbf{EnKF} Ensemble Kalman Filter - A sequential data assimilation method that uses an ensemble of model states to estimate uncertainty and update model parameters based on observations\cite{Morlighem_Goldberg_2024}.
+    \item\textbf{EnKF} Ensemble Kalman Filter A sequential data assimilation method that uses an ensemble of model states to estimate uncertainty and update model parameters based on observations\cite{Morlighem_Goldberg_2024}.
 
     \item\textbf{linear perturbation analysis} for an outlined example see section \ref{Ockenden_2022}.
 \end{itemize} 
@@ -51,7 +54,8 @@ The researchers selectively amplified the high-frequency components using a mult
 
 One of the study's most significant findings relates to the importance of "pinning points" - bedrock features that can temporarily halt or slow grounding line retreat. While their wavelet-based method could potentially bias results toward more effective pinning points, the study revealed that the location of bedrock features relative to the grounding line and their deviation from mean bed elevation were more significant than feature amplification\cite{Castleman_2022}. Through this analysis, they established crucial requirements for future bedrock measurements: 2 km spatial resolution and $\pm$8 meters vertical accuracy, particularly near the grounding line, to keep SLR uncertainty within $\pm$2 centimeters.
 
-The glacier's vulnerability is further complicated by Marine Ice Sheet Instability (MISI)\cite{Castleman_2022}, a feedback mechanism where warmer ocean temperatures accelerate ice shelf melting and calving. This process is particularly concerning for Thwaites Glacier due to its retrograde bedrock slope\cite{Castleman_2022}, which can accelerate grounding line retreat once initiated.
+The glacier's vulnerability is further complicated by Marine Ice Sheet Instability (MISI)\cite{Castleman_2022}, a feedback mechanism where warmer ocean temperatures accelerate ice shelf melting and calving. This process is particularly concerning for Thwaites Glacier due to its retrograde bedrock slope\cite{Castleman_2022}, which can accelerate grounding line retreat once initiated.% - MISI paragraph could be bigger - this is something that will come back due to its role as the dominant process explaining (mathematical) instabilities e.g., collapse of WAIS during pliocene
+
 
 Ocean-driven basal melt rates present another significant source of uncertainty in ice-sheet model simulations. The challenge stems from the stochastic nature of ocean circulation patterns, temporal variability in ocean forcing, and limitations in current ocean models\cite{Castleman_2022}. These factors make it particularly difficult to predict how the ice sheet will respond to future ocean warming scenarios\cite{Castleman_2022}.
 
