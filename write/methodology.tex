@@ -14,7 +14,10 @@ The project will make use of a number of new remote sensing datasets, namely the
     The NASA-administered ITS\_LIVE website provides automated, high-resolution datasets of Antarctic surface velocities and ice surface elevation change, derived from satellite observations. The datasets are available on annual timesteps from 1985 to present. ITS\_LIVE employs various statistical and computational methods to process data from satellites including Landsat and Sentinel, ensuring precise and timely updates for scientific research~\cite{itslive}.
 
     \item\textbf{BedMachine}\\
-    \cite{Fremand_2023}.
+    \cite{Morlighem_2017}.
+
+    \item\textbf{BedMAP}\\ 
+    A suite of gridded products describing surface elevation, ice-thickness and the seafloor and subglacial bed elevation of Antarctica, based on a compilation of data collected by a large number of researchers using a variety of techniques, with the aim of representing a snap-shot of understanding of the Antarctic region\cite{Fretwell_2013}.
 
     \item\textbf{Ice-sheet and Sea-level System Model (ISSM)}~\cite{ISSM}\\
     ISSM is a finite-element numerical ice sheet model. It has been used to simulate the Antarctic Ice Sheet’s response to various climate scenarios and assess future mass loss contributions to sea level rise [9, 10]. The mesh can be refined to better capture variations in ice flow and driving stresses, enhancing the simulation’s accuracy of surface elevation changes and ice dynamics. This project will involve numerical modeling using advanced mathematical approaches, including the Blatter-Pattyn approximation to the full Stokes equations for ice flow (i.e. conservation of momentum equations). The Blatter-Pattyn approximation strikes a balance between the computationally intensive full Stokes equations and the simpler shallow ice approximation (SIA), retaining vertical shearing and longitudinal stress gradients. This makes it ideal for modeling the dynamics of fast-flowing ice streams and ice shelves at the continental scale, enhancing simulation accuracy while being computationally feasible. Additionally, data assimilation, machine learning, and geostatistics will be employed, with the full Stokes equations used if necessary.
