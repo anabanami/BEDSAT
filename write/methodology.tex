@@ -2,27 +2,80 @@
 
 The first phase of the project (objective 1) is to derive the BedSAT method. This will involve the integration of the Budd~\cite{Budd_1970} mathematical model relating ice surface elevation and bed topography into ISSM, and the development of a methodology for the data assimilation into ISSM. I will use a regional catchment in Antarctica for which relatively more radar data are available and has an indicative range of topography features, e.g. the Aurora Subglacial Basin, East Antarctica, whose margins have been extensively surveyed by the ICECAP project for airborne geophysics~\cite{Young_2011}. The second phase of the project (objective 2) will apply the methodology developed in objective 1 to the whole Antarctic continent, deriving a continent-wide bed topography dataset. Using covariance properties from existing radar surveys, I will generate a number of realisations of bed topography with unique high-resolution, and statistically-consistent topographic roughness. The third phase of the project will use the new bed topography datasets to conduct a sensitivity analysis of ice sheet model projections to 2300 CE, investigating the impact of the new topography and different realisations of roughness on ice and subglacial hydrological flow and ice mass loss from Antarctica.\\
 
+\section*{Plan:}
+\subsection*{Objective 1}
+\begin{enumerate}
+\item Develop a method to interpolate topography that ensures consistent surface expressions with observations
+\item Reduce RMS error between observations and model predictions
+\end{enumerate}
 
-\section*{Currently available data and Framework}\label{data}
-The project will make use of a number of new remote sensing datasets and software tools.
+\subsection*{Key Investigation Areas}
 
 \begin{enumerate}
-    \item\textbf{Reference Elevation Model of Antarctica (REMA)}\\
-    REMA provides a high-resolution (2-metre) terrain map of nearly the entire continent, allowing for precise measurements of elevation changes over time. REMA supports various remote sensing activities, such as image orthorectification and interferometry, and aids in geodynamic and ice flow modeling, grounding line mapping, and surface process studies. Constructed from hundreds of thousands of Digital Elevation Models (DEMs) derived from high-resolution Maxar satellite imagery (including WorldView and GeoEye data), REMA is calibrated with Cryosat-2 and ICESat altimetry, ensuring high elevation accuracy with uncertainties of less than 1 meter over most areas\cite{REMA}.
-
-    \item\textbf{ITS\_LIVE Antarctic surface velocities and elevation}\\
-    The NASA-administered ITS\_LIVE website provides automated, high-resolution datasets of Antarctic surface velocities and ice surface elevation change, derived from satellite observations. The datasets are available on annual timesteps from 1985 to present. ITS\_LIVE employs various statistical and computational methods to process data from satellites including Landsat and Sentinel, ensuring precise and timely updates for scientific research~\cite{itslive}.
-
-    \item\textbf{BedMachine Antarctica}\\
-    A high-resolution map of Antarctic subglacial bed topography that provides unprecedented detail of basal features. The dataset combines multiple ice thickness measurements with mass conservation principles, satellite-derived ice flow velocities, and surface mass balance from regional atmospheric models. This methodology has led to significant corrections in known glacier depths (e.g., 200m deeper for Pine Island Glacier) and revealed previously unknown features, with bed slopes found to be steeper in 62\% of the mapped area compared to previous datasets\cite{Morlighem_2020}.
-
-    \item\textbf{BedMAP}\\ 
-    A suite of gridded products describing surface elevation, ice-thickness and the seafloor and subglacial bed elevation of Antarctica, based on a compilation of data collected by a large number of researchers using a variety of techniques, with the aim of representing a snap-shot of understanding of the Antarctic region\cite{Fretwell_2013}.
-
-    % \item\textbf{ICECAP}\\ 
-
-    \item\textbf{Ice-sheet and Sea-level System Model (ISSM)}\\
-    ISSM is a finite-element numerical ice sheet model. It has been used to simulate the Antarctic Ice Sheet’s response to various climate scenarios and assess future mass loss contributions to sea level rise [9, 10]. The mesh can be refined to better capture variations in ice flow and driving stresses, enhancing the simulation’s accuracy of surface elevation changes and ice dynamics. This project will involve numerical modeling using advanced mathematical approaches, including the Blatter-Pattyn approximation to the full Stokes equations for ice flow (i.e. conservation of momentum equations). The Blatter-Pattyn approximation strikes a balance between the computationally intensive full Stokes equations and the simpler shallow ice approximation (SIA), retaining vertical shearing and longitudinal stress gradients. This makes it ideal for modeling the dynamics of fast-flowing ice streams and ice shelves at the continental scale, enhancing simulation accuracy while being computationally feasible. Additionally, data assimilation, machine learning, and geostatistics will be employed, with the full Stokes equations used if necessary~\cite{ISSM}
+\item\textbf{Model Development Strategy}
+    \begin{itemize}
+    \item Focus on invariant bed traction over the time-frame
+    \item Consider thermal distribution, velocity field, and ice thickness
+    \item Perform cluster analysis to identify characteristics affecting surface expression amplitude and positions
+    \item Note: Ice behavior varies with thickness. Simulate the following different scenarios: (thick ice → slippery base, thin ice → sticky base)
+    \end{itemize}
+\item\textbf{Transfer Functions}
+    \begin{itemize}
+    \item Develop rapid transfer function construction methods
+    \item Use for various conditions and domains
+    \item Validate against ICECAP cross-section radargrams
+    \item Analyze spatial covariance of existing data
+    \item Consider friction roughness and high amplitude variations
+    \end{itemize}
+\item\textbf{Model Validation}
+    \begin{itemize}
+    \item Quantify error reduction
+    \item Identify model breaking points
+    \item Use SVD (Singular Value Decomposition)
+    \item Test grid independence
+    \item Evaluate sensitivity to assumptions
+    \end{itemize}
 \end{enumerate}
 
 
+\subsection*{Confounding Factors to Consider}
+
+Basal friction coefficient effects on:
+\begin{itemize}
+    \item Sliding behavior
+    \item Rheological properties
+    \item Thermomechanical responses (stiff vs soft ice)
+    \item Slippery spots
+    \end{itemize}
+
+
+\subsection*{Workflow Plan}
+
+\begin{enumerate}
+\item\textbf{Initial Modeling Phase}
+    \begin{itemize}
+    \item Exclude surface elevation initially (reserve for control model)
+    \item Use 2D Gaussian with $3\times$ ice thickness
+    \item Analyze REMA spectral components at various frequencies
+    \item Determine reasonable Signal-to-Noise ratio levels
+    \end{itemize}
+
+\item\textbf{Inversion Development}
+    Parameters to consider:
+    \begin{itemize}
+        \item Basal traction
+        \item Internal temperature distribution
+        \item Heat flux
+        \item Additional rheological parameters
+    \end{itemize}
+
+\item\textbf{Model Testing}
+    \begin{itemize}
+    \item Test with ensemble of topographical conditions
+    \item Experiment with Gaussian features of different sizes
+    \item Focus on surface expressions with meaningful results
+    \item Consider Gausberg domain
+    \item Use Jameson cross-flow features (ranging from shallow to deep ice, sticky to sliding bed)
+    \item Incorporate ICECAP data
+    \end{itemize}
+\end{enumerate}
