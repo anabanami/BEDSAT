@@ -8,17 +8,21 @@ The consequences of changes in different kinds of polar ice manifest across mult
 To make matters more challenging, there is significant uncertainty in the timing and magnitude of Antarctica's ice loss, largely due to unknowns in ice sheet properties and associated flow processes\cite{IPCC}. Several key physical processes remain poorly constrained in current models. These include bedrock characteristics like ``slipperiness'' and roughness, as well as our assumptions of temperature and depth dependent parameters like viscosity, which is often assumed to be constant.
 
 
-<><><><><<
-Models might also suffer undesirable three-dimensional effects, where radar profiles may not perfectly align with surface velocity fields, effectively neglecting real transverse ice dynamical effects. 
->><><><><>
+% <><><><><<
+% Models might also suffer undesirable three-dimensional effects, where radar profiles may not perfectly align with surface velocity fields, effectively neglecting real transverse ice dynamical effects. 
 
-can you expand on this? i'm not sure i fully understand what you want to convey here, particularly how the radar data are currently used to constrain ice dynamics and what that means for areas where we have data gaps
+% can you expand on this? i'm not sure i fully understand what you want to convey here, particularly how the radar data are currently used to constrain ice dynamics and what that means for areas where we have data gaps
+% >><><><><>
 
-Model uncertainty increases in regions with variable bed conditions
-
-<><><><><<EXPLAIN WHY>><><><><>
+% Model uncertainty increases in regions with variable bed conditions
+% <><><><><<EXPLAIN WHY>><><><><>
 
  - all of which impact our ability to accurately predict ice sheet behavior\cite{Ockenden_2022}.
+
+
+
+
+
 
 \chapter{Topography of Antarctica}\label{review}
 
@@ -34,7 +38,7 @@ Obtaining information about the conditions at the base of the ice-sheet often re
 
     \item\textbf{Inversions}
         \begin{itemize}
-            \item\textbf{Mass conservation}: Used to constrain inverison models and to fill data gaps by taking advantage of the physical laws of conservation of mass and momentum~\cite{Morlighem_2017, Morlighem_2020}. (Monte Carlo Mass Conservation: Random sampling solves mass conservation equations\cite{Brinkerhoff_2016}).
+            \item\textbf{Mass conservation}: Used to constrain inversion models and to fill data gaps by taking advantage of the physical laws of conservation of mass and momentum~\cite{Morlighem_2017, Morlighem_2020}. (Monte Carlo Mass Conservation: Random sampling solves mass conservation equations\cite{Brinkerhoff_2016}).
             \item\textbf{Control method inversion}: Basal conditions distribution information is obtained from remote sensing data and theoretical ice flow models\cite{deRydt_2013}.
             \item\textbf{Statistical inversion}: Study the simultaneous retrieval (or update) of bed topography and basal slipperiness from surface topography and velocity measurements\cite{deRydt_2013}.
         \end{itemize}
@@ -55,13 +59,8 @@ Thwaites Glacier in West Antarctica represents one of the most impactful potenti
 
 Two primary factors control Thwaites Glacier's evolution: Ocean-driven basal melt rates and bedrock topography\cite{Castleman_2022}. The Castleman et al.\cite{Castleman_2022} study reveals that the glacier is highly sensitive to changes in bedrock topography within current measurement error bounds, highlighting the critical need for more accurate topographical data.
 
-><><><><>
-
-The glacier's vulnerability is further complicated by Marine Ice Sheet Instability (MISI)\cite{Castleman_2022}, a feedback mechanism where warmer ocean temperatures accelerate ice shelf melting and calving. This process is particularly concerning for Thwaites Glacier due to its retrograde bedrock slope\cite{Castleman_2022}, which can accelerate grounding line retreat once initiated.% - MISI paragraph could be bigger - this is something that will come back due to its role as the dominant process explaining (mathematical) instabilities e.g., collapse of WAIS during pliocene
-
-Ocean-driven basal melt rates present another significant source of uncertainty in ice-sheet model simulations. The challenge stems from the stochastic nature of ocean circulation patterns, temporal variability in ocean forcing, and limitations in current ocean models and limited direct ocean observations underneath ice shelves.\cite{Castleman_2022}. These factors make it particularly difficult to predict how the ice sheet will respond to future ocean warming scenarios\cite{Castleman_2022}.
-
-<><><><><><
+The glacier's vulnerability is further complicated by Marine Ice Sheet Instability (MISI)\cite{Castleman_2022}, a feedback mechanism where warmer ocean temperatures accelerate ice shelf melting and calving. Buttressing ice shelves have a stabilizing effect on the ice sheet and can potentially suppress or delay MISI\cite{Werneke_2021}. For ice sheets on retrograde topographies (such as Thwaites glacier), this stabilizing effect fails. In these cases, the Grounding Line (GL)—the transition from grounded to floating ice—undergoes retreat. Once initiated on such topography, grounding line retreat can accelerate\cite{Castleman_2022}.
+Ocean-driven basal melt rates present another significant source of uncertainty in ice-sheet model simulations. This uncertainty stems from multiple factors\cite{Castleman_2022}: the stochastic nature of ocean circulation patterns, temporal variability in ocean forcing, limitations in current ocean models, and limited direct ocean observations underneath ice shelves. These factors make it particularly difficult to predict how the ice sheet will respond to future ocean warming scenarios\cite{Castleman_2022}.
 
 Current methods to generate topography datasets rely primarily on ice-penetrating radar, which presents significant challenges. While radar can provide direct measurements along specific tracks, interpolation is used to fill gaps between these tracks. This interpolation introduces uncertainties, particularly in areas where measurements are sparse. These uncertainties significantly affect our ability to model the glacier's future behavior accurately.
 
@@ -73,22 +72,29 @@ One of the study's most significant findings relates to the importance of "pinni
 
 This study underscores the critical importance of accurate bedrock topography measurements for reliable SLR projections. The findings provide clear guidelines for future mapping efforts and highlight the need for focused attention on grounding line regions where bedrock features have the most significant impact on glacier stability.
 
-\section{Ice Sheet Bed Reconstruction via  Surface Data Inversion}\label{Ockenden_2022}
+\section{Ice Sheet Bed Reconstruction via Surface Data Inversion}\label{Ockenden_2022}
 
 Direct observations of ice sheet bed conditions through methods like airborne and ground-based ice penetrating radar or seismic surveying remain sparse, making interpolation and inversion methods necessary for understanding the geophysics. The shape and mechanical properties of the bed significantly influence ice flow behavior, with even small changes in bed conditions potentially causing large variations in predicted ice loss rates. An important observation is that bed features often manifest as subtle signatures in the surface topography above them\cite{Ockenden_2022}.
-The relationship between bed and surface characteristics is core to inversion methods that attempt to reconstruct bed properties from surface observations. Unfortunately, these methods cannot paint a complete picture of the ice sheet model. Inversion methods require careful tuning of parameters which are not directly observable  (e.g. the basal friction coefficient), so that modelled surface velocity matches observations. The mathematical framework for these inversions can be achieved via steady-state \textbf{linear perturbation analysis} of shallow-ice-stream equations\cite{Gudmundsson_2008}.
+The relationship between bed and surface characteristics is core to inversion methods that attempt to reconstruct bed properties from surface observations. Unfortunately, these methods cannot paint a complete picture of the ice sheet model. Inversion methods require careful tuning of parameters which are not directly observable  (e.g. the basal friction coefficient), so that modelled surface velocity matches observations. The mathematical framework for these inversions can be achieved via steady-state \textbf{linear perturbation analysis} of shallow stream approximation (SSA)\cite{Gudmundsson_2008}.
 
 \subsection*{Theoretical Framework}
 
-The foundation of modern bed reconstruction methods lies in the shallow-ice-stream equations (SISEs) of motion (MacAyeal, 1989). These equations describe the relationship between ice flow and bed conditions:
+%%%this page needs a bit more context so that readers understand what's going on. try and step through a bit more slowly and describe things in a bit more detail. 
+
+% e.g., i'd recommend making sure you have sentences in the different sections that link back to the previous section. in the inversion section, make sure you describe what inversion is and how it relates to the ssa equations, before describing what it assumes. then with the transfer functions, describe how they relate to the previous two paragraphs
+
+These equations describe the relationship between ice flow and bed conditions:
 \begin{equation}\partial_{x} (4 h \eta \partial_{x} u + 2 h \eta \partial_y v) + \partial_{y}(h \eta( \partial_{x} v + \partial_{y} u)) - (u/c^{1/m}) = \rho g h ( \partial_{x} (s) \mathrm{cos}(\alpha) - \mathrm{sin}(\alpha))
-\end{equation}\\
+\end{equation}\label{2.1}\\
 \begin{equation}\partial_{y} (4 h \eta \partial_{y} v + 2 h \eta \partial_x u) + \partial_{x}(h \eta( \partial_{y} u + \partial_{x} v)) - (v/c^{1/m}) = \rho g h ( \partial_{y} (s) \mathrm{cos}(\alpha)
-\end{equation}
+\end{equation}\label{2.2}
 
 where $h$ represents ice thickness, $s$ surface elevation, $(u, v)$ horizontal components of surface velocity, $c$ basal slipperiness, $\eta$ effective ice viscosity, $m$ sliding law parameter, $\rho$ ice density, $\alpha$ mean surface slope in $x$-direction, and $g$ acceleration due to gravity.
 
-\subsection*{Inversion Methodology}
+
+\subsection*{Theoretical Framework}
+
+ % make sure you describe what inversion is and how it relates to the ssa equations, before describing what it assumes. then with the transfer functions, describe how they relate to the previous two paragraphs
 
 The inversion method developed by Ockenden et al. introduces perturbations to study how small changes in ice thickness ($h$), surface elevation ($s$), basal topography ($b$), and ice velocity ($u$) affect ice flow. The method assumes:
 \begin{enumerate}
@@ -98,17 +104,24 @@ The inversion method developed by Ockenden et al. introduces perturbations to st
 \item Spatially constant zero-order solutions
 \end{enumerate}
 
-The system is linearised around a reference model $(\bar{h}, \bar{s}, \bar{b}, \bar{u}, \bar{v}, \bar{c})$, leading to first-order momentum balance equations:
-\begin{equation}
-4 \eta \bar{h} \partial_{xx} \Delta u + 3 \eta \bar{h} \partial_{xy}^{2} \Delta v + \eta \bar{h} \partial_{yy}^{2}\Delta u -\gamma \Delta u  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_x \Delta s - \rho g \mathrm{sin}(\alpha)\Delta h
-\end{equation}\\
-\begin{equation}
-4 \eta \bar{h} \partial_{yy} \Delta v + 3 \eta \bar{h} \partial_{xy}^{2} \Delta u + \eta \bar{h} \partial_{xx}^{2}\Delta v -\gamma \Delta v  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_y \Delta s
-\end{equation}
+% The SSA describes relationship between ice flow and bed conditions:
+% \begin{equation}\partial_{x} (4 h \eta \partial_{x} u + 2 h \eta \partial_y v) + \partial_{y}(h \eta( \partial_{x} v + \partial_{y} u)) - (u/c^{1/m}) = \rho g h ( \partial_{x} (s) \mathrm{cos}(\alpha) - \mathrm{sin}(\alpha))
+% \end{equation}\label{eq:2.1}\\
+% \begin{equation}\partial_{y} (4 h \eta \partial_{y} v + 2 h \eta \partial_x u) + \partial_{x}(h \eta( \partial_{y} u + \partial_{x} v)) - (v/c^{1/m}) = \rho g h ( \partial_{y} (s) \mathrm{cos}(\alpha)
+% \end{equation}\label{eq:2.2}
+
+
+% Equations \ref{eq:2.1} and \ref{eq:2.2} describe a linearised system around a reference model $(\bar{h}, \bar{s}, \bar{b}, \bar{u}, \bar{v}, \bar{c})$, leading to first-order momentum balance equations:
+% \begin{equation}
+% 4 \eta \bar{h} \partial_{xx} \Delta u + 3 \eta \bar{h} \partial_{xy}^{2} \Delta v + \eta \bar{h} \partial_{yy}^{2}\Delta u -\gamma \Delta u  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_x \Delta s - \rho g \mathrm{sin}(\alpha)\Delta h
+% \end{equation}\\
+% \begin{equation}
+% 4 \eta \bar{h} \partial_{yy} \Delta v + 3 \eta \bar{h} \partial_{xy}^{2} \Delta u + \eta \bar{h} \partial_{xx}^{2}\Delta v -\gamma \Delta v  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_y \Delta s
+% \end{equation}
 
 \subsection*{Transfer Functions and Implementation}
 
-The methodology employs transfer functions to describe relationships between bed properties and surface characteristics:
+The methodology in \cite{Ockenden_2022} employs transfer functions to describe relationships between bed properties and surface characteristics:
 $$\begin{bmatrix}
 \hat{s} \\
 \hat{u} \\
@@ -129,7 +142,7 @@ The system is solved using a weighted least-squares approach, minimizing:
 
 \subsection*{Application and Limitations}
 
-The method has been successfully implemented using REMA surface elevation data (8m resolution) and NASA ITS\_LIVE velocity data (120m resolution). It performs particularly well in:
+Ockenden et al. report to have successfully implemented their inversion method using REMA surface elevation data (8m resolution) and NASA ITS\_LIVE velocity data (120m resolution). The method performs particularly well in:
 \begin{itemize}
 \item Areas with moderate topographic gradients in the central trunk of glaciers
 \item Features not aligned with ice flow direction
@@ -142,6 +155,6 @@ However, the method faces limitations in cases of:
 \item Variable slipperiness parameters
 \item Lack of validation data for slipperiness predictions
 \end{itemize}
-This methodology represents a significant advance in our ability to reconstruct bed conditions using surface data, particularly in regions where direct measurements are sparse or unavailable.
+This work represents a significant advance in our ability to reconstruct bed conditions using surface data, particularly in regions where direct measurements are sparse or unavailable.
 
 
