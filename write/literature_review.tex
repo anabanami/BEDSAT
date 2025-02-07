@@ -7,16 +7,7 @@ The consequences of changes in different kinds of polar ice manifest across mult
 
 Antarctica's climate response, however, differs markedly from the Arctic's uniform warming pattern. While West Antarctica has experienced warming in certain regions, East Antarctica has shown minimal overall temperature change in recent decades\cite{O_C_in_changingClimate}. These observations carry low confidence due to limited data availability and high variability\cite{O_C_in_changingClimate}. This asymmetric response is partly explained by the Southern Ocean's unique ability to absorb and mix heat into its depths\cite{L_T_C_C}.
  
-To make matters more challenging, there is significant uncertainty in the timing and magnitude of Antarctica's ice loss, largely due to unknowns in ice sheet properties and associated flow processes\cite{IPCC}. Several key physical processes remain poorly constrained in current models. These include bedrock characteristics like ``slipperiness'' and roughness, as well as our assumptions of temperature and depth dependent parameters like viscosity, which is often assumed to be constant.
-
-% <><><><><<
-% Models might also suffer undesirable three-dimensional effects, where radar profiles may not perfectly align with surface velocity fields, effectively neglecting real transverse ice dynamical effects. 
-
-% can you expand on this? i'm not sure i fully understand what you want to convey here, particularly how the radar data are currently used to constrain ice dynamics and what that means for areas where we have data gaps
-% >><><><><>
-
-% Model uncertainty increases in regions with variable bed conditions
-% <><><><><<EXPLAIN WHY>><><><><>
+To make matters more challenging, there is significant uncertainty in the timing and magnitude of Antarctica's ice loss, largely due to unknowns in ice sheet properties and associated flow processes\cite{IPCC}. Uncertainty increases in regions with variable bed conditions, where characteristics like "slipperiness" and roughness are difficult to verify via direct samples. Additionally, our assumptions about temperature and depth-dependent parameters like viscosity affect several key physical processes. How we use these model variables to constrain ice dynamics where we have data gaps is crucial for our ability to accurately predict ice sheet behavior\cite{Ockenden_2022}.
 
 \chapter{Topography of Antarctica}\label{review}
 
@@ -73,9 +64,9 @@ The relationship between bed and surface characteristics is core to inversion me
 
 \subsection*{Theoretical Framework}
 
- % make sure you describe what inversion is and how it relates to the ssa equations, before describing what it assumes. then with the transfer functions, describe how they relate to the previous two paragraphs
-
-The inversion method developed by Ockenden et al. introduces perturbations to study how small changes in ice thickness ($h$), surface elevation ($s$), basal topography ($b$), and ice velocity ($u$) affect ice flow. The method assumes:
+Inversion is based on the principle that variations in basal topography, slipperiness, and roughness cause disturbances to the surface flow of the ice. By measuring these disturbances in surface velocity and topography, and using equations like the shelfy-stream approximation (SSA) to relate those disturbances back to their source, we can estimate the basal conditions.
+The indirect measurements of basal properties $x$ and $y$ are related through $y=f(x)$, where $f$ is referred to as the forward model, this makes  $x=f^{-1}(y)$ the inversion. The indirect measurements $y$ can be measurements of velocity and topography along the upper surface of a glacier, while the quantity $x$ to be estimated represents basal topography and basal slipperiness\cite{Gudmundsson_2008}.
+The inversion method developed by Ockenden et al. introduces perturbations to study how small changes in ice thickness ($h$), surface elevation ($s$), basal topography ($b$), and ice velocity ($u$) affect ice flow. This means that the method is most accurate when applied to small perturbations, with the assumption that the perturbations are small relative to the mean of each studied property based on a reference state. The method assumes:
 \begin{enumerate}
 \item A linear viscous medium ($n=1$)
 \item Non-linear sliding law ($m>0$)
@@ -83,26 +74,28 @@ The inversion method developed by Ockenden et al. introduces perturbations to st
 \item Spatially constant zero-order solutions
 \end{enumerate}
 
+The SSA system described in Ockenden et al.\cite{Ockenden_2022} is as follows:
+\begin{equation}\partial_{x} (4 h \eta \partial_{x} u + 2 h \eta \partial_y v) + \partial_{y}(h \eta( \partial_{x} v + \partial_{y} u)) - (u/c^{1/m}) = \rho g h ( \partial_{x} (s) \mathrm{cos}(\alpha) - \mathrm{sin}(\alpha))
+\end{equation}\label{eq:2.1}\\
+\begin{equation}\partial_{y} (4 h \eta \partial_{y} v + 2 h \eta \partial_x u) + \partial_{x}(h \eta( \partial_{y} u + \partial_{x} v)) - (v/c^{1/m}) = \rho g h ( \partial_{y} (s) \mathrm{cos}(\alpha)
+\end{equation}\label{eq:2.2}
 
+Equations \ref{eq:2.1} and \ref{eq:2.2} are a linearised system around a reference model $(\bar{h}, \bar{s}, \bar{b}, \bar{u}, \bar{v}, \bar{c})$, leading to first-order momentum balance equations:
+\begin{equation}
+4 \eta \bar{h} \partial_{xx} \Delta u + 3 \eta \bar{h} \partial_{xy}^{2} \Delta v + \eta \bar{h} \partial_{yy}^{2}\Delta u -\gamma \Delta u  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_x \Delta s - \rho g \mathrm{sin}(\alpha)\Delta h
+\end{equation}\\
+\begin{equation}
+4 \eta \bar{h} \partial_{yy} \Delta v + 3 \eta \bar{h} \partial_{xy}^{2} \Delta u + \eta \bar{h} \partial_{xx}^{2}\Delta v -\gamma \Delta v  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_y \Delta s
+\end{equation}
 
-% The SSA describes relationship between ice flow and bed conditions:
-% \begin{equation}\partial_{x} (4 h \eta \partial_{x} u + 2 h \eta \partial_y v) + \partial_{y}(h \eta( \partial_{x} v + \partial_{y} u)) - (u/c^{1/m}) = \rho g h ( \partial_{x} (s) \mathrm{cos}(\alpha) - \mathrm{sin}(\alpha))
-% \end{equation}\label{eq:2.1}\\
-% \begin{equation}\partial_{y} (4 h \eta \partial_{y} v + 2 h \eta \partial_x u) + \partial_{x}(h \eta( \partial_{y} u + \partial_{x} v)) - (v/c^{1/m}) = \rho g h ( \partial_{y} (s) \mathrm{cos}(\alpha)
-% \end{equation}\label{eq:2.2}
+where $h$ represents ice thickness, $s$ surface elevation, $(u, v)$ horizontal components of surface velocity, $c$ basal slipperiness, $\eta$ effective ice viscosity, $m$ sliding law parameter, $\rho$ ice density, $\alpha$ mean surface slope in $x$-direction, and $g$ acceleration due to gravity.
 
-
-% Equations \ref{eq:2.1} and \ref{eq:2.2} describe a linearised system around a reference model $(\bar{h}, \bar{s}, \bar{b}, \bar{u}, \bar{v}, \bar{c})$, leading to first-order momentum balance equations:
-% \begin{equation}
-% 4 \eta \bar{h} \partial_{xx} \Delta u + 3 \eta \bar{h} \partial_{xy}^{2} \Delta v + \eta \bar{h} \partial_{yy}^{2}\Delta u -\gamma \Delta u  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_x \Delta s - \rho g \mathrm{sin}(\alpha)\Delta h
-% \end{equation}\\
-% \begin{equation}
-% 4 \eta \bar{h} \partial_{yy} \Delta v + 3 \eta \bar{h} \partial_{xy}^{2} \Delta u + \eta \bar{h} \partial_{xx}^{2}\Delta v -\gamma \Delta v  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_y \Delta s
-% \end{equation}
+A disadvantage of the  assumptions above is that they can limit how well we can model the behavior of real ice which exhibits nonlinear rheology.
 
 \subsection*{Transfer Functions and Implementation}
 
-The methodology employs transfer functions to describe relationships between bed properties and surface characteristics:
+The methodology in \cite{Ockenden_2022} employs transfer functions. Transfer functions are mathematical expressions that describe how perturbations in basal topography and slipperiness affect surface topography and velocity. They are derived from the SSA equations
+
 $$\begin{bmatrix}
 \hat{s} \\
 \hat{u} \\
@@ -121,26 +114,7 @@ The system is solved using a weighted least-squares approach, minimizing:
 \Sigma s(s_{\mathrm{obs}} - s_{\mathrm{pred}})^2 + \Sigma u(u_{\mathrm{obs}} - u_{\mathrm{pred}})^2 + \Sigma v(v_{\mathrm{obs}} - v_{\mathrm{pred}})^2
 \end{equation}
 
-\subsection*{Application and Limitations}
-
-The methodology in \cite{Ockenden_2022} employs transfer functions to describe relationships between bed properties and surface characteristics:
-$$\begin{bmatrix}
-\hat{s} \\
-\hat{u} \\
-\hat{v}
-\end{bmatrix} =\begin{bmatrix}
-T_{sb} & T_{sc} \\
-T_{ub} & T_{uc} \\
-T_{vb} & T_{vc}
-\end{bmatrix}
-\begin{bmatrix}
-\hat{b}\\
-\hat{c}
-\end{bmatrix}$$
-The system is solved using a weighted least-squares approach, minimizing:
-\begin{equation}
-\Sigma s(s_{\mathrm{obs}} - s_{\mathrm{pred}})^2 + \Sigma u(u_{\mathrm{obs}} - u_{\mathrm{pred}})^2 + \Sigma v(v_{\mathrm{obs}} - v_{\mathrm{pred}})^2
-\end{equation}
+Inversion combines the surface data with the transfer functions to estimate the bed properties that would cause the surface changes.
 
 \subsection*{Application and Limitations}
 
@@ -158,5 +132,6 @@ However, the method faces limitations in cases of:
 \item Lack of validation data for slipperiness predictions
 \end{itemize}
 This work represents a significant advance in our ability to reconstruct bed conditions using surface data, particularly in regions where direct measurements are sparse or unavailable.
+
 
 
