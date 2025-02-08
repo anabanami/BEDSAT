@@ -23,9 +23,9 @@ Obtaining information about the conditions at the base of the ice-sheet often re
 
     \item\textbf{Inversions}
         \begin{itemize}
-            \item\textbf{Mass conservation}: Used to constrain inverison models and to fill data gaps by taking advantage of the physical laws of conservation of mass and momentum~\cite{Morlighem_2017, Morlighem_2020}. (Monte Carlo Mass Conservation: Random sampling solves mass conservation equations\cite{Brinkerhoff_2016}).
+            \item\textbf{Mass conservation}: Used to constrain inversion models and to fill data gaps by taking advantage of the physical laws of conservation of mass and momentum~\cite{Morlighem_2017, Morlighem_2020}. (Monte Carlo Mass Conservation: Random sampling solves mass conservation equations\cite{Brinkerhoff_2016}).
             \item\textbf{Control method inversion}: Basal conditions distribution information is obtained from remote sensing data and theoretical ice flow models\cite{deRydt_2013}.
-            \item\textbf{Statistical inversion}: Study the simultaneous retrieval (or update) of bed topography and basal slipperiness from surface topography and velocity measurements\cite{deRydt_2013}.
+            \item\textbf{Statistical inversion}: Study the simultaneous retrieval (or update) of bed topography and basal slipperiness from surface topography and velocity measurements\cite{deRydt_2013}. See section \ref{Ockenden_2022} for an outlined example using \textbf{linear perturbation analysis}.
         \end{itemize}
 
     \item\textbf{4dvar}: Four-dimensional variational data assimilation - Minimizes the difference between model predictions and observations across a time window. Mainly used to optimize model parameters and initial conditions\cite{Morlighem_Goldberg_2024}.
@@ -34,7 +34,6 @@ Obtaining information about the conditions at the base of the ice-sheet often re
 
     \item\textbf{EnKF} Ensemble Kalman Filter A sequential data assimilation method that uses an ensemble of model states to estimate uncertainty and update model parameters based on observations\cite{Morlighem_Goldberg_2024}.
 
-    \item\textbf{linear perturbation analysis} for an outlined example see section \ref{Ockenden_2022}.
 \end{itemize} 
 
 \section{A case study}\label{Castleman_2022}
@@ -44,7 +43,7 @@ Thwaites Glacier in West Antarctica represents one of the most impactful potenti
 
 Two primary factors control Thwaites Glacier's evolution: Ocean-driven basal melt rates and bedrock topography\cite{Castleman_2022}. The Castleman et al.\cite{Castleman_2022} study reveals that the glacier is highly sensitive to changes in bedrock topography within current measurement error bounds, highlighting the critical need for more accurate topographical data.
 
-The glacier's vulnerability is further complicated by Marine Ice Sheet Instability (MISI)\cite{Castleman_2022}, a feedback mechanism where warmer ocean temperatures accelerate ice shelf melting and calving. Buttressing ice shelves have a stabilizing effect on the ice sheet and can potentially suppress or delay MISI\cite{Werneke_2021}. For ice sheets on retrograde topographies (such as Thwaites glacier), this stabilizing effect fails. In these cases, the Grounding Line (GL)—the transition from grounded to floating ice—undergoes retreat. Once initiated on such topography, grounding line retreat can accelerate\cite{Castleman_2022}.
+The glacier's vulnerability is further complicated by Marine Ice Sheet Instability (MISI)\cite{Castleman_2022}, a feedback mechanism where warmer ocean temperatures accelerate ice shelf melting and calving. Buttressing ice shelves have a stabilizing effect on the ice sheet and can potentially suppress or delay MISI\cite{Wernecke_2022}. For ice sheets on retrograde topographies (such as Thwaites glacier), this stabilizing effect fails. In these cases, the Grounding Line (GL)—the transition from grounded to floating ice—undergoes retreat. Once initiated on such topography, grounding line retreat can accelerate\cite{Castleman_2022}.
 Ocean-driven basal melt rates present another significant source of uncertainty in ice-sheet model simulations. This uncertainty stems from multiple factors\cite{Castleman_2022}: the stochastic nature of ocean circulation patterns, temporal variability in ocean forcing, limitations in current ocean models, and limited direct ocean observations underneath ice shelves. These factors make it particularly difficult to predict how the ice sheet will respond to future ocean warming scenarios\cite{Castleman_2022}.
 
 Current methods to generate topography datasets rely primarily on ice-penetrating radar, which presents significant challenges. While radar can provide direct measurements along specific tracks, interpolation is used to fill gaps between these tracks. This interpolation introduces uncertainties, particularly in areas where measurements are sparse. These uncertainties significantly affect our ability to model the glacier's future behavior accurately.
@@ -59,7 +58,7 @@ This study underscores the critical importance of accurate bedrock topography me
 
 \section{Ice Sheet Bed Reconstruction via  Surface Data Inversion}\label{Ockenden_2022}
 
-Direct observations of ice sheet bed conditions through methods like airborne and ground-based ice penetrating radar or seismic surveying remain sparse, making interpolation and inversion methods necessary for understanding the geophysics. The shape and mechanical properties of the bed significantly influence ice flow behavior, with even small changes in bed conditions potentially causing large variations in predicted ice loss rates. An important observation is that bed features often manifest as subtle signatures in the surface topography above them\cite{Ockenden_2022}.
+An important observation is that features in the ice bed often show up as subtle patterns in the surface topography above them\cite{Ockenden_2022}. These bed conditions - both their shape and mechanical properties - significantly influence how ice flows, with even small changes at the bed potentially leading to large differences in predicted ice loss rates. To address this challenge, is common to use inversion methods to understand the geophysical conditions at the ice sheet bed.
 The relationship between bed and surface characteristics is core to inversion methods that attempt to reconstruct bed properties from surface observations. Unfortunately, these methods cannot paint a complete picture of the ice sheet model. Inversion methods require careful tuning of parameters which are not directly observable  (e.g. the basal friction coefficient), so that modelled surface velocity matches observations. The mathematical framework for these inversions can be achieved via steady-state \textbf{linear perturbation analysis} of shallow stream approximation (SSA)\cite{Gudmundsson_2008}.
 
 \subsection*{Theoretical Framework}
@@ -131,7 +130,4 @@ However, the method faces limitations in cases of:
 \item Variable slipperiness parameters
 \item Lack of validation data for slipperiness predictions
 \end{itemize}
-This work represents a significant advance in our ability to reconstruct bed conditions using surface data, particularly in regions where direct measurements are sparse or unavailable.
-
-
-
+While this work represents a significant advance in our ability to reconstruct bed conditions using surface data. Modern satellite technology provides unprecedented detail of ice sheet surface features through high-resolution elevation models and velocity measurements. However, we have yet to fully harness this wealth of surface information to improve bed topography estimates, particularly in regions where radar measurements are sparse. This disconnect points to a critical need for robust mathematical frameworks that can systematically link bed conditions to observable surface characteristics. Work, such as Budd's model relating ice flow over bedrock perturbations to surface expressions\cite{Budd_1970}, provides foundational approaches for establishing these relationships. Building upon this existing framework while incorporating modern satellite observations could significantly enhance our ability to reconstruct bed topography in poorly sampled regions of Antarctica.
