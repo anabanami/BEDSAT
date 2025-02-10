@@ -31,7 +31,6 @@ Obtaining information about the conditions at the base of the ice-sheet often re
     \item\textbf{Geostatistics} Statistical methods specialized for analyzing spatially correlated data. In glaciology, it's used to interpolate between sparse measurements and characterize spatial patterns in bed properties, often employing techniques like kriging\cite{Mackie_2020}.
 
     \item\textbf{EnKF} Ensemble Kalman Filter A sequential data assimilation method that uses an ensemble of model states to estimate uncertainty and update model parameters based on observations\cite{Morlighem_Goldberg_2024}.
-
     
 \end{itemize} 
 
@@ -128,33 +127,6 @@ However, the method faces limitations in cases of:
 \item Lack of validation data for slipperiness predictions
 \end{itemize}
 
-While this work represents a significant advance in our ability to reconstruct bed conditions using surface data. Modern satellite technology provides unprecedented detail of ice sheet surface features through high-resolution elevation models and velocity measurements. However, we have yet to fully harness this wealth of surface information to improve bed topography estimates, particularly in regions where radar measurements are sparse. In this project I aim to integrate the mathematical framework by Budd in \cite{Budd_1970}. This model relates ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. The model by Budd simplifies the stress balance within the ice by assuming that most of the shear deformation happens at the base. It also explicitely considers longitudinal stresses and strain-rates. All these assumptions are similar to those of the SSA approach in Ockenden's. Budd's model like Ockenden's go beyond a simple relationship between surface-slope variation and perturbation size, which is a limitation of simplified SSA models\cite{Budd_1970}.
-
-
-
-
-
-% can it systematically link bed conditions to observable surface characteristics?
-
-
-
-
-% •Relating surface and bedrock: The model provides a mathematical framework for relating surface undulations to underlying bedrock features. This is a core concept in inverse methods, which aim to infer subglacial topography and basal conditions from observed surface data.
-
-% Spectral analysis: The use of spectral analysis of surface and bedrock profiles
-%  is important for understanding how different wavelengths are transmitted through the ice and can be used to confirm predictions from the theory. Inverse methods often use spectral techniques to decompose surface and bed topography into their harmonic components.
-
-% Damping factor as a transfer function: The damping factor acts as a "transfer function" or "filter", which can be applied to the bedrock profile to calculate the surface profile
-% . This idea of a transfer function is fundamental to inverse methods, where the goal is to invert the relationship between observed surface data and the underlying parameters of the ice and bed.
-
-% Estimating flow parameters: The document also explains how the flow parameter may be determined by measuring the surface and bedrock profiles, and velocity
-% . This is relevant to inverse methods, which may seek to constrain the ice flow law and basal conditions from surface observations.
-
-% Limitations in accuracy: The document states that accurate inferences of the bedrock from the surface can only be made in a limited range of wavelengths around that of minimum damping
-% . This highlights a key limitation of inverse methods, that different wavelengths are damped differently.
-
-% Phase shift: The model predicts that the surface slope is approximately 180 degrees out of phase with the bedrock, with the maximum surface slope occurring over the maximum bedrock elevation. This phase shift between the surface and bed is a key characteristic that can be used to confirm this model, or can be used to test the validity of a different model used in inverse methods.
-
-% In Summary:
-
-% The model presented in the document provides a theoretical basis for understanding the relationship between ice flow, bedrock topography, and surface features. While not directly using SSA equations or explicitly describing inverse methods, the concepts and relationships described, such as the damping factor, the phase shift, the spectral analysis, and the relation between basal stress and surface slope, are all key for the development and application of both forward SSA models and inverse methods in glaciology. This document emphasizes how the stress and strain components are influenced by bed topography which in turn has a strong effect on surface features and ice flow.
+This work represents a significant advance in our ability to reconstruct bed conditions using surface data. Modern satellite technology provides unprecedented detail of ice sheet surface features through high-resolution elevation models and velocity measurements. However, we have yet to fully harness this wealth of surface information to improve bed topography estimates.
+The model in \cite{Budd_1970} relates ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. Budd's model simplifies the stress balance within the ice by assuming that most of the shear deformation happens at the base. It also explicitely considers longitudinal stresses and strain-rates. All these assumptions are similar to those of the SSA approach in Ockenden et al. While not directly using SSA equations or explicitly describing inverse methods, the concepts and relationships described by Budd in\cite{Budd_1970} emphasize how the stress and strain components are influenced by bed topography which in turn has a strong effect on surface features and ice flow. Similarly to Ockenden et al., Budd's model goes beyond a simple relationship between surface-slope variation and perturbation size, which is a limitation of simplified SSA models\cite{Budd_1970}.
+Interestingly, Budd's mathematical framework, despite being around for over five decades, is yet to be put to use in modern ice sheet modeling. This is especially surprising now that we have the computational power and high-resolution satellite data that could make it work. In this project, I aim to integrate this framework into ice sheet models using the Ice-sheet and Sea-level System Model (ISSM), potentially creating a systematic way to link what we can see on the surface to what's happening at the bed - especially in areas where we don't have good bed measurements.

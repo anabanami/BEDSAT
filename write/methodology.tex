@@ -1,7 +1,12 @@
-\chapter{Methodology}
+\chapter{Objectives and Methodology}
 
-% can you include a verrrrrry brief overview of this model on page 9 and describe how it relates to the momentum equations / inverse methods you describe there? but also say that it hasn't been integrated within an ice sheet model and that is a big gap because [describe why that's a problem or how budd equations could provide a solution to the problem]
-
+The overall aim of this project is to derive a new Antarctic bed topography using remote sensing data, airborne derived-estimates of the bed and ice sheet modelling. Using the new bed topography to improve understanding of the impact of fine-scale topographic roughness on ice and subglacial hydrological flow, and projections of ice mass loss under climate warming.\\
+\\The specific objectives are:
+\begin{enumerate}
+    \item Develop an ice sheet modelling approach to assimilate satellite remote sensing datasets to improve knowledge of the bed (BedSAT) informed by mathematical models of ice flow over topography;
+    \item Derive a new bed topography for Antarctica using BedSAT;
+    \item Conduct sensitivity analyses to understand the impact of the improved bed topography on projections of ice mass loss from Antarctica under climate warming.
+\end{enumerate}
 
 The first phase of the project (objective 1) is to derive the BedSAT method. This will involve the integration of the Budd~\cite{Budd_1970} mathematical model relating ice surface elevation and bed topography into ISSM, and the development of a methodology for the data assimilation into ISSM. I will use a regional catchment in Antarctica for which relatively more radar data are available and has an indicative range of topography features, e.g. the Aurora Subglacial Basin, East Antarctica, extensively surveyed by the ICECAP project for airborne geophysics~\cite{Young_2011}. The second phase of the project (objective 2) will apply the methodology developed in objective 1 to the whole Antarctic continent, deriving a continent-wide bed topography dataset. Using covariance properties from existing radar surveys, I will generate a number of realisations of bed topography with unique high-resolution, and statistically-consistent topographic roughness. The third phase of the project will use the new bed topography datasets to conduct a sensitivity analysis of ice sheet model projections to 2300 CE, investigating the impact of the new topography and different realisations of roughness on ice and subglacial hydrological flow and ice mass loss from Antarctica.\\
 
@@ -13,13 +18,13 @@ The first phase of the project (objective 1) is to derive the BedSAT method. Thi
 \end{enumerate}
 
 \subsection*{Key Investigation Areas}
-
+% this is great, but perhaps make each point a sentence, and include: why it's relevant to your work, citation, how you might constrain it
 \begin{enumerate}
 \item\textbf{Model Development Strategy}
     \begin{itemize}
     \item Focus on invariant bed traction over the time-frame
     \item Consider thermal distribution, velocity field, and ice thickness
-    \item Perform cluster analysis to identify characteristics affecting surface expression amplitude and positions
+    \item Perform analysis to identify which topographical feartures affecting surface expression amplitude and positions
     \item Note: Ice behavior varies with thickness. Simulate the following different scenarios: (thick ice → slippery base, thin ice → sticky base)
     \end{itemize}
 \item\textbf{Transfer Functions}
