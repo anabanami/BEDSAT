@@ -16,75 +16,137 @@ The first phase of the project (objective 1) is to derive the BedSAT method. Thi
 \item Develop a method to interpolate topography that ensures consistent surface expressions with observations
 \item Reduce RMS error between observations and model predictions
 \end{enumerate}
-
 \subsection*{Key Investigation Areas}
-% this is great, but perhaps make each point a sentence, and include: why it's relevant to your work, citation, how you might constrain it
 \begin{enumerate}
 \item\textbf{Model Development Strategy}
     \begin{itemize}
-    \item Focus on invariant bed traction over the time-frame
-    \item Consider thermal distribution, velocity field, and ice thickness
-    \item Perform analysis to identify which topographical feartures affecting surface expression amplitude and positions
-    \item Note: Ice behavior varies with thickness. Simulate the following different scenarios: (thick ice → slippery base, thin ice → sticky base)
+    \item We will maintain invariant bed traction throughout our modeling timeframe to isolate topographical effects in our inversion approach, with validation through sensitivity tests in regions where bed properties are well-known.
+    
+    \item Our model will incorporate available thermal distribution, velocity field, and ice thickness data, as these parameters are essential for accurate ice flow representation and can be constrained using radar observations.
+    
+    \item Through spectral analysis of surface expressions, we will identify the topographical features that most strongly influence surface patterns, using available high-resolution surface elevation data for validation.
+    
+    \item To account for variations in ice behavior with thickness, we will simulate scenarios ranging from thick ice with slippery base to thin ice with sticky base, using observed velocity patterns as constraints.
     \end{itemize}
+
 \item\textbf{Transfer Functions}
     \begin{itemize}
-    \item Develop rapid transfer function construction methods
-    \item Use for various conditions and domains
-    \item Validate against ICECAP cross-section radargrams
-    \item Analyze spatial covariance of existing data
-    \item Consider friction roughness and high amplitude variations
+    \item We will develop efficient transfer function methods for rapid bed topography inversion, validating against known bed configurations from radar data.
+    
+    \item Our transfer functions will be tested across various ice thickness and flow conditions, with validation against different glacial systems.
+    
+    \item Cross-validation against radargrams will provide direct verification of our inversion results, including uncertainty quantification through comparison with measured bed elevations.
+    
+    \item Spatial covariance analysis of existing radar data will inform our statistical framework and error propagation through the inversion process.
+    
+    \item We will account for friction roughness and high-amplitude variations in our analysis, using observed surface velocity patterns as constraints.
     \end{itemize}
+
 \item\textbf{Model Validation}
     \begin{itemize}
-    \item Quantify error reduction
-    \item Identify model breaking points
-    \item Use SVD (Singular Value Decomposition)
-    \item Test grid independence
-    \item Evaluate sensitivity to assumptions
+    \item We will apply quantitative error reduction metrics and compare systematically against existing bed topography products.
+    
+    \item Model limitations and breaking points will be identified through systematic testing across extreme scenarios, constrained by physical principles.
+    
+    \item Singular Value Decomposition (SVD) analysis will help identify key modes of variability in our solutions.
+    
+    \item Grid independence testing will ensure solution robustness across different spatial resolutions.
+    
+    \item Sensitivity analysis will examine the impact of our model assumptions, particularly regarding basal conditions and ice rheology.
     \end{itemize}
 \end{enumerate}
 
 
 \subsection*{Confounding Factors to Consider}
-% this needs some more description - recommend writing a short paragraph describing how these each influence basal friction, and what that means for what we might expect in terms of surface expressions, and how that relates to your aims of generating bed topography
 
-Basal friction coefficient effects on:
+Basal friction at the ice-bed interface plays a crucial role in how bed topography is expressed at the surface. Understanding how different factors affect basal friction is essential for accurately interpreting surface expressions and inverting them to determine bed topography:
+
 \begin{itemize}
-    \item Sliding behavior
-    \item Rheological properties
-    \item Thermomechanical responses (stiff vs soft ice)
-    \item Slippery spots
-    \end{itemize}
+    \item Sliding behavior: The relationship between basal stress and sliding velocity affects how ice flows over the bed. Areas with enhanced sliding can mask bed features in surface expressions, while areas with stronger friction tend to show more pronounced surface expressions of bed topography.
+    
+    \item Rheological properties: Ice viscosity varies with temperature and stress state, affecting how efficiently bed topographic signals propagate to the surface. Softer ice tends to dampen bed topography signals more than stiffer ice.
+    
+    \item Thermomechanical responses: The temperature-dependent nature of ice deformation means that warmer, softer ice near the bed behaves differently from colder, stiffer ice above. This vertical variation in ice properties affects how bed topography signals are transmitted to the surface.
+    
+    \item Slippery spots: Localized areas of reduced friction, often due to the presence of water or deformable sediments, can create surface expressions that might be misinterpreted as bed topography features.
+\end{itemize}
+
+These factors directly impact our ability to invert surface data for bed topography, as they can either enhance or mask the relationship between bed features and their surface expressions. Our methodology must account for these effects to avoid misinterpreting surface features.
 
 
-\subsection*{Workflow Plan}
+% \section*{Plan:}
+% \subsection*{Objective 1}
+% \begin{enumerate}
+% \item Develop a method to interpolate topography that ensures consistent surface expressions with observations
+% \item Reduce RMS error between observations and model predictions
+% \end{enumerate}
 
-\begin{enumerate}
-\item\textbf{Initial Modeling Phase}
-    \begin{itemize}
-    \item Exclude surface elevation initially (reserve for control model)
-    \item Use 2D Gaussian with $3\times$ ice thickness
-    \item Analyze REMA spectral components at various frequencies
-    \item Determine reasonable Signal-to-Noise ratio levels
-    \end{itemize}
+% \subsection*{Key Investigation Areas}
+% % this is great, but perhaps make each point a sentence, and include: why it's relevant to your work, citation, how you might constrain it
+% \begin{enumerate}
+% \item\textbf{Model Development Strategy}
+%     \begin{itemize}
+%     \item Focus on invariant bed traction over the time-frame
+%     \item Consider thermal distribution, velocity field, and ice thickness
+%     \item Perform analysis to identify which topographical feartures affecting surface expression amplitude and positions
+%     \item Note: Ice behavior varies with thickness. Simulate the following different scenarios: (thick ice → slippery base, thin ice → sticky base)
+%     \end{itemize}
+% \item\textbf{Transfer Functions}
+%     \begin{itemize}
+%     \item Develop rapid transfer function construction methods
+%     \item Use for various conditions and domains
+%     \item Validate against ICECAP cross-section radargrams
+%     \item Analyze spatial covariance of existing data
+%     \item Consider friction roughness and high amplitude variations
+%     \end{itemize}
+% \item\textbf{Model Validation}
+%     \begin{itemize}
+%     \item Quantify error reduction
+%     \item Identify model breaking points
+%     \item Use SVD (Singular Value Decomposition)
+%     \item Test grid independence
+%     \item Evaluate sensitivity to assumptions
+%     \end{itemize}
+% \end{enumerate}
 
-\item\textbf{Inversion Development}
-    Parameters to consider:
-    \begin{itemize}
-        \item Basal traction
-        \item Internal temperature distribution
-        \item Heat flux
-        \item Additional rheological parameters
-    \end{itemize}
 
-\item\textbf{Model Testing}
-    \begin{itemize}
-    \item Test with ensemble of topographical conditions
-    \item Experiment with Gaussian features of different sizes
-    \item Focus on surface expressions with meaningful results
-    \item Consider Gausberg domain
-    \item Use Jameson cross-flow features (ranging from shallow to deep ice, sticky to sliding bed)
-    \item Incorporate ICECAP data
-    \end{itemize}
-\end{enumerate}
+% \subsection*{Confounding Factors to Consider}
+% % this needs some more description - recommend writing a short paragraph describing how these each influence basal friction, and what that means for what we might expect in terms of surface expressions, and how that relates to your aims of generating bed topography
+
+% Basal friction coefficient effects on:
+% \begin{itemize}
+%     \item Sliding behavior
+%     \item Rheological properties
+%     \item Thermomechanical responses (stiff vs soft ice)
+%     \item Slippery spots
+%     \end{itemize}
+
+% \subsection*{Workflow Plan}
+% \begin{enumerate}
+% \item\textbf{Initial Modeling Phase}
+%     \begin{itemize}
+%     \item Exclude surface elevation initially (reserve for control model)
+%     \item Use 2D Gaussian with $3\times$ ice thickness
+%     \item Analyze REMA spectral components at various frequencies
+%     \item Determine reasonable Signal-to-Noise ratio levels
+%     \end{itemize}
+
+% \item\textbf{Inversion Development}
+%     Parameters to consider:
+%     \begin{itemize}
+%         \item Basal traction
+%         \item Internal temperature distribution
+%         \item Heat flux
+%         \item Additional rheological parameters
+%     \end{itemize}
+
+% \item\textbf{Model Testing}
+%     \begin{itemize}
+%     \item Test with ensemble of topographical conditions
+%     \item Experiment with Gaussian features of different sizes
+%     \item Focus on surface expressions with meaningful results
+%     \item Consider Gausberg domain
+%     \item Use Jameson cross-flow features (ranging from shallow to deep ice, sticky to sliding bed)
+%     \item Incorporate ICECAP data
+%     \end{itemize}
+% \end{enumerate}
