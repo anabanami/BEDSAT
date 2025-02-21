@@ -5,14 +5,13 @@ The polar regions are losing ice, and their oceans are changing rapidly\cite{O_C
 
 The consequences of changes in different kinds of polar ice manifest across multiple interconnected systems. Of particular concern is the accelerating loss of continental ice sheets (permanent glacial ice masses on land) in both Greenland and Antarctica, which has become a major contributor to global sea level rise\cite{O_C_in_changingClimate}. Impacts extend beyond direct ice loss: As fresh water from melting ice sheets is added into the ocean, it increases ocean stratification. Cold freshwater can dissolve larger amounts of $\mathrm{CO_2}$ than regular ocean water. Increased $\mathrm{CO_2}$ uptake by polar oceans is creating corrosive conditions for calcifying organisms\cite{O_C_in_changingClimate}. In addition, freshwater stratification threatens to disrupt global thermohaline circulation\cite{Jacobs_2004} by decreasing the natural mixing of the ocean layers.
  
-While there is high confidence in current ice loss and retreat observations in many areas, there is more uncertainty about the mechanisms driving these changes and their future progression\cite{Kemper_2021}. Uncertainty increases in regions with variable bed conditions, where characteristics like "slipperiness" and roughness are difficult to verify via direct samples.
-
-% you could write 1 sentence on how GL migration rate depends critically on bed topography at the GL, and include stats from the SCAR RINGS white paper that says how little of the Antarctica GL is actually directly observed. 
-
+While there is high confidence in current ice loss and retreat observations in many areas, there is more uncertainty about the mechanisms driving these changes and their future progression\cite{Fox-Kemper_2021}. Uncertainty increases in regions with variable bed conditions, where characteristics like "slipperiness" and roughness are difficult to verify via direct samples. Other problematic areas involve the ice sheet's grounding line (GL). The retreat rate depends crucially on topographical features like pinning points, as these are locations where the GL is most stable and ice-sheet retreat will slow\cite{Fox-Kemper_2021}. However, major knowledge gaps persist in mapping bed topography across Antarctic ice sheet margins - with over half of all margin areas having insufficient data within 5 km of the grounding zone\cite{RINGS_2022}. Addressing this data gap through systematic mapping efforts would significantly improve both our understanding of current ice dynamics and the accuracy of ice-sheet models projecting future changes.
 
 \chapter{Topography of Antarctica}\label{review}
 
-% overall, i think it'd be worth thinknig about how you integrate/relate all of this information back to the overall thesis objectives. the information that you include here should be sufficient for the reader to understand the problem, what previous studies have done, where the gap is, and naturally lead to what you're planning to address in your thesis. 
+% overall, i think it'd be worth thinknig about how you integrate/relate all of this information back to the overall thesis objectives. 
+
+% the information that you include here should be sufficient for the reader to understand the problem, what previous studies have done, where the gap is, and naturally lead to what you're planning to address in your thesis. 
 
 % hence, when you include specific case studies, e.g., ockenden study, you want to make sure that readers understand why you're focussing on that paper in particular. how does it relate to your objectives? what did they find / how was it successful? what are the big gaps that you might tackle in this project?
 
@@ -28,39 +27,37 @@ Bed topography is one of the most crucial boundary conditions that influences ic
 Obtaining information about the conditions at the base of the ice-sheet often relies on indirect modelling methods like
 \begin{itemize}
 
-% recommend that you include a bit more information about these techniques. what are the benefits and limitations? we want to understand why you're not going to use these in your approach, so it's helpful to outline the gaps / limitations here
     \item\textbf{Inversions}
+    Retrieval (or update) of bed topography and basal slipperiness from surface topography and velocity measurements\cite{deRydt_2013}. See section \ref{Ockenden_2022} for an outlined example using \textbf{linear perturbation analysis}.
+
         \begin{itemize}
-            % sorry i think i've led you astray with this one. mass conservation uses control method approach, but the Monte Carlo is usually Markov Chain Monte Carlo, and it's an ensemble approach to geostatistical bed approximation. not necessarily mass conserving?
-            \item\textbf{Mass conservation}: Used to constrain inversion models and to fill data gaps by taking advantage of the physical laws of conservation of mass and momentum~\cite{Morlighem_2017, Morlighem_2020}. (Monte Carlo Mass Conservation: Random sampling solves mass conservation equations\cite{Brinkerhoff_2016}).
-            % I'd put this one first. add 1 sentence that says how it works (e.g., something about minimising mismatch between observed and simulated fields by tuning unknown parameter, through a cost function approach)
-            \item\textbf{Control method inversion}: Basal conditions distribution information is obtained from remote sensing data and theoretical ice flow models\cite{deRydt_2013}.
-            % is this also using the control method? or what do you mean by inversion here? does this involve geophyiscal inversion? 
-            \item\textbf{Statistical inversion}: Study the simultaneous retrieval (or update) of bed topography and basal slipperiness from surface topography and velocity measurements\cite{deRydt_2013}. See section \ref{Ockenden_2022} for an outlined example using \textbf{linear perturbation analysis}.
+            \item\textbf{Control method inversion}: A variational approach that minimizes mismatches between observed and simulated fields through a cost function approach, using remote sensing data and theoretical ice flow models to obtain basal conditions\cite{deRydt_2013}. Often needs regularization terms to prevent non-physical features or over-fitting\cite{Morlighem_Goldberg_2024}.
+
+            \item\textbf{Mass conservation}: Used to constrain inversion models and fill data gaps by employing physical conservation laws, particularly effective for reconstructing bed topography where direct measurements are sparse~\cite{Morlighem_2017, Morlighem_2020}. Requires (contemporary) measurements of ice thickness at the inflow boundary to properly constrain the system\cite{Morlighem_Goldberg_2024}.
+
+            \item\textbf{Markov Chain Monte Carlo (MCMC)}: A probabilistic method that generates sample distributions to quantify uncertainties in ice sheet parameters and models\cite{Morlighem_Goldberg_2024}. While powerful for uncertainty quantification, these methods remain computationally intensive for continental-scale ice sheet models\cite{Morlighem_Goldberg_2024}.
+
         \end{itemize}
 
-    % maybe contrast with control method - how does it differ? what are benefits / limitations
-    \item\textbf{4dvar}: Four-dimensional variational data assimilation - Minimizes the difference between model predictions and observations across a time window. Mainly used to optimize model parameters and initial conditions\cite{Morlighem_Goldberg_2024}.
+    \item\textbf{4dvar}: Four-dimensional variational data assimilation - Minimizes the difference between model predictions and observations across a time window. Mainly used to optimize model parameters and initial conditions\cite{Morlighem_Goldberg_2024}. Can handle time-varying data and evolving glacier states, making it more suitable for dynamic systems unlike control methods, this makes them more computationally demanding\cite{Morlighem_Goldberg_2024}.
 
     \item\textbf{Geostatistics} Statistical methods specialized for analyzing spatially correlated data. In glaciology is used to interpolate between sparse measurements and characterise spatial patterns in bed properties, often employing techniques like kriging\cite{Mackie_2020}.
 
     \item\textbf{EnKF} Ensemble Kalman Filter. A sequential data assimilation method that uses an ensemble of model states to estimate uncertainty and update model parameters based on observations\cite{Morlighem_Goldberg_2024}.
     
 \end{itemize} 
+Many authors have considered the influence of the bed topography on the ice surface profile features. Understanding this relationship is crucial for accurate ice sheet bed reconstruction\cite{Budd_1970}. While each method has its strengths and limitations, the choice of approach often depends on the specific research objectives, data availability, and computational resources. Control methods and mass conservation approaches are widely used for steady-state reconstructions, while 4dvar and EnKF methods are better suited for time-evolving systems. Recent advances in computational power have made probabilistic methods like MCMC more feasible, offering valuable insights into parameter uncertainties.
 
 \section*{Ice Sheet Bed Reconstruction via Surface Data Inversion}\label{Ockenden_2022}
-% you could also set this up by including a short paragraph at the end of the previous sentence. either way, this paragraph needs a topic sentence that gives this paragraph context
-% lmk if you want to chat about this in more detail
-An important observation is that features in the ice bed often show up as subtle patterns in the ice surface topography above them\cite{Ockenden_2022}. These bed conditions - both their shape and mechanical properties - significantly influence how ice flows, with even small changes at the bed potentially leading to large differences in predicted ice loss rates% can you add a citation here?
-To address this challenge, it is common to use inversion methods to estimate the geophysical conditions at the ice sheet bed. An example is outlined below.
+
+Features in the ice bed often show up as subtle patterns in the ice surface topography above them\cite{Ockenden_2022}. These bed conditions - both their shape and mechanical properties - significantly influence how ice flows. changes at the bed potentially leading to large differences in predicted ice loss rates\cite{Ockenden_2022}. To address this challenge, it is common to use inversion methods to estimate the geophysical conditions at the ice sheet bed. An example is outlined below.
 
 \subsection*{Theoretical Framework}
 
 Inversion is based on the principle that variations in basal topography, slipperiness, and roughness cause disturbances to the surface flow of the ice. By measuring these disturbances in surface velocity and topography, and using equations like the shelfy-stream approximation (SSA) to relate those disturbances back to their source, we can estimate the basal conditions.
 The indirect estimate of basal property $x$ and surface property $y$ are related through $y=f(x)$, where $f$ is referred to as the forward model, this makes  $x=f^{-1}(y)$ the inversion. Property $y$ can be measurements of velocity and topography along the upper surface of a glacier, while the quantity $x$ to be estimated represents basal topography and basal slipperiness\cite{Gudmundsson_2008}.
-The inversion method developed by Ockenden et al. in\cite{Ockenden_2022} introduces perturbations to study how small changes in ice thickness ($h$), surface elevation ($s$), basal topography ($b$), and ice velocity ($u$) affect ice flow. This means that the method is most accurate when applied to pertirbations, small relative to the mean of each studied property (based on a reference state). The method assumes:
+The inversion method developed by Ockenden et al. in\cite{Ockenden_2022} introduces perturbations to study how small changes in ice thickness ($h$), surface elevation ($s$), basal topography ($b$), and ice velocity ($u$) affect ice flow. This means that the method is most accurate when applied to perturbations, small relative to the mean of each studied property (based on a reference state). Ockenden et al. explain in\cite{Ockenden_2022} that the shallow-ice-stream equations can be linearised and solved analytically when assuming:
 \begin{enumerate}
-    % this needs explanation, paricularly given that ice is not linearly viscous, but typically has n=4 (or n=3)
 \item A linear viscous medium ($n=1$)
 \item Non-linear sliding law ($m>0$)
 \item Steady-state conditions
@@ -73,7 +70,7 @@ The SSA system described in Ockenden et al.\cite{Ockenden_2022} is as follows:
 \begin{equation}\partial_{y} (4 h \eta \partial_{y} v + 2 h \eta \partial_x u) + \partial_{x}(h \eta( \partial_{y} u + \partial_{x} v)) - (v/c^{1/m}) = \rho g h ( \partial_{y} (s) \mathrm{cos}(\alpha)
 \end{equation}\label{eq:2.2}
 
-Equations \ref{eq:2.1} and \ref{eq:2.2} are a linearised system around a reference model $(\bar{h}, \bar{s}, \bar{b}, \bar{u}, \bar{v}, \bar{c})$, leading to first-order momentum balance equations:
+The linearised system described by Equations \ref{eq:2.1} and \ref{eq:2.2} is based around a reference model $(\bar{h}, \bar{s}, \bar{b}, \bar{u}, \bar{v}, \bar{c})$, leading to first-order momentum balance equations:
 \begin{equation}
 4 \eta \bar{h} \partial_{xx} \Delta u + 3 \eta \bar{h} \partial_{xy}^{2} \Delta v + \eta \bar{h} \partial_{yy}^{2}\Delta u -\gamma \Delta u  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_x \Delta s - \rho g \mathrm{sin}(\alpha)\Delta h
 \end{equation}\\
@@ -127,8 +124,21 @@ However, the method faces limitations in cases of:
 
 %  I think this section would benefit from a final paragraph that highlights the specific problem: i.e., that we have all this information about ice dynamics, and some of it is evident in datasets like surface elevations from satellite remote sensing (i.e., of surface features), but we're not harnessing that information to improve bed estimates, particularly where radar estimates might be sparse. so we need a way to mathematically link what's going on at the bed to the surface (and vice versa). perhaps include a very brief overview of some already-available models (i.e. budd) that could do that
 
-% I think this paragraph needs a bit of work. I was not entirely sure how it relates to what you're doing, so i'm wondering whether it'd be helpful to instead include an overview of Budd here, and then move most / the rest of this paragraph to the methodology. Then, recommend to give a more broad overview of how you will take the benefits of a few different approaches and integrate that within an ice sheet model? 
+% I think this paragraph needs a bit of work. I was not entirely sure how it relates to what you're doing, Then, recommend to give a more broad overview of how you will take the benefits of a few different approaches and integrate that within an ice sheet model? 
 
 This work represents a significant advance in our ability to reconstruct bed conditions using surface data. Modern satellite technology provides unprecedented detail of ice sheet surface features through high-resolution elevation models and velocity measurements. However, we have yet to fully harness this wealth of surface information to improve bed topography estimates, particularly where radar estimates might be sparse.
-The model developed by Budd in \cite{Budd_1970} relates ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. Budd's model simplifies the stress balance within the ice by assuming that most of the shear deformation happens at the base. It also explicitely considers longitudinal stresses and strain-rates. All these assumptions are similar to those of the SSA approach in Ockenden et al. While not directly using SSA equations or explicitly describing inverse methods, the concepts and relationships described by Budd in\cite{Budd_1970} emphasize how the stress and strain components are influenced by bed topography which in turn has a strong effect on surface features and ice flow. Similarly to Ockenden et al., Budd's model goes beyond a simple relationship between surface-slope variation and perturbation size, which is a limitation of simplified SSA models.
-Interestingly, Budd's mathematical framework, despite being around for over five decades, is yet to be put to use in modern ice sheet modeling. This is especially surprising now that we have the computational power and high-resolution satellite data required for the broad scale application of the method. In this project, we aim to integrate this framework into ice sheet models using the Ice-sheet and Sea-level System Model (ISSM), potentially creating a systematic way to link what we can see on the surface observations to what's happening at the bed - especially in areas of sparse bed measurements.
+
+\section*{A Forward Model: relating the bed to the surface}
+
+The model developed by Budd in \cite{Budd_1970} relates ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. Budd's model simplifies the stress balance within the ice by assuming that most of the shear deformation happens at the base. 
+
+% HOW REALISTIC IS THIS ASSUMPTION?
+
+It also explicitely considers longitudinal stresses and strain-rates. All these assumptions are similar to those of the SSA approach in Ockenden et al. While not directly using SSA equations, the concepts and relationships described by Budd in\cite{Budd_1970} emphasize how the stress and strain components are influenced by bed topography which in turn has a strong effect on surface features and ice flow.
+
+Similarly to Ockenden et al., Budd's model goes beyond a simple relationship between surface-slope variation and perturbation size, which is a limitation of simplified SSA models.
+
+Interestingly, Budd's mathematical framework, despite being around for over five decades, is yet to be put to use in modern ice sheet modeling. This is especially surprising now that we have the computational power and high-resolution satellite data required for the broad scale application of the method. In this project, we aim to integrate this framework into ice sheet models using the Ice-sheet and Sea-level System Model (ISSM), 
+
+
+potentially creating a systematic way to link what we can see on the surface observations to what's happening at the bed - especially in areas of sparse bed measurements.
