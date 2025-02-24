@@ -15,8 +15,6 @@ While there is high confidence in current ice loss and retreat observations in m
 
 % hence, when you include specific case studies, e.g., ockenden study, you want to make sure that readers understand why you're focussing on that paper in particular. how does it relate to your objectives? what did they find / how was it successful? what are the big gaps that you might tackle in this project?
 
-% making sure that you have topic sentences, and sentences that link back are really important here
-
 Bed topography is one of the most crucial boundary conditions that influences ice flow and loss from the Antarctic Ice Sheet (AIS)\cite{Morlighem_2020}. Bed topography datasets are typically generated from airborne radar surveys, which are sparse and unevenly distributed across the Antarctic continent (see figure \ref{fig:BedMAP}). Interpolation schemes to "gap fill" these sparse datasets yield bed topography estimates that have high uncertainties (i.e. multiple hundreds of metres in elevation uncertainty; Morlighem et al., 2020) which propagate in simulations of AIS evolution under climate change\cite{Castleman_2022}. Given the logistical challenges of accessing large parts of the Antarctic continent, there is a crucial need for alternative approaches, that integrate diverse and possibly more spatially complete data streams – including satellite data.
 \begin{figure}[H] % Forces the figure exactly HERE
     \includegraphics[scale=0.4]{bedmap.png}
@@ -48,6 +46,7 @@ Obtaining information about the conditions at the base of the ice-sheet often re
 \end{itemize} 
 Many authors have considered the influence of the bed topography on the ice surface profile features. Understanding this relationship is crucial for accurate ice sheet bed reconstruction\cite{Budd_1970}. While each method has its strengths and limitations, the choice of approach often depends on the specific research objectives, data availability, and computational resources. Control methods and mass conservation approaches are widely used for steady-state reconstructions, while 4dvar and EnKF methods are better suited for time-evolving systems. Recent advances in computational power have made probabilistic methods like MCMC more feasible, offering valuable insights into parameter uncertainties.
 
+\newpage
 \section*{Ice Sheet Bed Reconstruction via Surface Data Inversion}\label{Ockenden_2022}
 
 Features in the ice bed often show up as subtle patterns in the ice surface topography above them\cite{Ockenden_2022}. These bed conditions - both their shape and mechanical properties - significantly influence how ice flows. changes at the bed potentially leading to large differences in predicted ice loss rates\cite{Ockenden_2022}. To address this challenge, it is common to use inversion methods to estimate the geophysical conditions at the ice sheet bed. An example is outlined below.
@@ -107,26 +106,9 @@ Inversion combines the surface data with the transfer functions to estimate the 
 
 \subsection*{Application and Limitations}
 
-Ockenden et al. report to have successfully implemented their inversion method using REMA surface elevation data (8m resolution) and NASA ITS\_LIVE velocity data (120m resolution). The method performs particularly well in:
-\begin{itemize}
-\item Areas with moderate topographic gradients in the central trunk of glaciers
-\item Features not aligned with ice flow direction
-\item Medium-wavelength (5-50km) bedrock features
-\end{itemize}
-However, the method faces limitations in cases of:
-\begin{itemize}
-    % are these specific aspects that you're planning to focus on here? how might you extend Ockenden's work, or introduce novel approaches? 
-\item Steep topography where shallow-ice-stream approximation breaks down
-\item Features aligned with ice flow direction
-\item Variable slipperiness parameters
-\item Lack of validation data for slipperiness predictions
-\end{itemize}
+Ockenden et al. successfully implemented this inversion method using two key datasets: REMA surface elevation data (8m resolution) and NASA ITS\_LIVE velocity data (120m resolution). The method demonstrates particularly strong performance in areas with moderate topographic gradients, with features not aligned with ice flow direction, and medium-wavelength (5-50km) bedrock features. However, the inversion encounters significant limitations when dealing with steep topography where the shallow-ice-stream approximation breaks down, variable slipperiness parameters, and suffers from a lack of validation data for slipperiness predictions.
 
-%  I think this section would benefit from a final paragraph that highlights the specific problem: i.e., that we have all this information about ice dynamics, and some of it is evident in datasets like surface elevations from satellite remote sensing (i.e., of surface features), but we're not harnessing that information to improve bed estimates, particularly where radar estimates might be sparse. so we need a way to mathematically link what's going on at the bed to the surface (and vice versa). perhaps include a very brief overview of some already-available models (i.e. budd) that could do that
-
-% I think this paragraph needs a bit of work. I was not entirely sure how it relates to what you're doing, Then, recommend to give a more broad overview of how you will take the benefits of a few different approaches and integrate that within an ice sheet model? 
-
-This work represents a significant advance in our ability to reconstruct bed conditions using surface data. Modern satellite technology provides unprecedented detail of ice sheet surface features through high-resolution elevation models and velocity measurements. However, we have yet to fully harness this wealth of surface information to improve bed topography estimates, particularly where radar estimates might be sparse.
+Modern satellite technology has revolutionized our understanding of ice sheets by providing unprecedented detail of surface features through high-resolution elevation models and velocity measurements, as exemplified by the advanced remote sensing observations utilized in Ockenden et al.'s work. While this represents a significant advance in our ability to reconstruct bed conditions using surface data, we have yet to fully harness this wealth of information to improve bed topography estimates, particularly in regions where radar estimates are sparse. The central challenge now lies in developing systematic methods to link these detailed surface observations with underlying bed conditions - a critical step in bridging the gap between our rich surface datasets and our more limited understanding of subglacial topography.
 
 \section*{A Forward Model: relating the bed to the surface}
 
