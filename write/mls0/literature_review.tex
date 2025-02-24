@@ -1,5 +1,5 @@
 \chapter{Antarctica's Landscape}\label{why}
-\section*{Climate Impacts and Global Significance}
+\section{Climate Impacts and Global Significance}
 
 The polar regions are losing ice, and their oceans are changing rapidly\cite{O_C_in_changingClimate}. The consequences of this extend to the whole planet and it is crucial for us to understand them to be able to evaluate the costs and benefits of potential mitigation. 
 
@@ -9,12 +9,6 @@ While there is high confidence in current ice loss and retreat observations in m
 
 \chapter{Topography of Antarctica}\label{review}
 
-% overall, i think it'd be worth thinknig about how you integrate/relate all of this information back to the overall thesis objectives. 
-
-% the information that you include here should be sufficient for the reader to understand the problem, what previous studies have done, where the gap is, and naturally lead to what you're planning to address in your thesis. 
-
-% hence, when you include specific case studies, e.g., ockenden study, you want to make sure that readers understand why you're focussing on that paper in particular. how does it relate to your objectives? what did they find / how was it successful? what are the big gaps that you might tackle in this project?
-
 Bed topography is one of the most crucial boundary conditions that influences ice flow and loss from the Antarctic Ice Sheet (AIS)\cite{Morlighem_2020}. Bed topography datasets are typically generated from airborne radar surveys, which are sparse and unevenly distributed across the Antarctic continent (see figure \ref{fig:BedMAP}). Interpolation schemes to "gap fill" these sparse datasets yield bed topography estimates that have high uncertainties (i.e. multiple hundreds of metres in elevation uncertainty; Morlighem et al., 2020) which propagate in simulations of AIS evolution under climate change\cite{Castleman_2022}. Given the logistical challenges of accessing large parts of the Antarctic continent, there is a crucial need for alternative approaches, that integrate diverse and possibly more spatially complete data streams – including satellite data.
 \begin{figure}[H] % Forces the figure exactly HERE
     \includegraphics[scale=0.4]{bedmap.png}
@@ -22,11 +16,13 @@ Bed topography is one of the most crucial boundary conditions that influences ic
     \label{fig:BedMAP}
 \end{figure}
 
+\section{Approaches to Bed Topography Reconstruction}
+
 Obtaining information about the conditions at the base of the ice-sheet often relies on indirect modelling methods like
 \begin{itemize}
 
     \item\textbf{Inversions}
-    Retrieval (or update) of bed topography and basal slipperiness from surface topography and velocity measurements\cite{deRydt_2013}. See section \ref{Ockenden_2022} for an outlined example using \textbf{linear perturbation analysis}.
+    Retrieval (or update) of bed topography and basal slipperiness from surface topography and velocity measurements\cite{deRydt_2013}.
 
         \begin{itemize}
             \item\textbf{Control method inversion}: A variational approach that minimizes mismatches between observed and simulated fields through a cost function approach, using remote sensing data and theoretical ice flow models to obtain basal conditions\cite{deRydt_2013}. Often needs regularization terms to prevent non-physical features or over-fitting\cite{Morlighem_Goldberg_2024}.
@@ -46,81 +42,58 @@ Obtaining information about the conditions at the base of the ice-sheet often re
 \end{itemize} 
 Many authors have considered the influence of the bed topography on the ice surface profile features. Understanding this relationship is crucial for accurate ice sheet bed reconstruction\cite{Budd_1970}. While each method has its strengths and limitations, the choice of approach often depends on the specific research objectives, data availability, and computational resources. Control methods and mass conservation approaches are widely used for steady-state reconstructions, while 4dvar and EnKF methods are better suited for time-evolving systems. Recent advances in computational power have made probabilistic methods like MCMC more feasible, offering valuable insights into parameter uncertainties.
 
-\newpage
-\section*{Ice Sheet Bed Reconstruction via Surface Data Inversion}\label{Ockenden_2022}
+\section{Theoretical Frameworks}
+\subsection*{Budd's Forward Model: Pioneering Surface-Bed Relationships}
 
-Features in the ice bed often show up as subtle patterns in the ice surface topography above them\cite{Ockenden_2022}. These bed conditions - both their shape and mechanical properties - significantly influence how ice flows. changes at the bed potentially leading to large differences in predicted ice loss rates\cite{Ockenden_2022}. To address this challenge, it is common to use inversion methods to estimate the geophysical conditions at the ice sheet bed. An example is outlined below.
+Understanding how bed features manifest in surface observations requires a theoretical framework that connects these two domains. A pioneering contribution to this field was made by Budd \cite{Budd_1970}, who developed a model relating ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. 
 
-\subsection*{Theoretical Framework}
+The model's foundation rests on two key simplifications:
+\begin{itemize}
+    \item Most shear deformation occurs at the base of the ice sheet
+    \item Explicit consideration of longitudinal stresses and strain-rates
+\end{itemize}
 
-Inversion is based on the principle that variations in basal topography, slipperiness, and roughness cause disturbances to the surface flow of the ice. By measuring these disturbances in surface velocity and topography, and using equations like the shelfy-stream approximation (SSA) to relate those disturbances back to their source, we can estimate the basal conditions.
-The indirect estimate of basal property $x$ and surface property $y$ are related through $y=f(x)$, where $f$ is referred to as the forward model, this makes  $x=f^{-1}(y)$ the inversion. Property $y$ can be measurements of velocity and topography along the upper surface of a glacier, while the quantity $x$ to be estimated represents basal topography and basal slipperiness\cite{Gudmundsson_2008}.
-The inversion method developed by Ockenden et al. in\cite{Ockenden_2022} introduces perturbations to study how small changes in ice thickness ($h$), surface elevation ($s$), basal topography ($b$), and ice velocity ($u$) affect ice flow. This means that the method is most accurate when applied to perturbations, small relative to the mean of each studied property (based on a reference state). Ockenden et al. explain in\cite{Ockenden_2022} that the shallow-ice-stream equations can be linearised and solved analytically when assuming:
+These assumptions align closely with the Shallow-Shelf Approximation (SSA) approach later used by Ockenden et al. described in \ref{Ockenden_2022}, though Budd's formulation does not directly employ SSA equations. Both approaches transcend simplified models by capturing complex relationships between surface-slope variations and bed perturbations. Where simpler SSA models might only consider direct correlations, these frameworks account for how stress and strain components mediate the influence of bed topography on surface features and ice flow.
+
+Despite its theoretical robustness, Budd's mathematical framework remains notably underutilized in modern ice sheet modeling. This gap in application is particularly striking given today's advanced computational capabilities and high-resolution satellite observations. Our project aims to address this by integrating Budd's framework into the Ice-sheet and Sea-level System Model (ISSM). This integration offers a promising pathway to systematically link surface observations with bed conditions, particularly valuable in regions where direct bed measurements are sparse.
+
+% \newpage
+\section{Modern Inversion Methods}\label{Ockenden_2022}
+
+Decoding the relationship between surface expressions and subglacial conditions remains a central challenge in glaciology. Ice bed conditions - both their shape and mechanical properties - significantly influence how ice flows, with changes at the bed potentially leading to large differences in predicted ice loss rates\cite{Ockenden_2022}. Recent work by Ockenden et al. demonstrates both the capabilities and limitations of current inversion approaches in addressing this challenge.
+
+The core principle of their method relies on the fact that variations in basal topography, slipperiness, and roughness cause measurable disturbances to the surface flow of the ice. Through linear perturbation analysis, they establish a systematic relationship between surface observations and bed conditions. This relationship can be expressed as $y=f(x)$, where $y$ represents surface measurements (velocity and topography), $x$ represents bed properties (topography and slipperiness), and $f$ is the forward model\cite{Gudmundsson_2008}. The inversion process, $x=f^{-1}(y)$, estimates bed conditions from surface observations.
+
+The method works best when analyzing perturbations that are small relative to mean properties, under specific conditions including:
 \begin{enumerate}
-\item A linear viscous medium ($n=1$)
-\item Non-linear sliding law ($m>0$)
-\item Steady-state conditions
-\item Spatially constant zero-order solutions
+    \item A linear viscous medium ($n=1$)
+    \item Non-linear sliding law ($m>0$)
+    \item Steady-state conditions
+    \item Spatially constant zero-order solutions
 \end{enumerate}
 
-The SSA system described in Ockenden et al.\cite{Ockenden_2022} is as follows:
-\begin{equation}\partial_{x} (4 h \eta \partial_{x} u + 2 h \eta \partial_y v) + \partial_{y}(h \eta( \partial_{x} v + \partial_{y} u)) - (u/c^{1/m}) = \rho g h ( \partial_{x} (s) \mathrm{cos}(\alpha) - \mathrm{sin}(\alpha))
-\end{equation}\label{eq:2.1}\\
-\begin{equation}\partial_{y} (4 h \eta \partial_{y} v + 2 h \eta \partial_x u) + \partial_{x}(h \eta( \partial_{y} u + \partial_{x} v)) - (v/c^{1/m}) = \rho g h ( \partial_{y} (s) \mathrm{cos}(\alpha)
-\end{equation}\label{eq:2.2}
+Using high-resolution datasets (REMA surface elevation at 8m resolution and NASA ITS\_LIVE velocity at 120m resolution), their approach performs well for:
+\begin{itemize}
+    \item Areas with moderate topographic gradients
+    \item Features not aligned with ice flow direction
+    \item Medium-wavelength (5-50km) bedrock features
+\end{itemize}
 
-The linearised system described by Equations \ref{eq:2.1} and \ref{eq:2.2} is based around a reference model $(\bar{h}, \bar{s}, \bar{b}, \bar{u}, \bar{v}, \bar{c})$, leading to first-order momentum balance equations:
-\begin{equation}
-4 \eta \bar{h} \partial_{xx} \Delta u + 3 \eta \bar{h} \partial_{xy}^{2} \Delta v + \eta \bar{h} \partial_{yy}^{2}\Delta u -\gamma \Delta u  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_x \Delta s - \rho g \mathrm{sin}(\alpha)\Delta h
-\end{equation}\\
-\begin{equation}
-4 \eta \bar{h} \partial_{yy} \Delta v + 3 \eta \bar{h} \partial_{xy}^{2} \Delta u + \eta \bar{h} \partial_{xx}^{2}\Delta v -\gamma \Delta v  = \rho g \bar{h}\mathrm{cos}(\alpha) \partial_y \Delta s
-\end{equation}
+However, significant limitations emerge when:
+\begin{itemize}
+    \item Dealing with steep topography where the shallow-ice-stream approximation breaks down
+    \item Handling variable slipperiness parameters
+    \item Attempting to validate slipperiness predictions due to lack of ground-truth data
+\end{itemize}
 
-where $h$ represents ice thickness, $s$ surface elevation, $(u, v)$ horizontal components of surface velocity, $c$ basal slipperiness, $\eta$ effective ice viscosity, $m$ sliding law parameter, $\rho$ ice density, $\alpha$ mean surface slope in $x$-direction (zero mean slope in $y$-direction), and $g$ acceleration due to gravity.
-
-A disadvantage of the  assumptions above is that they can limit how well we can model the behavior of real ice which exhibits nonlinear rheology.
-
-\subsection*{Transfer Functions and Implementation}
-
-The methodology in \cite{Ockenden_2022} employs transfer functions. Transfer functions are mathematical expressions that describe how perturbations in basal topography and slipperiness affect surface topography and velocity. They are derived from the SSA equations
-$$\begin{bmatrix}
-\hat{s} \\
-\hat{u} \\
-\hat{v}
-\end{bmatrix} =\begin{bmatrix}
-T_{sb} & T_{sc} \\
-T_{ub} & T_{uc} \\
-T_{vb} & T_{vc}
-\end{bmatrix}
-\begin{bmatrix}
-\hat{b}\\
-\hat{c}
-\end{bmatrix}$$
-The system is solved using a weighted least-squares approach, minimizing:
-\begin{equation}
-\Sigma s(s_{\mathrm{obs}} - s_{\mathrm{pred}})^2 + \Sigma u(u_{\mathrm{obs}} - u_{\mathrm{pred}})^2 + \Sigma v(v_{\mathrm{obs}} - v_{\mathrm{pred}})^2
-\end{equation}
-
-Inversion combines the surface data with the transfer functions to estimate the bed properties that would cause the surface changes.
-
-\subsection*{Application and Limitations}
-
-Ockenden et al. successfully implemented this inversion method using two key datasets: REMA surface elevation data (8m resolution) and NASA ITS\_LIVE velocity data (120m resolution). The method demonstrates particularly strong performance in areas with moderate topographic gradients, with features not aligned with ice flow direction, and medium-wavelength (5-50km) bedrock features. However, the inversion encounters significant limitations when dealing with steep topography where the shallow-ice-stream approximation breaks down, variable slipperiness parameters, and suffers from a lack of validation data for slipperiness predictions.
-
-Modern satellite technology has revolutionized our understanding of ice sheets by providing unprecedented detail of surface features through high-resolution elevation models and velocity measurements, as exemplified by the advanced remote sensing observations utilized in Ockenden et al.'s work. While this represents a significant advance in our ability to reconstruct bed conditions using surface data, we have yet to fully harness this wealth of information to improve bed topography estimates, particularly in regions where radar estimates are sparse. The central challenge now lies in developing systematic methods to link these detailed surface observations with underlying bed conditions - a critical step in bridging the gap between our rich surface datasets and our more limited understanding of subglacial topography.
-
-\section*{A Forward Model: relating the bed to the surface}
-
-The model developed by Budd in \cite{Budd_1970} relates ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. Budd's model simplifies the stress balance within the ice by assuming that most of the shear deformation happens at the base. 
-
-% HOW REALISTIC IS THIS ASSUMPTION?
-
-It also explicitely considers longitudinal stresses and strain-rates. All these assumptions are similar to those of the SSA approach in Ockenden et al. While not directly using SSA equations, the concepts and relationships described by Budd in\cite{Budd_1970} emphasize how the stress and strain components are influenced by bed topography which in turn has a strong effect on surface features and ice flow.
-
-Similarly to Ockenden et al., Budd's model goes beyond a simple relationship between surface-slope variation and perturbation size, which is a limitation of simplified SSA models.
-
-Interestingly, Budd's mathematical framework, despite being around for over five decades, is yet to be put to use in modern ice sheet modeling. This is especially surprising now that we have the computational power and high-resolution satellite data required for the broad scale application of the method. In this project, we aim to integrate this framework into ice sheet models using the Ice-sheet and Sea-level System Model (ISSM), 
+While modern satellite technology has revolutionized our understanding of ice sheets by providing unprecedented detail of surface features, these limitations highlight a key challenge in glaciology: we have yet to fully leverage this wealth of information to improve bed topography estimates in regions where radar data is sparse. This gap between rich surface datasets and limited subglacial understanding motivates our investigation of alternative approaches, particularly the integration of Budd's theoretical framework with modern computational capabilities.
 
 
-potentially creating a systematic way to link what we can see on the surface observations to what's happening at the bed - especially in areas of sparse bed measurements.
+% \section{Current Challenges and Opportunities}
+% [Discussion of gaps and your project's approach]
+
+% overall, i think it'd be worth thinknig about how you integrate/relate all of this information back to the overall thesis objectives. 
+
+% the information that you include here should be sufficient for the reader to understand the problem, what previous studies have done, where the gap is, and naturally lead to what you're planning to address in your thesis. 
+
+% hence, when you include specific case studies, e.g., ockenden study, you want to make sure that readers understand why you're focussing on that paper in particular. how does it relate to your objectives? what did they find / how was it successful? what are the big gaps that you might tackle in this project?
