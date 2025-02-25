@@ -5,11 +5,11 @@ The polar regions are losing ice, and their oceans are changing rapidly\cite{O_C
 
 The consequences of changes in different kinds of polar ice manifest across multiple interconnected systems. Of particular concern is the accelerating loss of continental ice sheets (permanent glacial ice masses on land) in both Greenland and Antarctica, which has become a major contributor to global sea level rise\cite{O_C_in_changingClimate}. Impacts extend beyond direct ice loss: As fresh water from melting ice sheets is added into the ocean, it increases ocean stratification. Cold freshwater can dissolve larger amounts of $\mathrm{CO_2}$ than regular ocean water. Increased $\mathrm{CO_2}$ uptake by polar oceans is creating corrosive conditions for calcifying organisms\cite{O_C_in_changingClimate}. In addition, freshwater stratification threatens to disrupt global thermohaline circulation\cite{Jacobs_2004} by decreasing the natural mixing of the ocean layers.
  
-While there is high confidence in current ice loss and retreat observations in many areas, there is more uncertainty about the mechanisms driving these changes and their future progression\cite{Fox-Kemper_2021}. Uncertainty increases in regions with variable bed conditions, where characteristics like "slipperiness" and roughness are difficult to verify via direct samples. Other problematic areas involve the ice sheet's grounding line (GL). The retreat rate depends crucially on topographical features like pinning points, as these are locations where the GL is most stable and ice-sheet retreat will slow\cite{Fox-Kemper_2021}. However, major knowledge gaps persist in mapping bed topography across Antarctic ice sheet margins - with over half of all margin areas having insufficient data within 5 km of the grounding zone\cite{RINGS_2022}. Addressing this data gap through systematic mapping efforts would significantly improve both our understanding of current ice dynamics and the accuracy of ice-sheet models projecting future changes.
+While there is high confidence in current ice loss and retreat observations in many areas, there is more uncertainty about the mechanisms driving these changes and their future progression\cite{Fox-Kemper_2021}. Uncertainty increases in regions with variable bed conditions, where characteristics like ``slipperiness'' and ``roughness'' are difficult to verify via direct samples. Other problematic areas involve the ice sheet's grounding line (GL). The retreat rate depends crucially on topographical features like pinning points, as these are locations where the GL is most stable and ice-sheet retreat will slow\cite{Fox-Kemper_2021}. However, major knowledge gaps persist in mapping bed topography across Antarctic ice sheet margins - with over half of all margin areas having insufficient data within 5 km of the grounding zone\cite{RINGS_2022}. Addressing this data gap through systematic mapping efforts would significantly improve both our understanding of current ice dynamics and the accuracy of ice-sheet models projecting future changes.
 
 \chapter{Topography of Antarctica}\label{review}
 
-Bed topography is one of the most crucial boundary conditions that influences ice flow and loss from the Antarctic Ice Sheet (AIS)\cite{Morlighem_2020}. Bed topography datasets are typically generated from airborne radar surveys, which are sparse and unevenly distributed across the Antarctic continent (see figure \ref{fig:BedMAP}). Interpolation schemes to "gap fill" these sparse datasets yield bed topography estimates that have high uncertainties (i.e. multiple hundreds of metres in elevation uncertainty; Morlighem et al., 2020) which propagate in simulations of AIS evolution under climate change\cite{Castleman_2022}. Given the logistical challenges of accessing large parts of the Antarctic continent, there is a crucial need for alternative approaches, that integrate diverse and possibly more spatially complete data streams – including satellite data.
+Bed topography is one of the most crucial boundary conditions that influences ice flow and loss from the Antarctic Ice Sheet (AIS)\cite{Morlighem_2020}. Bed topography datasets are typically generated from airborne radar surveys, which are sparse and unevenly distributed across the Antarctic continent (see figure \ref{fig:BedMAP}). Interpolation schemes to ``gap fill'' these sparse datasets yield bed topography estimates that have high uncertainties (i.e. multiple hundreds of metres in elevation uncertainty; Morlighem et al., 2020) which propagate in simulations of AIS evolution under climate change\cite{Castleman_2022}. Given the logistical challenges of accessing large parts of the Antarctic continent, there is a crucial need for alternative approaches, that integrate diverse and possibly more spatially complete data streams – including satellite data.
 \begin{figure}[H] % Forces the figure exactly HERE
     \includegraphics[scale=0.4]{bedmap.png}
     \caption{Distribution of BedMAP\{1,2,3\} data tracks (Source: bedmap.scar.org).}
@@ -40,12 +40,11 @@ Obtaining information about the conditions at the base of the ice-sheet often re
     \item\textbf{EnKF} Ensemble Kalman Filter. A sequential data assimilation method that uses an ensemble of model states to estimate uncertainty and update model parameters based on observations\cite{Morlighem_Goldberg_2024}.
     
 \end{itemize} 
-Many authors have considered the influence of the bed topography on the ice surface profile features. Understanding this relationship is crucial for accurate ice sheet bed reconstruction\cite{Budd_1970}. While each method has its strengths and limitations, the choice of approach often depends on the specific research objectives, data availability, and computational resources. Control methods and mass conservation approaches are widely used for steady-state reconstructions, while 4dvar and EnKF methods are better suited for time-evolving systems. Recent advances in computational power have made probabilistic methods like MCMC more feasible, offering valuable insights into parameter uncertainties.
+While each method has its strengths and limitations, the choice of approach often depends on the specific research objectives, data availability, and computational resources. Control methods and mass conservation approaches are widely used for steady-state reconstructions, while 4dvar and EnKF methods are better suited for time-evolving systems. Recent advances in computational power have made probabilistic methods like MCMC more feasible, offering valuable insights into parameter uncertainties.
 
+\newpage
 \section{Theoretical Frameworks}
-\subsection*{Budd's Forward Model: Pioneering Surface-Bed Relationships}
-
-Understanding how bed features manifest in surface observations requires a theoretical framework that connects these two domains. A pioneering contribution to this field was made by Budd \cite{Budd_1970}, who developed a model relating ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. 
+Many authors have considered the influence of the bed topography on the ice surface profile features. Understanding how bed features manifest in surface observations requires a theoretical framework that connects these two domains. A pioneering contribution to this field was made by Budd \cite{Budd_1970}, who developed a model relating ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. 
 
 The model's foundation rests on two key simplifications:
 \begin{itemize}
@@ -53,14 +52,12 @@ The model's foundation rests on two key simplifications:
     \item Explicit consideration of longitudinal stresses and strain-rates
 \end{itemize}
 
-These assumptions align closely with the Shallow-Shelf Approximation (SSA) approach later used by Ockenden et al. described in \ref{Ockenden_2022}, though Budd's formulation does not directly employ SSA equations. Both approaches transcend simplified models by capturing complex relationships between surface-slope variations and bed perturbations. Where simpler SSA models might only consider direct correlations, these frameworks account for how stress and strain components mediate the influence of bed topography on surface features and ice flow.
+These assumptions align closely with the Shallow-Shelf Approximation (SSA) approach used by Ockenden et al. described in \ref{Ockenden_2022}, though Budd's formulation does not directly employ SSA equations. Both approaches capture complex relationships between surface-slope variations and bed perturbations. The experiments carried out in\cite{Budd_1970} determined ice-sliding velocities for wide ranges of roughness, normal stress, and shear stress relevant to real glaciers\cite{Budd_1970}. Budd's mathematical framework remains notably underutilized in modern ice sheet modeling. This gap in application is particularly striking given today's advanced computational capabilities and high-resolution satellite observations. 
+Similarly to these works, our project aims to link surface observations with bed conditions by following a similar method to Budd's since would be particularly valuable in regions where direct bed measurements are sparse.
 
-Despite its theoretical robustness, Budd's mathematical framework remains notably underutilized in modern ice sheet modeling. This gap in application is particularly striking given today's advanced computational capabilities and high-resolution satellite observations. Our project aims to address this by integrating Budd's framework into the Ice-sheet and Sea-level System Model (ISSM). This integration offers a promising pathway to systematically link surface observations with bed conditions, particularly valuable in regions where direct bed measurements are sparse.
-
-% \newpage
 \section{Modern Inversion Methods}\label{Ockenden_2022}
 
-Decoding the relationship between surface expressions and subglacial conditions remains a central challenge in glaciology. Ice bed conditions - both their shape and mechanical properties - significantly influence how ice flows, with changes at the bed potentially leading to large differences in predicted ice loss rates\cite{Ockenden_2022}. Recent work by Ockenden et al. demonstrates both the capabilities and limitations of current inversion approaches in addressing this challenge.
+The shape and mechanical properties of the ice bed significantly influence how ice flows, with changes at the bed potentially leading to large differences in predicted ice loss rates\cite{Ockenden_2022}. Recent work by Ockenden et al. demonstrates both the capabilities and limitations of current inversion approaches in addressing this problem.
 
 The core principle of their method relies on the fact that variations in basal topography, slipperiness, and roughness cause measurable disturbances to the surface flow of the ice. Through linear perturbation analysis, they establish a systematic relationship between surface observations and bed conditions. This relationship can be expressed as $y=f(x)$, where $y$ represents surface measurements (velocity and topography), $x$ represents bed properties (topography and slipperiness), and $f$ is the forward model\cite{Gudmundsson_2008}. The inversion process, $x=f^{-1}(y)$, estimates bed conditions from surface observations.
 
@@ -86,14 +83,24 @@ However, significant limitations emerge when:
     \item Attempting to validate slipperiness predictions due to lack of ground-truth data
 \end{itemize}
 
-While modern satellite technology has revolutionized our understanding of ice sheets by providing unprecedented detail of surface features, these limitations highlight a key challenge in glaciology: we have yet to fully leverage this wealth of information to improve bed topography estimates in regions where radar data is sparse. This gap between rich surface datasets and limited subglacial understanding motivates our investigation of alternative approaches, particularly the integration of Budd's theoretical framework with modern computational capabilities.
+While modern satellite technology has revolutionized our understanding of ice sheets by providing unprecedented detail of surface features, these limitations highlight a key challenge in glaciology: we have yet to fully leverage this wealth of information to improve bed topography estimates in regions where radar data is sparse. This gap between rich surface datasets in certain regions and limited subglacial understanding motivates our investigation. It is of particular interest to us to develop the integration of more comprehensive models and modern computational capabilities.
 
 
-% \section{Current Challenges and Opportunities}
-% [Discussion of gaps and your project's approach]
+\section{Current Opportunities}
 
-% overall, i think it'd be worth thinknig about how you integrate/relate all of this information back to the overall thesis objectives. 
+We already highlighted several persistent challenges in Antarctic bed topography reconstruction. Current approaches, while theoretically robust, face significant practical limitations. Inversion methods like those employed by Ockenden et al. provide valuable insights but are limited by some unrealistic assumptions that may not capture the full complexity of ice-bed interactions. Similarly, the sliding theory developed by Budd offers important physical frameworks but have not been fully integrated with modern computational capabilities and high-resolution satellite observations.
 
-% the information that you include here should be sufficient for the reader to understand the problem, what previous studies have done, where the gap is, and naturally lead to what you're planning to address in your thesis. 
+With BedSAT we aim to developing a novel approach that builds upon the theoretical foundations established by Budd and the inversion methods employed by Ockenden et al.
+More precisely, we intend to:
 
-% hence, when you include specific case studies, e.g., ockenden study, you want to make sure that readers understand why you're focussing on that paper in particular. how does it relate to your objectives? what did they find / how was it successful? what are the big gaps that you might tackle in this project?
+\begin{itemize}
+    \item Develop transfer functions that efficiently relate bed conditions to surface expressions, enabling rapid bed topography inversion while accounting for various ice thickness and flow conditions
+    
+    \item Implement an interpolation methodology that ensures surface expressions consistent with observations, particularly focusing on reducing RMS error between model predictions and satellite data via iteratively correcting our interpolation
+    
+    \item Account for confounding factors such as spatial variations in sliding behavior, rheological properties, that affect the interpretation of surface expressions
+    
+    \item Validate our approach through cross-validation against radargrams and existing bed topography products, with targeted initial development in the Aurora Subglacial Basin
+\end{itemize}
+
+By addressing these challenges through our BedSAT methodology, we aim to improve the accuracy of bed topography reconstructions in regions where direct observations are limited. This will ultimately enhance our understanding of ice dynamics and improve projections of Antarctic Ice Sheet contribution to sea level rise under climate warming scenarios, directly supporting our sensitivity analyses in the final phase of the project.
