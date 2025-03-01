@@ -18,10 +18,20 @@ Bed topography is one of the most crucial boundary conditions that influences ic
 
 \section{Approaches to Bed Topography Reconstruction}
 
-Obtaining information about the conditions at the base of the ice-sheet often relies on indirect modelling methods like
+Obtaining information about the conditions at the base of the ice-sheet often relies on indirect modelling methods that operate in two fundamentally different directions:
 \begin{itemize}
+    \item\textbf{Forward models}
+    From bed topography data, simulate ice flow to predict surface conditions. They use known or assumed basal properties to model how the ice sheet will respond.
+    
+    \begin{itemize}
+           \item\textbf{4dvar}: Four-dimensional variational data assimilation - Minimizes the difference between model predictions and observations across a time window. Mainly used to optimize model parameters and initial conditions\cite{Morlighem_Goldberg_2024}. Can handle time-varying data and evolving glacier states, making it more suitable for dynamic systems unlike control methods, this makes them more computationally demanding\cite{Morlighem_Goldberg_2024}.
 
-    \item\textbf{Inversions}
+            \item\textbf{Geostatistics} Statistical methods specialized for analyzing spatially correlated data. In glaciology is used to interpolate between sparse measurements and characterise spatial patterns in bed properties, often employing techniques like kriging\cite{Mackie_2020}.
+
+            \item\textbf{EnKF} Ensemble Kalman Filter. A sequential data assimilation method that uses an ensemble of model states to estimate uncertainty and update model parameters based on observations\cite{Morlighem_Goldberg_2024}.
+    \end{itemize}
+
+    \item\textbf{Inversion models}
     Retrieval (or update) of bed topography and basal slipperiness from surface topography and velocity measurements\cite{deRydt_2013}.
 
         \begin{itemize}
@@ -30,21 +40,14 @@ Obtaining information about the conditions at the base of the ice-sheet often re
             \item\textbf{Mass conservation}: Used to constrain inversion models and fill data gaps by employing physical conservation laws, particularly effective for reconstructing bed topography where direct measurements are sparse~\cite{Morlighem_2017, Morlighem_2020}. Requires (contemporary) measurements of ice thickness at the inflow boundary to properly constrain the system\cite{Morlighem_Goldberg_2024}.
 
             \item\textbf{Markov Chain Monte Carlo (MCMC)}: A probabilistic method that generates sample distributions to quantify uncertainties in ice sheet parameters and models\cite{Morlighem_Goldberg_2024}. While powerful for uncertainty quantification, these methods remain computationally intensive for continental-scale ice sheet models\cite{Morlighem_Goldberg_2024}.
-
         \end{itemize}
-
-    \item\textbf{4dvar}: Four-dimensional variational data assimilation - Minimizes the difference between model predictions and observations across a time window. Mainly used to optimize model parameters and initial conditions\cite{Morlighem_Goldberg_2024}. Can handle time-varying data and evolving glacier states, making it more suitable for dynamic systems unlike control methods, this makes them more computationally demanding\cite{Morlighem_Goldberg_2024}.
-
-    \item\textbf{Geostatistics} Statistical methods specialized for analyzing spatially correlated data. In glaciology is used to interpolate between sparse measurements and characterise spatial patterns in bed properties, often employing techniques like kriging\cite{Mackie_2020}.
-
-    \item\textbf{EnKF} Ensemble Kalman Filter. A sequential data assimilation method that uses an ensemble of model states to estimate uncertainty and update model parameters based on observations\cite{Morlighem_Goldberg_2024}.
     
 \end{itemize} 
 While each method has its strengths and limitations, the choice of approach often depends on the specific research objectives, data availability, and computational resources. Control methods and mass conservation approaches are widely used for steady-state reconstructions, while 4dvar and EnKF methods are better suited for time-evolving systems. Recent advances in computational power have made probabilistic methods like MCMC more feasible, offering valuable insights into parameter uncertainties.
 
 \newpage
 \section{Theoretical Frameworks}
-Many authors have considered the influence of the bed topography on the ice surface profile features. Understanding how bed features manifest in surface observations requires a theoretical framework that connects these two domains. A pioneering contribution to this field was made by Budd \cite{Budd_1970}, who developed a model relating ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. 
+These modeling approaches, particularly forward models, rely on theoretical frameworks that describe the relationship between bed topography and surface features. Many authors have explored this relationship to understand how basal conditions influence the ice surface profile features. Understanding how bed features manifest in surface observations requires a theoretical framework that connects these two domains. A pioneering contribution to this field was made by Budd \cite{Budd_1970}, who developed a model relating ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. 
 
 The model's foundation rests on two key simplifications:
 \begin{itemize}
@@ -52,14 +55,13 @@ The model's foundation rests on two key simplifications:
     \item Explicit consideration of longitudinal stresses and strain-rates
 \end{itemize}
 
-These assumptions align closely with the Shallow-Shelf Approximation (SSA) approach used by Ockenden et al. described in \ref{Ockenden_2022}, though Budd's formulation does not directly employ SSA equations. Both approaches capture complex relationships between surface-slope variations and bed perturbations. The experiments carried out in\cite{Budd_1970} determined ice-sliding velocities for wide ranges of roughness, normal stress, and shear stress relevant to real glaciers\cite{Budd_1970}. Budd's mathematical framework remains notably underutilized in modern ice sheet modeling. This gap in application is particularly striking given today's advanced computational capabilities and high-resolution satellite observations. 
-Similarly to these works, our project aims to link surface observations with bed conditions by following a similar method to Budd's since would be particularly valuable in regions where direct bed measurements are sparse.
+The modelling carried out in\cite{Budd_1970} determined ice-sliding velocities for wide ranges of roughness, normal stress, and shear stress relevant to real glaciers\cite{Budd_1970}. Despite its simplicity and robustness, Budd's mathematical framework remains notably underutilized in modern ice sheet modeling. This gap in application is particularly striking given today's advanced computational capabilities and high-resolution satellite observations. 
 
 \section{Modern Inversion Methods}\label{Ockenden_2022}
 
 The shape and mechanical properties of the ice bed significantly influence how ice flows, with changes at the bed potentially leading to large differences in predicted ice loss rates\cite{Ockenden_2022}. Recent work by Ockenden et al. demonstrates both the capabilities and limitations of current inversion approaches in addressing this problem.
 
-The core principle of their method relies on the fact that variations in basal topography, slipperiness, and roughness cause measurable disturbances to the surface flow of the ice. Through linear perturbation analysis, they establish a systematic relationship between surface observations and bed conditions. This relationship can be expressed as $y=f(x)$, where $y$ represents surface measurements (velocity and topography), $x$ represents bed properties (topography and slipperiness), and $f$ is the forward model\cite{Gudmundsson_2008}. The inversion process, $x=f^{-1}(y)$, estimates bed conditions from surface observations.
+The core principle of the method by Ockenden et al. (2022) relies on the fact that variations in basal topography, slipperiness, and roughness cause measurable disturbances to the surface flow of the ice. Through linear perturbation analysis, they establish a systematic relationship between surface observations and bed conditions. This relationship can be expressed as $y=f(x)$, where $y$ represents surface measurements (velocity and topography), $x$ represents bed properties (topography and slipperiness), and $f$ is the forward model\cite{Gudmundsson_2008}. The inversion process, $x=f^{-1}(y)$, estimates bed conditions from surface observations.
 
 The method works best when analyzing perturbations that are small relative to mean properties, under specific conditions including:
 \begin{enumerate}
@@ -88,19 +90,10 @@ While modern satellite technology has revolutionized our understanding of ice sh
 
 \section{Current Opportunities}
 
-We already highlighted several persistent challenges in Antarctic bed topography reconstruction. Current approaches, while theoretically robust, face significant practical limitations. Inversion methods like those employed by Ockenden et al. provide valuable insights but are limited by some unrealistic assumptions that may not capture the full complexity of ice-bed interactions. Similarly, the sliding theory developed by Budd offers important physical frameworks but have not been fully integrated with modern computational capabilities and high-resolution satellite observations.
+We have highlighted above several persistent challenges in Antarctic bed topography reconstruction, and we have also included a description of current approaches. The works we chose to exemplify here, while theoretically robust, faces practical limitations. The inversion method employed by Ockenden et al. provides valuable insights but is limited by assumptions that do not capture the full complexity of ice-bed interactions, particularly when dealing with steep topography where the shallow-ice-stream approximation breaks down. Similarly, the sliding theory developed by Budd offers important physical insight but remains underutilized in modern ice sheet modeling despite today's advanced computational capabilities and high-resolution satellite observations.
 
-With BedSAT we aim to developing a novel approach that builds upon the theoretical foundations established by Budd and the inversion methods employed by Ockenden et al.
-More precisely, we intend to:
+A key question in our work is how surface features relate to ice thickness. Our current models struggle to capture the complex relationships created by basal roughness and variable friction zones. Additionally, we lack crucial data like basal friction measurements for accurate reconstruction. These challenges mean our results depend heavily on the assumptions built into our models. Another key factor involves the dynamics at ice sheet margins. As noted by Nias (2018) in \cite{Nias_2018}, "subtle variation in the geometry near the grounding line can trigger a response in the ice sheet that is felt hundreds of kilometers upstream." Understanding the effect of the dynamics at the shear margins and their propagation effects is essential for accurate bed topography reconstruction and subsequent ice sheet evolution modeling. Similarly, ice viscosity is a critical factor since high viscosity ice near the surface tends to dampen bed topography signals significantly\cite{deRydt_2013}, creating potential misinterpretations of surface expressions. 
 
-\begin{itemize}
-    \item Develop transfer functions that efficiently relate bed conditions to surface expressions, enabling rapid bed topography inversion while accounting for various ice thickness and flow conditions
-    
-    \item Implement an interpolation methodology that ensures surface expressions consistent with observations, particularly focusing on reducing RMS error between model predictions and satellite data via iteratively correcting our interpolation
-    
-    \item Account for confounding factors such as spatial variations in sliding behavior, rheological properties, that affect the interpretation of surface expressions
-    
-    \item Validate our approach through cross-validation against radargrams and existing bed topography products, with targeted initial development in the Aurora Subglacial Basin
-\end{itemize}
+With BedSAT, we aim to build upon the theoretical foundations established by Budd and recent inversion methods. Our approach will help bridge the disconnect between surface observations and bed topography by utilizing a more realistic set of rheological and geometric assumptions.  This addresses a fundamental question in our field: how should we interpret surface results in relation to our hypotheses about bed conditions? 
 
-By addressing these challenges through our BedSAT methodology, we aim to improve the accuracy of bed topography reconstructions in regions where direct observations are limited. This will ultimately enhance our understanding of ice dynamics and improve projections of Antarctic Ice Sheet contribution to sea level rise under climate warming scenarios, directly supporting our sensitivity analyses in the final phase of the project.
+In addition, we plan to implement our methods in an iterative way, allowing us to improve our results via an inversion-forward modelling validation cycle: The initially inverted bed topography will be used in the ice dynamics (forward) model with BedSAT's improved rheological and geometric assumptions, to then compare the resulting surface predictions with products like NASA'S ITS\_LIVE (see Chapter \ref{resources}). Part of our plan involves a systematization of this process via Machine learning methods. This will ultimately enhance our analyses in the final phase of our project.

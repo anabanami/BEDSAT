@@ -10,8 +10,12 @@ The overall aim of this project is to derive a new Antarctic bed topography usin
 \end{enumerate}
 
 \section{Research plan methodology}
-Objective 1 is to derive the BedSAT method. We will use a regional catchment in Antarctica for which relatively more radar data are available and has an indicative range of topography features, e.g. the Aurora Subglacial Basin, East Antarctica, extensively surveyed by the Collaborative Exploration of the Cryosphere through Airborne Profiling (ICECAP)~\cite{Young_2011}. The second phase of the project (objective 2) will apply the methodology developed in objective 1 to the whole Antarctic continent, deriving a continent-wide bed topography dataset. Using covariance properties from existing radar surveys, we will generate a number of realisations of bed topography with unique high-resolution, and statistically-consistent topographic roughness. The third phase of the project will use the new bed topography datasets to conduct a sensitivity analysis of ice sheet model projections to 2300 CE, investigating the impact of the new topography and different realisations of roughness on ice and subglacial hydrological flow and ice mass loss from Antarctica.\\
-\newpage
+
+Objective 1 is to derive the BedSAT method. We will use a regional catchment in Antarctica for which relatively more radar data are available and has an indicative range of topography features, e.g. the Aurora Subglacial Basin, East Antarctica, extensively surveyed by the Collaborative Exploration of the Cryosphere through Airborne Profiling (ICECAP)~\cite{Young_2011}. In developing our inversion approach, We will consider important factors like sliding variability, to distinguish between topographical signatures and sliding-induced features in surface expressions. We will implement a realistic sliding-law in ISSM that incorporates Budd's  determinations of ice-sliding velocities across varying roughness, normal stress, and shear stress conditions. By calibrating these advanced models against known radar-surveyed regions with varying sliding conditions and validating with other observational data, we can better isolate true bed topographical features from friction-related artifacts and create a more robust inversion framework.
+
+The second phase of the project (objective 2) will apply the methodology developed in objective 1 to the whole Antarctic continent, deriving a continent-wide bed topography dataset. Using covariance properties from existing radar surveys, we will generate a number of realisations of bed topography with unique high-resolution, and statistically-consistent topographic roughness. The third phase of the project will use the new bed topography datasets to conduct a sensitivity analysis of ice sheet model projections to 2300 CE, investigating the impact of the new topography and different realisations of roughness on ice and subglacial hydrological flow and ice mass loss from Antarctica.
+
+
 \subsection*{Specific outline for Objective 1}
 \begin{enumerate}
 \item Develop a method to interpolate topography that ensures surface expressions consistent with observations
@@ -57,18 +61,5 @@ Objective 1 is to derive the BedSAT method. We will use a regional catchment in 
 \end{enumerate}
 
 
-\subsection*{Confounding Factors to Consider}
-Understanding how different factors affect basal friction is essential for accurately interpreting surface expressions and inverting them to determine bed topography:
 
-\begin{itemize}
-    \item Sliding behavior: Areas with enhanced sliding can mask bed features in surface expressions, while areas with stronger friction tend to show more pronounced surface expressions of bed topography.
-    
-    \item Rheological properties: Softer ice tends to dampen bed topography signals more than stiffer ice.
-    
-    \item Thermomechanical responses: The temperature-dependent nature of ice deformation means that warmer, softer ice near the bed behaves differently from colder, stiffer ice above.
-    
-    \item Slippery spots: Localized areas of reduced friction, often due to the presence of water or deformable sediments, can create surface expressions that might be misinterpreted as bed topography features.
-\end{itemize}
-
-These factors directly impact our ability to invert surface data for bed topography, as they can either enhance or mask the relationship between bed features and their surface expressions. Our methodology must account for these effects to avoid misinterpreting surface features.
 
