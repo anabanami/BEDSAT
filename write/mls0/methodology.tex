@@ -1,7 +1,17 @@
 \chapter{Methods}
 \section{Aims}
 
-The project specific objectives are 
+I will address the following research questions:
+\begin{enumerate}
+
+    \item How does the bed topography manifest on the ice surface?
+
+    \item To what extent do interpolation uncertainties in bed topography datasets affect the accuracy of Antarctic Ice Sheet evolution simulations under different climate change scenarios?
+
+    \item What is the impact of variable bed conditions and topography influence the rate of GL retreat in continental ice sheets?
+
+\end{enumerate}
+Underpinning these research questions are the following objectives:
 \begin{enumerate}
     \item Develop an ice sheet modelling approach to assimilate satellite remote sensing datasets to improve knowledge of the bed (BedSAT) informed by mathematical models of ice flow over topography;
     \item Derive a new bed topography for Antarctica using BedSAT;
@@ -10,17 +20,16 @@ The project specific objectives are
 
 \section{Research plan methodology}
 
-Objective 1 is to derive the BedSAT method. I will use a regional catchment in Antarctica for which relatively more radar data are available and has an indicative range of topography features, e.g. the Aurora Subglacial Basin, East Antarctica, extensively surveyed by the Collaborative Exploration of the Cryosphere through Airborne Profiling (ICECAP)~\cite{Young_2011}. In developing my inversion approach, I will consider important factors like sliding variability, to distinguish between topographical signatures and sliding-induced features in surface expressions. I will implement a realistic sliding-law in ISSM that incorporates Budd's  determinations of ice-sliding velocities across varying roughness, normal stress, and shear stress conditions. By calibrating these advanced models against known radar-surveyed regions with varying sliding conditions and validating with other observational data, I can better isolate true bed topographical features from friction-related artifacts and create a more robust inversion framework.
+Objective 1 is to derive the BedSAT method. I will use a regional catchment in Antarctica for which relatively more radar data are available and has an indicative range of topography features, e.g. the Aurora Subglacial Basin, East Antarctica, extensively surveyed by Collaborative Exploration of the Cryosphere through Airborne Profiling (ICECAP)~\cite{Young_2011}. In developing my inversion approach, I will consider important factors like sliding variability, to distinguish between topographical signatures and sliding-induced features in surface expressions. I will implement a realistic sliding-law in the Ice-sheet and Sea-level System Model (ISSM) that incorporates Budd's  determinations of ice-sliding velocities across varying roughness, normal stress, and shear stress conditions. By calibrating these advanced models against known radar-surveyed regions with varying sliding conditions and validating with other observational data, I can better isolate true bed topographical features from friction-related artifacts and create a more robust inversion framework.
 
 The second phase of the project (objective 2) will apply the methodology developed in objective 1 to the whole Antarctic continent, deriving a continent-wide bed topography dataset. Using covariance properties from existing radar surveys, I will generate a number of realisations of bed topography with unique high-resolution, and statistically-consistent topographic roughness. In the third phase of the project will use the new bed topography datasets to conduct a sensitivity analysis of ice sheet model projections to 2300 CE, investigating the impact of the new topography and different realisations of roughness on ice and subglacial hydrological flow and ice mass loss from Antarctica.
 
-
-\subsection*{Specific outline for Objective 1 (ONLY)}
+\subsection*{Specific outline for Objective 1}
 \begin{enumerate}
 \item Develop a method to interpolate topography that ensures surface expressions consistent with observations
 \end{enumerate}
 
-\subsection*{Key Investigation Areas for Objective 1 (ONLY)}
+\subsection*{Key Investigation Areas for Objective 1}
 \begin{enumerate}
 \item\textbf{Model Development Strategy}
     \begin{itemize}
@@ -58,7 +67,6 @@ The second phase of the project (objective 2) will apply the methodology develop
     \end{itemize}
 \end{enumerate}
 
-
-
+\textit{Note: Detailed methodological outlines for Objectives 2 and 3 will be developed following the completion and refinement of the BedSAT method in Objective 1.}
 
 
