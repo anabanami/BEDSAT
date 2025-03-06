@@ -3,15 +3,15 @@
 
 The polar regions are losing ice, and their oceans are changing rapidly\cite{O_C_in_changingClimate}. The consequences of this extend to the whole planet and it is crucial for us to understand them to be able to evaluate the costs and benefits of potential mitigation. 
 
-Changes in different kinds of polar ice affect many connected systems. Of particular concern is the accelerating loss of continental ice sheets (glacial ice masses on land) in both Greenland and Antarctica, which has become a major contributor to global sea level rise\cite{O_C_in_changingClimate}. Impacts extend beyond direct ice loss: as fresh water from melting ice sheets is added into the ocean, it increases ocean stratification disrupting global thermohaline circulation\cite{Jacobs_2004}. In addition, cold freshwater can dissolve larger amounts of $\mathrm{CO_2}$ than regular ocean water creating corrosive conditions\cite{O_C_in_changingClimate}.
+Changes in different kinds of polar ice affect many connected systems. Of particular concern is the accelerating loss of continental ice sheets (glacial ice masses on land) in both Greenland and Antarctica, which has become a major contributor to global sea level rise\cite{O_C_in_changingClimate}. Impacts extend beyond direct ice loss: as fresh water from melting ice sheets is added into the ocean, it increases ocean stratification disrupting global thermohaline circulation\cite{Jacobs_2004}. In addition, cold freshwater can dissolve larger amounts of $\mathrm{CO_2}$ than regular ocean water creating corrosive conditions for marine life\cite{O_C_in_changingClimate}.
  
-While there is high confidence in current ice loss and retreat observations in many areas, there is more uncertainty about the mechanisms driving these changes and their future progression\cite{Fox-Kemper_2021}. Uncertainty increases in regions with variable bed conditions, where characteristics like ``slipperiness'' and ``roughness'' are difficult to verify via direct observations. Other problematic areas involve the ice sheet's grounding line (GL), the zone that delineates ice grounded on bedrock from ice shelves floating over the ocean. The retreat rate depends crucially on topographical features like pinning points\cite{Fox-Kemper_2021}, which lead to increased buttressing by the ice shelf on the upstream ice sheet. However, major knowledge gaps persist in mapping bed topography across Antarctic ice sheet margins - with over half of all margin areas having insufficient data within 5 km of the grounding zone\cite{RINGS_2022}. Addressing this data gap through both systematic mapping and improved interpolation utilising auxiliary data streams with more complete coverage would significantly improve both our understanding of current ice dynamics and the accuracy of ice-sheet models projecting future changes.
+While there is high confidence in current ice loss and retreat observations in many areas, there is more uncertainty about the mechanisms driving these changes and their future progression\cite{Fox-Kemper_2021}. Uncertainty increases in regions with variable bed conditions, where characteristics like ``slipperiness'' and ``roughness'' are difficult to verify via direct observations. Other problematic areas involve the ice sheet's grounding line (GL), the zone that delineates ice grounded on bedrock from ice shelves floating over the ocean. The retreat rate depends crucially on topographical features like pinning points\cite{Fox-Kemper_2021}, which lead to increased buttressing by the ice shelf on the upstream ice sheet. Although this mechanism is established, major knowledge gaps persist in mapping bed topography across Antarctic ice sheet margins - with over half of all margin areas having insufficient data within 5 km of the grounding zone\cite{RINGS_2022}. Addressing this data gap through both systematic mapping and improved interpolation utilising auxiliary data streams with more complete coverage would significantly improve both our understanding of current ice dynamics and the accuracy of ice-sheet models projecting future changes.
 
 \chapter{Topography of Antarctica}\label{review}
 
 Bed topography is one of the most crucial boundary conditions that influences ice flow and loss from the Antarctic Ice Sheet (AIS)\cite{Morlighem_2020}. Bed topography datasets are typically generated from airborne radar surveys, which are sparse and unevenly distributed across the Antarctic continent (see figure \ref{fig:BedMAP}). Interpolation schemes to ``gap fill'' these sparse datasets yield bed topography estimates that have high uncertainties (i.e. multiple hundreds of metres in elevation uncertainty; Morlighem et al., 2020) which propagate through simulations of AIS evolution under climate change\cite{Castleman_2022}. Given the logistical challenges of accessing large parts of the Antarctic continent, there is a crucial need for alternative approaches that integrate diverse and possibly more spatially complete data streams – including satellite data.
 \begin{figure}[H] % Forces the figure exactly HERE
-    \includegraphics[scale=0.4]{bedmap.png}
+    \includegraphics[scale=0.38]{bedmap.png}
     \caption{Distribution of BedMAP\{1,2,3\} data tracks (Source: bedmap.scar.org).}
     \label{fig:BedMAP}
 \end{figure}
@@ -20,15 +20,15 @@ Bed topography is one of the most crucial boundary conditions that influences ic
 
 A key objective of this study is to understand how bed topography influences ice dynamics, and the bed topography itself. There are two ways that we can infer information about this relationship: Through forward modelling, with assumptions of the bed conditions; and through inverse modelling that relies on surface observations.
 \begin{itemize}
-    \item\textbf{Forward models}
+    \item\textbf{Forward models}\\
     The aim of forward models is to see how bed properties impact ice dynamics. A key example is using a large ensemble of bed topographies to investigate how bed uncertainties impact simulated ice mass loss. In this example geostatistical methods can be used to generate bed topographies that either preserve elevation or texture:    
     \begin{itemize}
             \item\textbf{Geostatistics} Statistical methods specialized for analyzing spatially correlated data. In glaciology, this approach is used to interpolate between sparse measurements and characterise spatial patterns in bed properties, often employing techniques like kriging\cite{Mackie_2020}.
 
     \end{itemize}
 
-    \item\textbf{Inversion models}
-    The aim of these models is to understand bed properties through knowledge of surface or other variables. A key example is the retrieval od bed topography or basal slipperiness from surface elevation and velocities.
+    \item\textbf{Inversion models}\\
+    The aim of these models is to understand bed properties through knowledge of surface or other variables. A key example is the retrieval of bed topography or basal slipperiness from surface elevation and velocities.
 
         \begin{itemize}
             \item\textbf{Control method inversion}: A variational approach that minimizes mismatches between observed and simulated fields through a cost function approach. Remote sensing data and theoretical ice flow models are used to obtain basal conditions\cite{deRydt_2013}. Often needs regularization terms to prevent non-physical features or over-fitting\cite{Morlighem_Goldberg_2024}.
@@ -43,15 +43,13 @@ A key objective of this study is to understand how bed topography influences ice
         \end{itemize}
     
 \end{itemize} 
-This study aims to develop an integrated method combining forward and inverse modeling to improve bed topography estimates by leveraging high-resolution satellite surface data in regions where radar data is sparse. Despite revolutionary advances in satellite technology providing unprecedented surface detail, a key challenge in glaciology remains: fully utilizing this wealth of information where subglacial understanding is limited. Our approach will integrate more comprehensive models with modern computational capabilities, with the specific methodology chosen based on research objectives, data availability, and computational resources.
+This study aims to develop an integrated method combining forward and inverse modeling to improve bed topography estimates by leveraging high-resolution satellite surface data in regions where radar data is sparse. Despite revolutionary advances in satellite technology that provide unprecedented surface detail, a key challenge in glaciology remains: how to fully utilize this wealth of information in regions where our understanding of subglacial conditions is limited. Our approach will integrate more comprehensive models with modern computational capabilities, with the specific methodology chosen based on research objectives, data availability, and computational resources.
 
 \newpage
 \section{Theoretical Frameworks}
  Understanding how bed features manifest in surface observations requires a theoretical framework that connects these two domains. The modelling approach used on this project relies on two different theoretical frameworks that relate bed topography and surface features. Using observations and these modelling frameworks, my goal is understanding the limitations of each approach and how they can be improved
 
-The first framework was originally developed by Budd \cite{Budd_1970}. This model relates ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. 
-
-The model's foundation rests on two key simplifications:
+The first framework was originally developed by Budd \cite{Budd_1970}. This model relates ice flow over bedrock perturbations to surface expressions using a two-dimensional biharmonic stress equation. The model's foundation rests on two key simplifications:
 \begin{itemize}
     \item Most shear deformation occurs at the base of the ice sheet
     \item Explicit consideration of longitudinal stresses and strain-rates
@@ -76,8 +74,8 @@ Using high-resolution datasets (REMA surface elevation at 8m resolution and NASA
     \item Features not aligned with ice flow direction
     \item Medium-wavelength (5-50km) bedrock features
 \end{itemize}
-
-However, significant limitations emerge when:
+\newpage
+Nevertheless, significant limitations emerge when:
 \begin{itemize}
     \item Dealing with steep topography where the shallow-ice-stream approximation breaks down
     \item Handling variable slipperiness parameters
@@ -87,5 +85,5 @@ However, significant limitations emerge when:
 
 \section{Current Opportunities}
 
-The review of current approaches to Antarctic bed topography reconstruction reveals significant methodological limitations. While theoretically robust, methods such as the inversion technique employed by Ockenden et al. often rely on simplifying assumptions that inadequately capture complex ice-bed interactions, particularly in regions with steep topography where the shallow-ice-stream approximation breaks down.
-With BedSAT, I aim to address these limitations by building upon the theoretical foundations established by Budd and recent inversion methods. My primary objective is to better understand how variable bed conditions such as ``slipperiness,'' ``roughness,'' and pinning points influence both GL retreat rates and their surface manifestations. BedSAT will bridge the disconnect between surface observations and bed topography by implementing a more realistic set of rheological and geometric assumptions. The methodology will follow an iterative inversion-forward modeling validation cycle: initially inverted bed topography will be used in ice dynamics (forward) models with BedSAT's improved assumptions, allowing comparison between resulting surface predictions and established datasets like NASA's ITS\_LIVE (see Chapter \ref{resources}). This process will be systematized through machine learning methods, ultimately enhancing the analytical capabilities for the final phase of my project.
+The review of current approaches to Antarctic bed topography reconstruction reveals significant methodological limitations.Although theoretically robust, methods such as the inversion technique used by Ockenden et al. have limitations. These methods typically rely on simplifying assumptions—like treating ice viscosity as linear—that fail to capture the complex interactions between ice and the underlying bed.
+With BedSAT, I aim to address these limitations by building upon the theoretical foundations established by Budd and recent inversion methods. My primary objective is to better understand how variable bed conditions such as ``slipperiness,'' ``roughness,'' and pinning points influence both GL retreat rates and their surface manifestations. BedSAT will bridge the disconnect between surface observations and bed topography by implementing a more realistic set of rheological and geometric assumptions. The methodology will follow an iterative inversion-forward modeling validation cycle: initially inverted bed topography will be used in ice dynamics (forward) models with BedSAT's improved assumptions, allowing comparison between resulting surface predictions and established datasets like NASA's ITS\_LIVE (see Chapter \ref{resources}). I expect to make process systematized through machine learning methods, ultimately enhancing the analytical capabilities for the final phase of my project.
