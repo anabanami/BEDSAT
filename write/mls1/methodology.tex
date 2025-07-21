@@ -1,0 +1,74 @@
+\chapter{Methods}
+\section{Aims}
+
+I will address the following research questions:
+\begin{enumerate}
+
+    \item How does the bed topography manifest on the ice surface?
+
+    \item To what extent do interpolation uncertainties in bed topography datasets affect the accuracy of Antarctic Ice Sheet evolution simulations under different climate change scenarios?
+
+    \item What is the impact of variable bed conditions and topography influence the rate of GL retreat in continental ice sheets?
+
+\end{enumerate}
+Underpinning these research questions are the following objectives:
+\begin{enumerate}
+    \item Develop an ice sheet modelling approach to assimilate satellite remote sensing datasets to improve knowledge of the bed (BedSAT) informed by mathematical models of ice flow over topography;
+    \item Derive a new bed topography for Antarctica using BedSAT;
+    \item Evaluate the impact of the improved bed topography on projections of ice mass loss from Antarctica under climate warming through sensitivity analyses. 
+\end{enumerate}
+
+\section{Research plan methodology}
+
+Objective 1 is to derive the BedSAT method. I will use a regional catchment in Antarctica for which relatively more radar data are available and has an indicative range of topography features, e.g. the Aurora Subglacial Basin, East Antarctica, extensively surveyed by Collaborative Exploration of the Cryosphere through Airborne Profiling (ICECAP)~\cite{Young_2011}. In developing my inversion approach, I will consider important factors like sliding variability, to distinguish between topographical signatures and sliding-induced features in surface expressions. I will implement a realistic sliding-law in the Ice-sheet and Sea-level System Model (ISSM) that incorporates Budd's  determinations of ice-sliding velocities across varying roughness, normal stress, and shear stress conditions. By calibrating these advanced models against known radar-surveyed regions with varying sliding conditions and validating with other observational data, I can better isolate true bed topographical features from friction-related artifacts and create a more robust inversion framework.
+
+The second phase of the project (objective 2) will apply the methodology developed in objective 1 to the whole Antarctic continent, deriving a continent-wide bed topography dataset. Using covariance properties from existing radar surveys, I will generate a number of realisations of bed topography with unique high-resolution, and statistically-consistent topographic roughness. In the third phase of the project will use the new bed topography datasets to conduct a sensitivity analysis of ice sheet model projections to 2300 CE, investigating the impact of the new topography and different realisations of roughness on ice and subglacial hydrological flow and ice mass loss from Antarctica.
+
+\subsection*{Objective 1}
+\begin{enumerate}
+\item Develop an ice sheet modelling approach to assimilate satellite remote sensing
+datasets to improve knowledge of the bed (BedSAT) informed by mathematical
+models of ice flow over topography;
+\end{enumerate}
+
+\subsection*{Key Investigation Areas for Objective 1}
+\begin{enumerate}
+\item\textbf{Model Development Strategy}
+    \begin{itemize}
+    \item I will maintain invariant (but spatially variable) bed traction throughout the modeling timeframe to isolate topographical effects in the inversion approach.
+    
+    \item My model will incorporate available thermal distribution, velocity field, and ice thickness data, as these parameters be constrained using observations.
+    
+    \item Through spectral analysis of surface expressions, I will identify the topographical features that most strongly influence surface patterns.
+    
+    \item To account for variations in ice behavior with thickness, I will simulate scenarios ranging from thick ice with slippery base to thin ice with sticky base, using observed velocity patterns as constraints.
+    \end{itemize}
+
+\item\textbf{Transfer Functions}
+    \begin{itemize}
+    \item I will develop efficient transfer function methods for rapid bed topography inversion, validating against known bed configurations from radar data.
+    
+    \item My transfer functions will be tested across various ice thickness and flow conditions.
+    
+    \item Cross-validation against radargrams will provide direct verification of my inversion results.
+    
+    \item Spatial covariance analysis of existing radar data will inform my statistical framework and error propagation through the inversion process.
+    
+    \item I will account for friction roughness and high-amplitude variations, using observed surface velocity patterns as constraints.
+    \end{itemize}
+
+\item\textbf{Model Validation}
+    \begin{itemize}
+    \item I will apply quantitative error reduction metrics and compare systematically against existing bed topography products.
+    
+    \item Model limitations and breaking points will be identified through systematic testing across extreme scenarios, constrained by physical principles.
+    
+    \item Grid independence testing will ensure solution robustness across different spatial resolutions.
+    
+    \item Sensitivity analysis will examine the impact of my model assumptions.
+    \end{itemize}
+\end{enumerate}
+
+\textit{Note: Detailed methodological outlines for Objectives 2 and 3 will be developed following the completion and refinement of the BedSAT method in Objective 1.}
+
+
