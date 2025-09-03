@@ -129,7 +129,7 @@ In section~\ref{study1}, I extend these principles to investigate the transfer o
 % % % Technical Note: It is worth noting that while the periodic Full-Stokes model is mathematically well posed,physically robust and runs successfully locally, a technical issue related to a debug assertion in the NCI Gadi supercomputer's ISSM build currently prevents it from running in that specific environment. Investigations confirmed this is a software configuration matter, not a flaw in the model's physics. Consequently, the periodic boundary condition framework is validated as the scientifically superior method for this research.
 % % =====
 
-The experimental design is built around four benchmark experiments mentioned in subection~\ref{transient_ismip} to test different physical conditions:
+The experimental design is built around four benchmark experiments mentioned in subection~\ref{transient_ismip} to test different physical conditions.
 
 % % Include info on the realism of the setup: Friction, Rigidity, Basal forcings (none implemented)
 
@@ -169,20 +169,24 @@ The experimental design is built around four benchmark experiments mentioned in 
 
 \subsection{Data Processing and Visualization Tools}\label{dataviz}
 
-% I have developed a set of robust, high-performance scripts to handle the large volume of data produced by the ice flow simulations. (Note that: All these scripts have individual file processing capabilities)
+I have developed a set of robust, high-performance scripts to handle the large volume of data produced by the ice flow simulations. (Note that: All these scripts have individual file processing capabilities)
 
-% \begin{enumerate}
-% \item{Binary to NetCDF Conversion} A batch-capable tool (\texttt{batch\_convert.py}) converts ISSM \texttt{.outbin} files into the standard, portable NetCDF format. This script supports parallel processing for high throughput.
-% \item{Result Extraction and Visualization} A batch script (\texttt{batch\_extract\_results.py}) that automatically finds and processes NetCDF files to generate visualisations of key fields like velocity and pressure. 
+\begin{enumerate}
+\item{Binary to NetCDF Conversion} A batch-capable tool (\texttt{batch\_convert.py}) converts ISSM \texttt{.outbin} files into the standard, portable NetCDF format. This script supports parallel processing for high throughput.
+\item{Result Extraction and Visualization} A batch script (\texttt{batch\_extract\_results.py}) that automatically finds and processes NetCDF files to generate visualisations of key fields like velocity and pressure. 
 % \item{Targeted Scientific Plotting} Additional scripts (\texttt{batch\_plots.py}) are used to create specific scientific plots, such as basal and surface velocities, basal velocity colored over the bed topography and basal shear stress distributions, to analyse the direct impact of the bedrock on flow.
-% \end{enumerate}
+\end{enumerate}
 
 \subsection{Scientific Analysis Tools}
 
-% \subsubsection{Key Findings: The Grid Independence Study}\label{grid_ind}
-% In order to  perform quantitative analysis on the simulation results. I developed a pair of Grid Convergence Analysis scripts capable of analysing the resolution convergence in both the static and transient runs \texttt{analyse\_grid\_convergence.py} and \\\texttt{analyse\_transient\_convergence.py} respectively. Convergence is assessed by comparing solutions from different mesh resolutions (e.g., factors of 0.5, 0.75, 1.0, 1.25) against the finest mesh solution. The primary metric of this script is the L2 relative error, a global, scale-independent measure that quantifies the overall difference between two solutions. An error below $1\%$ is typically considered a sign of good convergence. A standardized $2\times2$ plot~\ref{fig:grid_conv}is generated to provide a comprehensive view of convergence, showing visual velocity comparisons of surface and basal velocities for each mesh resolution tested, numerical L2 error bars, and the computational cost of each resolution.
+\subsubsection{Key Findings: The Grid Independence Study}\label{grid_ind}
+In order to  perform quantitative analysis on the simulation results. 
+I developed a convergence analysis script: \texttt{convergence\_analyser.py}
+Grid convergence analysis is a fundamental verification technique in computational modeling that ensures numerical solutions are approaching the true solution as mesh resolution increases. The key principle is that as the grid is refined (smaller elements, more nodes), the numerical error should decrease systematically.
 
-% %add info on~\ref{fig:transient_conv}
+For the analysis, I compared coarser and finer meshes to a baseline reference mesh (I used resolution scaling factors of $0.5, 1.5$ and $2.0$). The primary metric of this script is the L2 relative error, a global, scale-dependent measure that quantifies the overall difference between two solutions. In my analysis, I chose a convergence threshold of $1\%$ when comparing the refined mesh solutions to the baseline.
+%  Based on [the requirements of my application, standards within the field, a sensitivity analysis], I established a convergence threshold of 1% for the L2 relative error 
+This script generates a standardised $2\times2$ plot~\ref{fig:grid_conv} to provide a comprehensive view of convergence, showing visual velocity comparisons of surface and basal velocities for each mesh resolution tested, numerical L2 error bars, and the maximum velocity at every time step.
 
 % % \begin{figure}[H]
 % %     \includegraphics[scale=0.45]{}
@@ -190,11 +194,6 @@ The experimental design is built around four benchmark experiments mentioned in 
 % %     \label{fig:grid_conv}
 % % \end{figure}
 
-% % \begin{figure}[H]
-% %     \includegraphics[scale=0.45]{}
-% %     \caption{}
-% %     \label{fig:transient_conv}
-% % \end{figure}
 
 % % =====
 % % =====
@@ -217,7 +216,7 @@ The experimental design is built around four benchmark experiments mentioned in 
 % % =====
 
 % \subsubsection{Mesh and Transient Fields}
-% % # ALSO INCLUDE EXTRANCT RESULTS???
+% % # ALSO INCLUDE EXTRACT RESULTS???
 
 % % THESE ARE ONLY FOR THE CHOSEN FINAL RESOLUTION
 
