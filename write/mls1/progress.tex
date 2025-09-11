@@ -77,12 +77,41 @@ Building upon the diagnostic ISMIP-HOM experiments, this work extends the progno
 
 While the original study by Pattyn et al. (2008) covered scenarios S1 and S3, understanding the impact of rheological assumptions is crucial for modern ice sheet modelling. During periods of rapid grounding line retreat, uncertainty in the Glen flow law exponent $n$ has been found to cause a larger spread in ice-loss projections than uncertainty in climate forcing~\cite{Getraer_2025}. Therefore, explicitly testing these different physical conditions is a critical step. This foundational analysis, validated against a well-established benchmark, will provide the necessary confidence in the modelling framework before extending the work to a suite of more complex synthetic bed topographies.
 
+
 % In section~\ref{study1}, I extend these principles to investigate the transfer of more complex synthetic bed topography signals to the ice surface. 
 
 \section{Rheology and Sliding Study}\label{study1}
 Budd's sliding theory describes stress propagation through flowing ice over undulating bedrock. The stress field propagates upward at an angle, creating surface (elevation) waves that are phase-shifted by approximately $\pi/2$ relative to bedrock (elevation) features, in Budd's words: \texttt{\texttt{the maximum shear stress occurs at the tops of the waves and the minimum in the troughs''\cite{Budd_1970}}}. 
 
 As mentioned in section~\ref{paper1}, my work up until now has been focused in building a comprehensive computational framework developed for the systematic investigation of ice dynamics. The first part of this framework is to study via flow simulations the behavior of ice to understand the relationship between basal geometry, ice rheology, and overall flow response. A key objective of this work is to understand the effect of commonly made assumptions in ice sheet modelling and their repercussions in the validity of resulting models. This initial stage is designed to be a complete, end-to-end pipeline, from environment setup to final scientific analysis. 
+
+\subsection{Extending ISMIP-HOM: Exp:F with non-Linear Rheology}
+
+% CONVERTING USING GETRAER (EXPLAIN THIS)
+
+The resultant surface elevations and velocities after a transient evolution
+
+\begin{figure}[H]
+    \includegraphics[scale=0.45]{combined_elevation_detrended_surface_velocity_['S1']_['S2'].png}
+    \caption{Final surface elevations and }
+    \label{fig:elev_vel_S1_S2}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[scale=0.45]{combined_elevation_detrended_surface_velocity_['S3']_['S4'].png}
+    \caption{}
+    \label{fig:elev_vel_S3_S4}
+\end{figure}
+
+% COMPARED TO PATTYN 2008:::
+% % Fig. 12. Steady state surface elevation along the central flowline for
+% Exp. F for the no sliding (top) and sliding (bottom) experiment. The
+% black line indicates the analytical solution.
+
+% Fig. 13. Norm of the steady state surface velocity along the central
+% flowline for Exp. F for the no sliding (top) and sliding (bottom)
+% experiment. The black line indicates the analytical solution.
+
 
 % over a variety of synthetic bedrock topographies to understand the relationship between basal geometry, ice rheology, and overall flow response.
 
@@ -115,7 +144,7 @@ The core of this study is a time evolution flow simulation of fully grounded ice
 The simulation utilises periodic boundary conditions which represents a section of an infinitely long ice sheet effectively eliminating edge effects that would arise from standard inlet/outlet boundaries. The script couples the inlet and outlet velocities by matching vertices in the base layer and then extruding this setup vertically. This ensures that the ice flow is continuous and that the dynamics are driven solely by the underlying topography and internal stresses, which is crucial for studying the transfer of bedrock signals to the surface.
 This approach has proved to be highly successful, yielding stable and physically realistic velocities across experimental scenarios. The results are consistent with established benchmarks like ISMIP-HOM and show the expected physical relationships (e.g., faster flow with sliding and non-linear rheology).
 
-The experimental design is built around four benchmark experiments mentioned in subection~\ref{transient_ismip} to test different physical conditions.
+The experimental design is built around four benchmark experiments mentioned in subsection~\ref{transient_ismip} to test different physical conditions.
 
 % % Include info on the realism of the setup: Friction, Rigidity, Basal forcings (none implemented)
 
@@ -174,33 +203,48 @@ I have developed a set of robust, high-performance scripts to handle the large v
 In order to  perform quantitative analysis on the simulation results. I developed a convergence analysis script: \texttt{convergence\_analyser.py}.
 Grid convergence analysis is a fundamental verification technique in computational modeling that ensures numerical solutions are approaching the true solution as mesh resolution increases. The key principle is that as the grid is refined (smaller elements, more nodes), the numerical error should decrease systematically.
 The grid analysis involved running simulations across 16 distinct mesh resolutions, generated by independently varying both the horizontal (H) and vertical (V) grid densities. 
-I applied resolution scaling factors of $2.0$ i.e. double the resolution, $0.5$ i.e. half the mesh resolution, $1.0$ i.e. no scaling and $1.5$ i.e. 50\% scaling. I designated the solution from the highest resolution mesh, corresponding to scaling factors of ($H=2.0, V=2.0$) as the reference solution against which all coarser meshes were compared. Refined meshes (either horizontal or vertical) often require smaller timesteps to satisfy the Courant–Friedrichs–Lewy (CFL) condition and maintain solver stability. To satisfy this criterion I scaled the time step for each simulation matching the largest resolution factor independently if it was hoizontal or vertical scaling.
-The primary metric of this script is the L2 relative error, a global, scale-dependent measure that quantifies the overall difference between two solutions. In my analysis, I chose a convergence threshold of $1\%$ when comparing the solutions to the baseline. If the L2 norm of the data is very close to zero (less than $1^{-6}$), the analysis reports the absolute error to avoid division by a tiny, unstable number. Otherwise, it calculates and reports the standard relative error as a percentage.%  Based on [the requirements of my application, standards within the field, a sensitivity analysis], I established a convergence threshold of 1% for the L2 relative error 
-The \texttt{convergence\_analyser.py} script generates a standardised $2\times2$ plot~\ref{fig:grid_conv} to provide a comprehensive view of convergence via L2 error bars, and the maximum velocity at every time step. In addition the output plot shows visual velocity comparisons along a centre line in the y dimension. This is done for surface and basal velocities for each mesh resolution tested. The code identifies all unique y-coordinates present in the mesh layer (surface or base) then finds the y-coordinate that is numerically closest (given some threshold) to the defined geometric centre line, then it selects all nodes whose y-coordinate matches this identified ``closest'' y-coordinate. The script effectively extracts the entire mesh line closest to the ideal centre for each simulation. The code also establishes a reference grid based on the baseline resolution chosen, then sorts and interpolates the velocity data based on this reference grid iteratively for all resolutions, the script interpolates the sorted velocity data for each resolution onto the common reference grid. 
+I applied resolution scaling factors of $2.0$ i.e. double the resolution, $0.5$ i.e. half the mesh resolution, $1.0$ i.e. no scaling and $1.5$ i.e. 50\% scaling. I designated the solution from the highest resolution mesh, corresponding to scaling factors of ($H=2.0, V=2.0$) as the reference solution against which all coarser meshes were compared. Refined meshes (either horizontal or vertical) often require smaller time steps to satisfy the Courant–Friedrichs–Lewy (CFL) condition and maintain solver stability. To satisfy this criterion I scaled the time step for each simulation matching the largest resolution factor independently if it was horizontal or vertical scaling.
+The primary metric of this script is the L2 relative error, a global, scale-dependent measure that quantifies the overall difference between two solutions. In my analysis, I chose a convergence threshold of $1\%$—since estimates of other uncertaintiesare expected to be larger than grid errors—when comparing the solutions to the baseline. If the L2 norm of the data is very close to zero (less than $1^{-6}$), the analysis reports the absolute error to avoid division by a tiny, unstable number. Otherwise, it calculates and reports the standard relative error as a percentage.%  
+
+The \texttt{convergence\_analyser.py} script generates a standardised $2\times2$ plot (see figures~\ref{fig:grid_conv_S1},~\ref{fig:grid_conv_S2},~\ref{fig:grid_conv_S3},~\ref{fig:grid_conv_S4}) to provide a comprehensive view of convergence via L2 error bars, and the maximum velocity at every time step. In addition the output plot shows visual velocity comparisons along a centre line in the y dimension. This is done for surface and basal velocities for each mesh resolution tested. The code identifies all unique y-coordinates present in the mesh layer (surface or base) then finds the y-coordinate that is numerically closest (given some threshold) to the defined geometric centre line, then it selects all nodes whose y-coordinate matches this identified ``closest'' y-coordinate. The script effectively extracts the entire mesh line closest to the ideal centre for each simulation. The code also establishes a reference grid based on the baseline resolution chosen, then sorts and interpolates the velocity data based on this reference grid iteratively for all resolutions, the script interpolates the sorted velocity data for each resolution onto the common reference grid. 
 
 \begin{figure}[H]
     \includegraphics[scale=0.49]{IsmipF_S1_convergence_summary.png}
     \caption{Velocity convergence summary for S1 using experiment F in ISMIP HOM. ...}
-    \label{fig:grid_conv}
+    \label{fig:grid_conv_S1}
 \end{figure}
+
+\begin{figure}[H]
+    \includegraphics[scale=0.49]{IsmipF_S2_convergence_summary.png}
+    \caption{Velocity convergence summary for S2 using experiment F in ISMIP HOM. ... }
+    \label{fig:grid_conv_S2}
+\end{figure}
+
+% \begin{figure}[H]
+%     \includegraphics[scale=0.49]{IsmipF_S2_convergence_summary_zoom.png}
+%     \caption{Velocity convergence summary for S2 using experiment F in ISMIP HOM. ... }
+%     \label{fig:grid_conv_S2_zoom}
+% \end{figure}
 
 \begin{figure}[H]
     \includegraphics[scale=0.49]{IsmipF_S3_convergence_summary.png}
     \caption{Velocity convergence summary for S3 using experiment F in ISMIP HOM. ... }
-    \label{fig:grid_conv}
+    \label{fig:grid_conv_S3}
+\end{figure}
+
+
+\begin{figure}[H]
+    \includegraphics[scale=0.49]{IsmipF_S4_convergence_summary.png}
+    \caption{Velocity convergence summary for S4 using experiment F in ISMIP HOM. ... }
+    \label{fig:grid_conv_S4}
 \end{figure}
 
 % \begin{figure}[H]
-%     \includegraphics[scale=0.49]{IsmipF_S2_convergence_summary.png}
-%     \caption{Velocity convergence summary for S2 using experiment F in ISMIP HOM. ... }
-%     \label{fig:grid_conv}
+%     \includegraphics[scale=0.49]{IsmipF_S4_convergence_summary_zoom.png}
+%     \caption{Velocity convergence summary for S4 using experiment F in ISMIP HOM. ... }
+%     \label{fig:grid_conv_S4_zoom}
 % \end{figure}
 
-% \begin{figure}[H]
-%     \includegraphics[scale=0.49]{IsmipF_S4_convergence_summary.png}
-%     \caption{Velocity convergence summary for S4 using experiment F in ISMIP HOM. ... }
-%     \label{fig:grid_conv}
-% \end{figure}
 
 % % =====
 % % My diagnostic convergence analyses show that 
@@ -285,6 +329,40 @@ The \texttt{convergence\_analyser.py} script generates a standardised $2\times2$
 % % ======================================================
 
 \subsubsection{Phase Analysis}
+
+% PHASE ANALYSIS:
+
+% broader goal of measuring how surface signals shift relative to
+%   the most prominent bed feature, using sigma (the Gaussian width) as your
+%   characteristic length scale makes perfect sense.
+
+%   The phase calculation as (2 * π * lag_distance) / sigma is actually a reasonable way
+%    to normalize the lag by the size of the prominent feature. It gives you a
+%   dimensionless measure of how much the surface has shifted relative to the bed
+%   feature's characteristic size.
+
+
+%   As time progresses and the ice surface responds to the underlying bed topography,
+%   the surface will develop a bump that's spatially shifted relative to the bed bump
+%   (upstream due to ice flow dynamics), and that's when your phase/lag analysis becomes
+%    physically meaningful.
+
+% This means at t=0:
+%   - surface_signal = surface - unperturbed_surface ≈ 0 ✓ (should be near zero)
+%   - base_signal = base - unperturbed_base = Gaussian bump ✓ (should be the 100m bump)
+
+%   You're right that the correlation should be very weak initially! If you're seeing
+%   strong correlations (~10km lag) at t=0, it suggests either:
+
+%   1. Numerical artifacts: Even tiny surface perturbations (numerical noise) might
+%   correlate with the large bed signal
+%   2. The surface isn't actually flat: Check if your initial surface has small
+%   perturbations
+%   3. Cross-correlation finding spurious peaks: With one strong signal (bed) and one
+%   weak signal (surface), the correlation can find false peaks
+
+%   Can you check what the actual surface_signal values look like at t=0? They should be
+%    very close to zero if the surface is truly unperturbed.
 To quantify the transient surface response to the basal topography as a spatial phase shift and hence to verify the physical validity of my simulation based on the criteria in \cite{Budd_1970}, I developed single and batch-processing scripts (\texttt{phase\_analysis.py} and \texttt{batch\_phase\_analysis.py}) that use cross-correlation to calculate the spatial lag and phase shift between the de-trended base and surface signals for each time step in a given simulation.
 
  The scripts generate time-series plots of phase shift evolution and summary text files with numerical results. For each batch or single simulation analysed.
