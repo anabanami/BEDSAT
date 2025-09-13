@@ -11,14 +11,12 @@ My contribution was focused on the literature review of key methodologies used t
 \item{Ensemble Kalman Filter (EnKF)}: Summarising this data assimilation technique which uses an ensemble of model states to estimate and update system parameters based on new observations, thereby tracking the transient evolution of an ice sheet. some relevant works include~\cite{Gillet-Chaulet_2020, Choi_2025}.
 
 \item{Linear Perturbation Theory}: Referenced works using this method are included and discussed in section~\ref{theoretical_frameworks} of this report.
-
 \end{itemize}
-
 By describing these distinct approaches, their physical assumptions, and their limitations, my work helped to establish the theoretical context for the paper's case study on the Aurora Subglacial Basin. This review framed the comparison between different types of synthetic beds ("elevation-preserving" vs. "texture-preserving") and underscored how methodological choices in bed generation can significantly influence projections of future sea level contributions
 
 \newpage
 \subsection{SMUG}
-I have also contributed to the investigation and writing of a manuscript detailing a new interpolation method for sparse and unevenly sampled data. The manuscript is titled: ``Antarctic bed topography estimation using a Stochastic Meshless Uncertainty Gridding (SMUG) method''. This manuscript will be submitted TO Elsevier.
+I have also contributed to the investigation and writing of a manuscript detailing a new interpolation method for sparse and unevenly sampled data. The manuscript is titled: ``Antarctic bed topography estimation using a Stochastic Meshless Uncertainty Gridding (SMUG) method''. This manuscript will be submitted to Elsevier.
 
 My contribution involved conducting a review of existing interpolation techniques helping to author the introductory section of the manuscript. My writing establishes the scientific context and rationale for the development of SMUG. I analysed several established methods used in previous Antarctic bed topography datasets, including:
 
@@ -31,95 +29,109 @@ My contribution involved conducting a review of existing interpolation technique
 
     \item{Mass Conservation Methods}: Implemented in BedMachine~\cite{Morlighem_2020}, this physics-informed approach improves accuracy in data-sparse regions but requires additional datasets (like ice velocity) that are not always available.
 \end{itemize}
-
 Through my investigation, I identified and articulated key limitations and research gaps inherent in these widely-used techniques. Specifically, my writing highlighted the common difficulties in providing robust uncertainty estimates, avoiding systematic biases, and capturing the spatial correlation of errors realistically. This analysis sets the stage for the manuscript to introduce SMUG as a method designed to overcome these specific shortcomings, setting the foundation upon which the novelty and significance of the SMUG method were demonstrated in our manuscript.
 
 \section{Recreating ISMIP-HOM}
 As a first step in validating the computational framework for this project and to build a understanding foundation of the capabilities and functionality of ISSM, I replicated a series of benchmark experiments from the Ice Sheet Model Intercomparison Project for Higher-Order Models (ISMIP-HOM)~\cite{Pattyn_2008}. Successfully replicating these benchmarks demonstrates that the simulation setup is configured accurately capturing the fundamental physics of ice flow.  
 Part of my recreation focused on the first four diagnostic experiments (A, B, C, and D), which test a model's ability to simulate ice flow under a range of conditions. Experiments A and B involve flow over a sinusoidally varying bed topography (a "bumpy" 3D bed and a "rippled" 2D bed, respectively) with no basal sliding. These experiments are designed to evaluate the model's handling of longitudinal and vertical stress gradients induced by basal topography. Conversely, Experiments C and D feature a flat bed but introduce spatially variable basal friction, simulating the dynamics of an ice stream with slippery and sticky patches. All my models utilised full-Stokes equations (FS).
-
 \begin{figure}[H]
     \includegraphics[scale=0.49]{ExpA_velocity_panels.png}
     \caption{ISSM recreation of ISMIP-HOM Experiment A: Ice flow over a bumpy bed. The panels show the the surface velocity for a 3D ice flow simulation over a sinusoidal bed with no basal sliding ($v_b=0$). Each panel corresponds to a different domain length scale (L), from 5 km to 160 km.}
     \label{fig:4.1}
 \end{figure}
-
 \begin{figure}[H]
     \includegraphics[scale=0.49]{ExpB_velocity_panels.png}
     \caption{ISSM recreation of ISMIP-HOM Experiment B: Ice flow over a rippled bed. The panels show the surface velocity for a 2D flowline simulation. The setup is identical to Experiment A, but the basal topography does not vary in the y-direction, isolating longitudinal stress effects.}
     \label{fig:4.2}
 \end{figure}
-
 \begin{figure}[H]
     \includegraphics[scale=0.49]{ExpC_velocity_panels.png}
     \caption{ISSM recreation of ISMIP-HOM Experiment C: Ice stream flow I. The panels show both surface (blue) and basal (orange) velocity for a 3D simulation over a flat bed where basal motion is governed by a spatially variable friction coefficient, $\beta^{2}(x,y)$.}
     \label{fig:4.3}
 \end{figure}
-
 \begin{figure}[H]
     \includegraphics[scale=0.49]{ExpD_velocity_panels.png}
     \caption{ ISSM recreation of ISMIP-HOM Experiment D: Ice stream flow II. The panels show the surface velocity for a 2D flowline over a flat bed with variable basal friction. The setup is identical to Experiment C, but the friction coefficient varies only in the x-direction, $\beta^{2}(x,y)$.}
     \label{fig:4.4}
 \end{figure}
-
 The results from these simulations demonstrate a strong agreement with the published findings in~\cite{Pattyn_2008}. For all experiments and across the different prescribed length scales \\(L = 5 km to 160 km), the calculated surface velocities closely matched the behaviour of the full-Stokes (FS) models from the original ISMIP-HOM. This successful validation confirms that my computational framework is robust and reliably simulates complex ice dynamics. This verification establishes a solid foundation for the application of my framework to more complex simulation settings and its subsequent research questions. In subsection~\ref{transient_ismip} I work on extending the findings in Pattyn et al, 2008. To investigate the transient (Prognostic) experiment F where the free surface is allowed to relax until a steady state is reached for zero surface mass balance~\cite{Pattyn_2008}
 
 
 \subsection{Transient evolution ISMIP-HOM}\label{transient_ismip}
 Building upon the diagnostic ISMIP-HOM experiments, this work extends the prognostic experiment F to systematically investigate the combined effects of rheology and basal sliding within a benchmark ice sheet model. The original experiment F included two scenarios: one with a frozen bed (no-slip) and another with linear sliding. My study expands upon these conditions by also incorporating non-linear rheology. This addition generates four distinct scenarios for comparison:
-
 \begin{itemize}
 \item{S1} No-slip (frozen) bed + Linear rheology ($n=1$).
 \item{S2} No-slip (frozen) bed + Non-linear rheology ($n=3$).
 \item{S3} Linear sliding + Linear rheology ($n=1$).
 \item{S4} Linear sliding + Non-linear rheology ($n=3$).
 \end{itemize}
-
 While the original study by Pattyn et al. (2008) covered scenarios S1 and S3, understanding the impact of rheological assumptions is crucial for modern ice sheet modelling. During periods of rapid grounding line retreat, uncertainty in the Glen flow law exponent $n$ has been found to cause a larger spread in ice-loss projections than uncertainty in climate forcing~\cite{Getraer_2025}. Therefore, explicitly testing these different physical conditions is a critical step. This foundational analysis, validated against a well-established benchmark, will provide the necessary confidence in the modelling framework before extending the work to a suite of more complex synthetic bed topographies.
-
-
 % In section~\ref{study1}, I extend these principles to investigate the transfer of more complex synthetic bed topography signals to the ice surface. 
-
 \section{Rheology and Sliding Study}\label{study1}
 Budd's sliding theory describes stress propagation through flowing ice over undulating bedrock. The stress field propagates upward at an angle, creating surface (elevation) waves that are phase-shifted by approximately $\pi/2$ relative to bedrock (elevation) features, in Budd's words: \texttt{\texttt{the maximum shear stress occurs at the tops of the waves and the minimum in the troughs''\cite{Budd_1970}}}. 
 
 As mentioned in section~\ref{paper1}, my work up until now has been focused in building a comprehensive computational framework developed for the systematic investigation of ice dynamics. The first part of this framework is to study via flow simulations the behavior of ice to understand the relationship between basal geometry, ice rheology, and overall flow response. A key objective of this work is to understand the effect of commonly made assumptions in ice sheet modelling and their repercussions in the validity of resulting models. This initial stage is designed to be a complete, end-to-end pipeline, from environment setup to final scientific analysis. 
 
-\subsection{Extending ISMIP-HOM: Exp:F with non-Linear Rheology}
+\subsection{Non-Linear Rheology for Exp F}
+In order to extend Experiment F in Pattyn et al., (2008) ISMIP-HOM to encompass non-linear rheology and still be consistent, I must ensure that different model rheologies start from identical initial conditions. The method I follow here is based on re-scaling method by Getraer and Morlighem (2025)~\cite{Getraer_2025}. Their formula ensures that the initial ice viscosity—and therefore strain rates for a given stress—is identical between simulations with different rheologies.
 
-% CONVERTING USING GETRAER (EXPLAIN THIS)
-
-The resultant surface elevations and velocities after a transient evolution
-
+The fundamental model for the deformation of glacial ice and the equations which govern ice flow is Glen's flow law. 
+\begin{equation}
+\mathbf{\dot{\varepsilon}} \,=\, A_{n}\,\mathbf{\tau}^{n},
+\end{equation}
+We can also write Glen's flow law in terms of the material's resistance to deformation—the viscosity—, which is not a constant value but changes depending on stress and strain rates.
+\begin{equation}
+\mathbf{\tau}\,=\, 2\mu\,\mathbf{\dot{\varepsilon}},
+\end{equation}
+which means that $A^{-1/n} = 2\mu \mathbf{\dot{\varepsilon}}^{\frac{n-1}{n}}$, where $B=A^{-1/n}$ (Pa s$^{1/n}$) is an alternative formulation of the rate factor known as the rigidity. The rigidity parameter is commonly used in ISSM to characterise the rheology of ice in a model. This is the parameter that will be scaled.
+The definition of ice viscosity uses the rigidity; for any $n$:
+\begin{equation}
+\mu_n = \frac{B_n}{2\,\mathbf{\dot{\varepsilon}}^{\frac{n-1}{n}}},
+\end{equation}
+setting the viscosity as equal for both linear and non-linear rheology scenarios implies that the strain rates can be set as equivalent between linear and non-linear rheology scenarios
+\begin{equation}
+\mu_1 = \frac{B_1}{2},
+\end{equation}
+Then setting $\mu_1 = \mu_n$ and rearranging for $B_n$
+\begin{equation}
+\frac{B_1}{2} = \frac{B_n}{2\,\mathbf{\dot{\varepsilon}}^{\frac{n-1}{n}}}
+\end{equation}
+Letting $n = 1$, this means we are treating ice a Newtonian fluid (viscosity is independent to changes in stress). Since $B_{1}=A^{-1}$ where value of $A_{1}$ is taken as from Pattyn (2008). 
+\begin{equation}
+B_{1} = (2.140373×10^{-7})^{-1}\,\mathrm{Pa\,a},
+\end{equation}
+For the non-linear scenarios I am considering $n=4$, since the assumption of $n = 3$ for ice deformation is not universally supported and values of $n > 3$ have been inferred from real‐world glaciers. Suggesting that a value of $n=4$ better represents the actual behavior of glaciers in some places\cite{Getraer_2025}. Then scaling the rigidity for the non-linear scenarios is:
+\begin{equation}
+B_4 = B_1 \mathbf{\dot{\varepsilon}}^{\frac{4-1}{4}} = B_1 \mathbf{\dot{\varepsilon}}^{\frac{3}{4},}
+\end{equation}
+Here the strain rate is the characteristic strain rate that can be derived from the unperturbed velocity. For simple shear, $\dot{\varepsilon} \approx U / H$. Where $U$ is the mean ice velocity and $H$ is the ice thickness. 
+From the grid convergence analyses in~\ref{grid_ind}, I discovered that the highest grid resolution ($2.0\times2.0$) converges to velocities $U_{\mathrm{S1}}=102.75 \, \mathrm{m\,a^{-1}}$ and $U_{\mathrm{S3}}=205.09 \, \mathrm{m\,a^{-1}}$ for the frozen and sliding scenarios respectively. The ice thickness is $H=1000~\mathrm{m}$, therefore the characteristic strain rate for S1 is $\dot{\varepsilon}_{\mathrm{S1}}=  0.10275\,\mathrm{a^{-1}}$. Leaving the scaled rigidity for the frozen bed and non-linear rheology experiment (S2) as, 
+\begin{equation}
+B_4 = B_1 \dot{\varepsilon}_{\mathrm{S1}}^{\frac{3}{4}}.
+\end{equation}
+While for S3 the characteristic strain rate is $\dot{\varepsilon}_{\mathrm{S3}}= 0.20509 \, a^{-1}.$ Therefore, the scaled rigidity for the sliding and non-linear rheology experiment S4 is
+\begin{equation}
+B_4 = B_1 \dot{\varepsilon}_{\mathrm{S3}}^{\frac{3}{4}}.
+\end{equation}
+The resultant surface elevations and velocities after a 300 year transient evolution For the frozen and sliding bed scenarios are 
 \begin{figure}[H]
-    \includegraphics[scale=0.45]{combined_elevation_detrended_surface_velocity_['S1']_['S2'].png}
-    \caption{Final surface elevations and }
+    \includegraphics[scale=0.40]{combined_elevation_detrended_surface_velocity_['S1']_['S2'].png}
+    \caption{Final surface elevations and velocities for the original frozen bed Experiment F (S1) and the corresponding transformed to non-linear rheology experiment (S2)}
     \label{fig:elev_vel_S1_S2}
 \end{figure}
-
 \begin{figure}[H]
-    \includegraphics[scale=0.45]{combined_elevation_detrended_surface_velocity_['S3']_['S4'].png}
-    \caption{}
+    \includegraphics[scale=0.40]{combined_elevation_detrended_surface_velocity_['S3']_['S4'].png}
+    \caption{Final surface elevations and velocities for the original sliding bed Experiment F (S3) and the corresponding transformed to non-linear rheology experiment (S4)}
     \label{fig:elev_vel_S3_S4}
 \end{figure}
-
-% COMPARED TO PATTYN 2008:::
-% % Fig. 12. Steady state surface elevation along the central flowline for
-% Exp. F for the no sliding (top) and sliding (bottom) experiment. The
-% black line indicates the analytical solution.
-
-% Fig. 13. Norm of the steady state surface velocity along the central
-% flowline for Exp. F for the no sliding (top) and sliding (bottom)
-% experiment. The black line indicates the analytical solution.
-
+These results are consistent with the surface elevation and velocities found by Pattyn et al., (2008) for Exp. F—along the central flowline of the domain—for the both the frozen and sliding experiments. The non-linear scenarios—the orange plots—in Figures\ref{fig:elev_vel_S3_S4, fig:elev_vel_S1_S2} present completely new results.
 
 % over a variety of synthetic bedrock topographies to understand the relationship between basal geometry, ice rheology, and overall flow response.
-
+\newpage
 \subsection{The Computational Framework of this Study}
 This study is supported by a suite of interconnected scripts and tools designed for generating conditions, running simulations, processing output, and performing scientific analysis.
 
 % \subsection{Synthetic Bedrock Generation}
-
 % The \texttt{bedrock\_generator.py} script generates synthetic 1D bedrock profiles for ice flow modeling. the core functionality of this script is the creation of realistic bedrock topographies with configurable geometric properties. The bedrock profiles are defined by the following four key parameters that can be varied systematically:
 % \begin{itemize}
 % \item{Amplitude} Controls the vertical scale of undulations (e.g., 19.2 m to 38.4 m).
@@ -143,50 +155,23 @@ The core of this study is a time evolution flow simulation of fully grounded ice
 
 The simulation utilises periodic boundary conditions which represents a section of an infinitely long ice sheet effectively eliminating edge effects that would arise from standard inlet/outlet boundaries. The script couples the inlet and outlet velocities by matching vertices in the base layer and then extruding this setup vertically. This ensures that the ice flow is continuous and that the dynamics are driven solely by the underlying topography and internal stresses, which is crucial for studying the transfer of bedrock signals to the surface.
 This approach has proved to be highly successful, yielding stable and physically realistic velocities across experimental scenarios. The results are consistent with established benchmarks like ISMIP-HOM and show the expected physical relationships (e.g., faster flow with sliding and non-linear rheology).
-
-The experimental design is built around four benchmark experiments mentioned in subsection~\ref{transient_ismip} to test different physical conditions.
-
-% % Include info on the realism of the setup: Friction, Rigidity, Basal forcings (none implemented)
-
-
-% % def setup_friction(md, exp):
-
-% % rho_ice = 910 # kg/m^3. From table 1 in Pattyn 2008
-% % ice_temperature = (273.15 - 60) # for initialisation <<< MAKE IT COLD AF
-
-
-% % #>>> CORRECT THIS SHIIIIIIIIII TALK ABOUT THE reference nonlinear and linear work.
-
-% % # rheology
-% % if rheology_n==1:
-% %     # if n=1: ISSM interprets the rheology_B parameter as the dynamic viscosity (η)
-% %     # in Pattyn for (n=1), the effective viscosity (η) is defined as η=(2A)^−1
-% %     A = 2.140373e-7 / yts
-% %     rheology_B = (2 * A)**(-1) # = 7.37e13
-% % else:
-% %     rheology_B = cuffey(ice_temperature)
-
-
-% % # basal forcing
-% % md.basalforcings.floatingice_melting_rate = np.zeros(nv)
-% % md.basalforcings.groundedice_melting_rate = np.zeros(nv)
-
-% % # SMB initialisation
-% % md.smb.mass_balance = np.zeros(nv)
-
-
-% % =====
+The experimental design tests different physical conditions being built around four benchmark experiments from subsection~\ref{transient_ismip}.  
+The simulation friction parameters are identical to those set in Pattyn et al., (2008) which themselves follow the scaling given by Gudmundsson (2003), where the basal friction coefficient is related to the slip ratio $c$ by
+\begin{equation}
+\beta^2 = \left (c A H\right )^{-1}
+\end{equation}
+Where S1, S2 utilise a frozen bed condition ($c = 0$) while S3, S4 utilise a sliding bed ($c = 1$).
 
 The main simulation scripts produce \texttt{.nc} files and binary \texttt{.outbin} files for full simulation results (when run locally and on the NCI Gadi system respectively).
-The simulation framework in this study includes capabilities for systematic grid convergence testing, comparing solutions across multiple mesh resolutions to ensure the results are independent of the mesh discretisation, see sections~\ref{grid_ind}.
+The simulation framework in this study includes capabilities for systematic grid convergence testing, comparing solutions across multiple mesh resolutions to ensure the results are independent of the mesh discretisation, see section~\ref{grid_ind}.
 
 \subsection{Data Processing and Visualization Tools}\label{dataviz}
-I have developed a set of robust, high-performance scripts to handle the large volume of data produced by the ice flow simulations. (Note that: All these scripts have their individual file processing counterpart)
+I have developed a set of robust, high-performance scripts to handle the large volume of data produced by the ice flow simulations. (Note that: All batch scripts have their individual file processing counterpart)
 
 \begin{enumerate}
 \item{Binary to NetCDF Conversion} A batch-capable tool (\texttt{batch\_convert.py}) converts ISSM \texttt{.outbin} files into the standard, portable NetCDF format. This script supports parallel processing for high throughput.
 \item{Result Extraction and Visualization} A batch script (\texttt{batch\_extract\_results.py}) that automatically finds and processes NetCDF files to generate visualisations of key fields like velocity and pressure. 
-% \item{Targeted Scientific Plotting} Additional scripts (\texttt{batch\_plots.py}) are used to create specific scientific plots, such as basal and surface velocities, basal velocity colored over the bed topography and basal shear stress distributions, to analyse the direct impact of the bedrock on flow.
+\item{Targeted Scientific Plotting} Additional scripts (\texttt{elevations\_velocities\_combined}) are used to create specific scientific plots..
 \end{enumerate}
 
 % MAKE A WORKFLOW DIAGRAM!
@@ -202,52 +187,41 @@ I have developed a set of robust, high-performance scripts to handle the large v
 \subsubsection{Grid Independence}\label{grid_ind}
 In order to  perform quantitative analysis on the simulation results. I developed a convergence analysis script: \texttt{convergence\_analyser.py}.
 Grid convergence analysis is a fundamental verification technique in computational modeling that ensures numerical solutions are approaching the true solution as mesh resolution increases. The key principle is that as the grid is refined (smaller elements, more nodes), the numerical error should decrease systematically.
-The grid analysis involved running simulations across 16 distinct mesh resolutions, generated by independently varying both the horizontal (H) and vertical (V) grid densities. 
-I applied resolution scaling factors of $2.0$ i.e. double the resolution, $0.5$ i.e. half the mesh resolution, $1.0$ i.e. no scaling and $1.5$ i.e. 50\% scaling. I designated the solution from the highest resolution mesh, corresponding to scaling factors of ($H=2.0, V=2.0$) as the reference solution against which all coarser meshes were compared. Refined meshes (either horizontal or vertical) often require smaller time steps to satisfy the Courant–Friedrichs–Lewy (CFL) condition and maintain solver stability. To satisfy this criterion I scaled the time step for each simulation matching the largest resolution factor independently if it was horizontal or vertical scaling.
-The primary metric of this script is the L2 relative error, a global, scale-dependent measure that quantifies the overall difference between two solutions. In my analysis, I chose a convergence threshold of $1\%$—since estimates of other uncertaintiesare expected to be larger than grid errors—when comparing the solutions to the baseline. If the L2 norm of the data is very close to zero (less than $1^{-6}$), the analysis reports the absolute error to avoid division by a tiny, unstable number. Otherwise, it calculates and reports the standard relative error as a percentage.%  
+The grid analysis involved running simulations across 16 distinct mesh resolutions, generated by independently varying both the horizontal (H) and vertical (V) grid densities—note that I have kept the vertical layer thickness constant—I applied resolution scaling factors of $2.0$ i.e. double the resolution, $0.5$ i.e. half the mesh resolution, $1.0$ i.e. no scaling and $1.5$ i.e. 50\% scaling. I designated the solution from the highest resolution mesh, corresponding to scaling factors of ($H=2.0, V=2.0$) as the reference solution against which all coarser meshes were compared. Refined meshes (either horizontal or vertical) often require smaller time steps to satisfy the Courant-Friedrichs-Lewy (CFL) condition and maintain solver stability. To satisfy this criterion I scaled the time step for each simulation matching the largest resolution factor independently if it was horizontal or vertical scaling.
 
+The primary metric of this script is the L2 relative error, a global, scale-dependent measure that quantifies the overall difference between two solutions. In my analysis, I chose a convergence threshold of $1\%$—since estimates of other uncertainties are expected to be larger than grid errors—when comparing the solutions to the baseline. If the L2 norm of the data is very close to zero (less than $1^{-6}$), the analysis reports the absolute error to avoid division by a tiny, unstable number. Otherwise, it calculates and reports the standard relative error as a percentage.
 The \texttt{convergence\_analyser.py} script generates a standardised $2\times2$ plot (see figures~\ref{fig:grid_conv_S1},~\ref{fig:grid_conv_S2},~\ref{fig:grid_conv_S3},~\ref{fig:grid_conv_S4}) to provide a comprehensive view of convergence via L2 error bars, and the maximum velocity at every time step. In addition the output plot shows visual velocity comparisons along a centre line in the y dimension. This is done for surface and basal velocities for each mesh resolution tested. The code identifies all unique y-coordinates present in the mesh layer (surface or base) then finds the y-coordinate that is numerically closest (given some threshold) to the defined geometric centre line, then it selects all nodes whose y-coordinate matches this identified ``closest'' y-coordinate. The script effectively extracts the entire mesh line closest to the ideal centre for each simulation. The code also establishes a reference grid based on the baseline resolution chosen, then sorts and interpolates the velocity data based on this reference grid iteratively for all resolutions, the script interpolates the sorted velocity data for each resolution onto the common reference grid. 
-
 \begin{figure}[H]
-    \includegraphics[scale=0.49]{IsmipF_S1_convergence_summary.png}
+    \includegraphics[scale=0.45]{IsmipF_S1_convergence_summary.png}
     \caption{Velocity convergence summary for S1 using experiment F in ISMIP HOM. ...}
     \label{fig:grid_conv_S1}
 \end{figure}
-
 \begin{figure}[H]
-    \includegraphics[scale=0.49]{IsmipF_S2_convergence_summary.png}
+    \includegraphics[scale=0.45]{IsmipF_S2_convergence_summary.png}
     \caption{Velocity convergence summary for S2 using experiment F in ISMIP HOM. ... }
     \label{fig:grid_conv_S2}
 \end{figure}
-
 % \begin{figure}[H]
-%     \includegraphics[scale=0.49]{IsmipF_S2_convergence_summary_zoom.png}
+%     \includegraphics[scale=0.45]{IsmipF_S2_convergence_summary_zoom.png}
 %     \caption{Velocity convergence summary for S2 using experiment F in ISMIP HOM. ... }
 %     \label{fig:grid_conv_S2_zoom}
 % \end{figure}
-
 \begin{figure}[H]
-    \includegraphics[scale=0.49]{IsmipF_S3_convergence_summary.png}
+    \includegraphics[scale=0.45]{IsmipF_S3_convergence_summary.png}
     \caption{Velocity convergence summary for S3 using experiment F in ISMIP HOM. ... }
     \label{fig:grid_conv_S3}
 \end{figure}
-
-
 \begin{figure}[H]
-    \includegraphics[scale=0.49]{IsmipF_S4_convergence_summary.png}
+    \includegraphics[scale=0.45]{IsmipF_S4_convergence_summary.png}
     \caption{Velocity convergence summary for S4 using experiment F in ISMIP HOM. ... }
     \label{fig:grid_conv_S4}
 \end{figure}
-
 % \begin{figure}[H]
-%     \includegraphics[scale=0.49]{IsmipF_S4_convergence_summary_zoom.png}
+%     \includegraphics[scale=0.45]{IsmipF_S4_convergence_summary_zoom.png}
 %     \caption{Velocity convergence summary for S4 using experiment F in ISMIP HOM. ... }
 %     \label{fig:grid_conv_S4_zoom}
 % \end{figure}
-
-
-% % =====
-% % My diagnostic convergence analyses show that 
+My diagnostic convergence analyses show that the simulations are most sensitive to vertical resolution refinement. The effect is more dramatic with the non-linear rheology scenarios in Figures~\ref{fig:grid_conv_S2} and~\ref{fig:grid_conv_S4}. The convergence threshold of 1\% is only achieved for both S2 and S4 with the vertical resolution factor $2.0$. The vertical resolution of the mesh produces qualitatively different results as it is refined. The lowest vertical resolution simulations converge to a slow-flowing state ($\approx11 \mathrm{m/a}$). On the other hand the high- vertical resolution simulations converge to larger velocities ($\approx37\mathrm{m/a}$).  In addition to this, the Frozen bed scenario S2 basal velocities show the highest errors for low resolution simulations. 
 % % =====
 
 % % \begin{table}[h]
@@ -329,40 +303,6 @@ The \texttt{convergence\_analyser.py} script generates a standardised $2\times2$
 % % ======================================================
 
 \subsubsection{Phase Analysis}
-
-% PHASE ANALYSIS:
-
-% broader goal of measuring how surface signals shift relative to
-%   the most prominent bed feature, using sigma (the Gaussian width) as your
-%   characteristic length scale makes perfect sense.
-
-%   The phase calculation as (2 * π * lag_distance) / sigma is actually a reasonable way
-%    to normalize the lag by the size of the prominent feature. It gives you a
-%   dimensionless measure of how much the surface has shifted relative to the bed
-%   feature's characteristic size.
-
-
-%   As time progresses and the ice surface responds to the underlying bed topography,
-%   the surface will develop a bump that's spatially shifted relative to the bed bump
-%   (upstream due to ice flow dynamics), and that's when your phase/lag analysis becomes
-%    physically meaningful.
-
-% This means at t=0:
-%   - surface_signal = surface - unperturbed_surface ≈ 0 ✓ (should be near zero)
-%   - base_signal = base - unperturbed_base = Gaussian bump ✓ (should be the 100m bump)
-
-%   You're right that the correlation should be very weak initially! If you're seeing
-%   strong correlations (~10km lag) at t=0, it suggests either:
-
-%   1. Numerical artifacts: Even tiny surface perturbations (numerical noise) might
-%   correlate with the large bed signal
-%   2. The surface isn't actually flat: Check if your initial surface has small
-%   perturbations
-%   3. Cross-correlation finding spurious peaks: With one strong signal (bed) and one
-%   weak signal (surface), the correlation can find false peaks
-
-%   Can you check what the actual surface_signal values look like at t=0? They should be
-%    very close to zero if the surface is truly unperturbed.
 To quantify the transient surface response to the basal topography as a spatial phase shift and hence to verify the physical validity of my simulation based on the criteria in \cite{Budd_1970}, I developed single and batch-processing scripts (\texttt{phase\_analysis.py} and \texttt{batch\_phase\_analysis.py}) that use cross-correlation to calculate the spatial lag and phase shift between the de-trended base and surface signals for each time step in a given simulation.
 
  The scripts generate time-series plots of phase shift evolution and summary text files with numerical results. For each batch or single simulation analysed.
@@ -372,19 +312,19 @@ The resultant spatial lag is converted into a phase shift in degrees using the b
 
 %%%% S1
 \begin{figure}[H]
-    \includegraphics[scale=0.49]{S1_signals.pdf}
-    \caption{The isolated bedrock and ice surface signals (along the y- centreline) for the initial (a) and final (b) time steps in the 300 year long simulation. The bedrock is identical to that of ISMIP HOM experiment F (S1: Frozen bed and linear rheology)}
+    \includegraphics[scale=0.49]{S1_F_signals.pdf}
+    \caption{The isolated bedrock and ice surface signals (along the y- centreline) for the initial (a) and final (b) time steps in the 300 year long simulation. The bedrock is identical to that of ISMIP HOM experiment F (S1: Frozen bed and linear rheology). As time progresses and the ice surface responds to the underlying bed topography, the surface develops a bump that's spatially shifted relative to the bed bump (upstream due to ice flow dynamics).}
     \label{fig:phase_analysis_Signals}
 \end{figure}
 
 \begin{figure}[H]
-    \includegraphics[scale=0.45]{S1_correlation_t_0037.png}
-    \caption{The cross-correlation function and the detected lag of maximum correlation.}
+    \includegraphics[scale=0.45]{S1_F_correlation_t_0036.png}
+    \caption{The cross-correlation of surface and bed elevation signals shift relative to the most prominent bed feature, using sigma (the Gaussian width) as the characteristic length scale of the lag.}
     \label{fig:phase_analysis_Cross_Correlation}
 \end{figure}
 
 \begin{figure}[H]
-    \includegraphics[scale=0.39]{S1_phase_evolution_summary.png}
+    \includegraphics[scale=0.39]{S1_F_phase_evolution_summary.png}
     \caption{The evolution of the phase shift and spatial lag over the entire simulation.}
     \label{fig:phase_analysis_Evolution_Plots}
 \end{figure}
