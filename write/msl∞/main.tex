@@ -1,0 +1,150 @@
+% latexmk -pvc -pdf
+\documentclass[12pt, a4paper, openany]{book}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\usepackage[english]{babel}
+\usepackage{float} 
+\usepackage{pdflscape} 
+\usepackage{cite}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{datetime}
+\newdateformat{monthyeardate}{%
+  \monthname[\THEMONTH], \THEYEAR}
+
+\usepackage{graphicx}
+\newenvironment{Figure}
+    {\par\medskip\noindent\minipage{\linewidth}}
+    {\endminipage\par\medskip}
+\usepackage{tabularx}
+
+\newenvironment{abstract}
+{\clearpage \thispagestyle{empty} \null \vfill \begin{center} \bfseries \large Abstract \end{center}}
+{\vfill \null \clearpage}
+
+\newenvironment{impactstatement}
+{\clearpage \thispagestyle{empty} \null \vfill \begin{center} \bfseries \large Impact Statement \end{center}}
+{\vfill \null \clearpage}
+
+\usepackage{booktabs}
+
+% Colours:
+\usepackage[table]{xcolor} % for setting colors
+\definecolor{purple}{RGB}{117,77,226}
+
+\usepackage[bookmarksopen,
+  pagebackref,
+  pdfpagelayout=TwoPageRight,
+  colorlinks=true,
+  urlcolor=purple,
+  citecolor=purple,
+  filecolor=purple,
+  linkcolor=purple,
+  ]
+{hyperref}
+
+\usepackage{listings}
+\usepackage{xcolor} % Necessary to define custom colors
+
+\definecolor{softblue}{rgb}{0.3, 0.5, 0.8}
+\definecolor{darkergreen}{rgb}{0, 0.5, 0}
+
+\lstset{
+  basicstyle=\ttfamily\small, % Set the typeface to typewriter and small size
+  breaklines=true, % Enable line breaking
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}, % Marker for line breaks
+  numbers=left, % Line numbers on left
+  numberstyle=\tiny, % Set the size of the numbers
+}
+
+\lstdefinestyle{mystyleC}{
+    language=C,      
+    commentstyle=\color{softblue},
+    morecomment=[l]{//},  % Line comment
+}
+
+\lstdefinestyle{mystylePython}{
+    language=Python,      
+    commentstyle=\color{darkergreen},
+    morecomment=[l]{//},  % Line comment
+}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\Huge}
+
+
+% Required packages
+\usepackage{catchfile}
+
+% Command to execute texcount and capture the word count
+\newcommand\wordcount[1]{
+    \immediate\write18{texcount #1.tex | grep "Words in text" | cut -d: -f2 > #1.wordcount.tmp}
+    \CatchFileDef{\mywordcount}{#1.wordcount.tmp}{}
+    \immediate\write18{rm #1.wordcount.tmp} % to remove the temporary file
+    \mywordcount % to print the word count
+}
+
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+    {\Huge BedSAT: Antarctica}\\ [1cm] 
+    {\Large Exploring what lies beneath using big data and modelling}\\
+    \vspace{5cm}
+    {\large Ana Fabela Hinojosa\footnote{ana.fabelahinojosa@monash.edu}}\\
+    \monthyeardate\today\\ [1cm]
+    Supervisors:\\
+    Dr. Felicity McCormack\\
+    Dr. Jason Roberts\\
+    Dr. Richard Jones\\ [2cm]
+    Panel:\\
+    Dr. Fabio Capitanio (Chair) \\
+    Dr. Andrew Gunn \\
+    Dr. Ariaan Purich \\ [3.5cm]
+    \includegraphics[scale=0.2]{logos.png}
+
+    \end{center}
+
+\end{titlepage}
+
+\begin{impactstatement}\label{impactstatement}
+Antarctica's bed topography data currently has local uncertainties of hundreds of metres in elevation due to sparse and unevenly distributed radar surveys, significantly limiting our ability to predict ice sheet behaviour and sea level rise contributions. Through the BedSAT project, I am developing a novel modelling approach that integrates remote sensing data and airborne-derived estimates, with mathematical and numerical ice flow models to substantially improve bed topography resolution and accuracy. I aim to derive a continent-wide bed topography dataset and conduct sensitivity analyses of dynamic ice loss to different realisations of topographic roughness through 2300CE.
+My work will quantify how bed topography uncertainties affect ice mass loss projections. This improved understanding can provide more reliable sea level rise predictions, and enable evidence-based policy decisions for climate adaptation strategies. This open-source approach and FAIR data principles will ensure these improvements benefit the broader scientific community and support more effective climate change mitigation planning.
+\end{impactstatement}
+
+\tableofcontents
+
+% remove later
+% \include{TODO}
+
+% introduction
+\include{literature_review} 
+% \wordcount{literature_review} words in this section.
+
+\include{methodology}
+% \wordcount{methodology} words in this section.
+
+% \include{resources} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+% \wordcount{resources} words in this section.
+
+\include{progress}
+% \wordcount{progress} words in this section.
+
+\include{timeline}
+
+% \include{glossary}
+
+\bibliographystyle{unsrturl_mod}
+\bibliography{mybib}
+\end{document}
+
+
