@@ -1,6 +1,6 @@
 % latexmk -pvc -pdf
 \documentclass[12pt, a4paper, openany]{book}
-\usepackage[margin=2.5cm]{geometry}
+\usepackage[margin=2cm]{geometry}
 \usepackage{titling}
 \usepackage{titlesec}
 \usepackage{amsmath,amsthm,amsfonts,amssymb}
@@ -80,16 +80,23 @@
 \titleformat{\chapter}[display]
   {\normalfont\bfseries}{}{0pt}{\Huge}
 
-
-% Required packages
 \usepackage{catchfile}
-
 % Command to execute texcount and capture the word count
 \newcommand\wordcount[1]{
     \immediate\write18{texcount #1.tex | grep "Words in text" | cut -d: -f2 > #1.wordcount.tmp}
     \CatchFileDef{\mywordcount}{#1.wordcount.tmp}{}
     \immediate\write18{rm #1.wordcount.tmp} % to remove the temporary file
     \mywordcount % to print the word count
+}
+
+\usepackage{enumitem}
+
+\newlist{compactitem}{itemize}{1}
+\setlist[compactitem]{
+    label=\textbullet,
+    nosep,  % This is a shortcut for itemsep=0pt, parsep=0pt, etc.
+    before=\vspace{0.3cm},
+    after=\vspace{0.3cm}
 }
 
 \begin{document}
