@@ -23,11 +23,11 @@ For the non-linear scenarios I am considering $n = 4$, since the assumption of $
 The linear results depicted in blue in Figure~\ref{fig:elev_vel_S1_S2_S3_S4} are consistent with the surface elevation and velocities found for Experiment F in~\cite{Pattyn_2008}. Meanwhile, the non-linear scenarios (S2 and S4) shown in orange  represent the first key finding of this analysis. The marked differences in both final surface elevation and velocity compared to the linear counterparts (S1, S3) provide crucial evidence for my first research question (``How does the bed topography manifest on the ice surface?''). Using $n = 4$ leads to a strong non-linear relationship where a small increase in stress yields a much larger increase in deformation. The results utilise an optimised grid meshing and demonstrate that the choice of rheology is an important control on the bed-to-surface signal transfer, implying that a succesful inversion framework like BedSAT must account for non-linear effects.
 \newpage
 \section{Data Processing, Visualisation and Analysis Tools}\label{analysis_tools}
-This study is supported by a suite of interconnected scripts and tools designed for generating conditions, running simulations, processing output, and performing scientific analysis.
 The core of this study is a time evolution flow simulation of fully grounded ice over 300 years with daily time steps. This simulation is designed to systematically investigate the relationship between basal geometry, ice rheology and flow response by running a series of ISMIP-HOM style experiments~\cite{Pattyn_2008} that can later be analysed in detail with other data processing tools.
 \begin{figure}[H]
     \includegraphics[scale=0.55]{figures/workflow_diagram.pdf}
-    \caption{Diagrammatic representation of the current workflow using my ice simulation and analysis suite. For a particular simulation I will extract the results and visually inspect the output using  all analysis scripts in the suite.}\label{fig:workflow}
+    \caption{Diagrammatic representation of the current workflow using my ice simulation and analysis suite.}
+    \label{fig:workflow}
 \end{figure}
 The scripts I've developed include a binary file to into NetCDF converter, a transient simulation analyser that generate visualisations of key fields like velocity and pressure. and other additional scripts that create specific scientific analysis and plots.
 \subsection{Grid Independence}\label{grid_ind}

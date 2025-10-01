@@ -1,32 +1,31 @@
 \chapter{Project Methodology}
 
-In order to achieve my objectives, each objective will be addressed in sequential phases. My primary focus is currently on O1: Deriving the BedSAT method. As the initial phase of O1, I am working on an investigation on the influence of different combinations of rheological and sliding law assumptions in ice sheet modeling. The goal of this investigation is to systematically understand the forward problem —how the bed affects the surface under different physical conditions— to then use that knowledge to build a better inverse model (BedSAT).
-
 \section{Analysis of Bed-to-Surface Signal Transfer}\label{paper1}
+% SUPERVISOR FEEDBACK: can you be more explicit about what you will consider. e.g. talk to the phase / amplitude relationship between bed-surface that you're focussing on>>>>
 The first step is to systematically quantify how fundamental physical assumptions influence the expression of subglacial topography at the ice surface.
-This directly addresses my first research question: ``How does the bed topography manifest on the ice surface?''. This work will leverage the Ice-sheet and Sea-level System Model (ISSM)~\cite{Larour_2012}. ISSM is a state-of-the-art ice sheet model that is well tested and supported by multiple developers, making it a robust choice for my project. 
-% <<<<can you be more explicit about what you will consider. e.g. talk to the phase / amplitude relationship between bed-surface that you're focussing on>>>>
-This study will verify and validate the necessary set of constraints on bed-to-surface transfer functions that account for realistic ice dynamics, taking into consideration different parameterisations, sliding laws and parameter values.
+This directly addresses my first research question: ``How does the bed topography manifest on the ice surface?''. This work will leverage the well-tested and robust Ice-sheet and Sea-level System Model (ISSM)~\cite{Larour_2012}. ISSM is a state-of-the-art ice sheet model that is well tested and supported by multiple developers, making it a robust choice for my project. 
+I have developed tools that quantify the the bed-to-surface phase signal transfer by tracking the evolution of the surface with respect to the base using cross-correlations to calculate the spatial lag and phase shift between signals for each time step. This verifies and validates the necessary set of constraints for realistic ice dynamics, taking into consideration different parameterisations, sliding laws and parameter values.
 
 \section{Development of the BedSAT Inversion Framework}
-% it'd be good to flesh out in more detail what the actual steps are in the modelling
-By understanding how rheology and sliding conditions alter the surface expression of the bed, I can develop more physically robust transfer functions for the inversion process. The inversion model will be developed and tested using a regional catchment in Antarctica with extensive radar data, such as the Aurora Subglacial Basin (this data can be found in works such as~\cite{Young_2011}) or the Wilkes subglacial Basin. The model will be constrained by available observations of surface velocity and ice thickness, this will allow for direct validation of the inversion results against known bed configurations. My methodology will include a pre-processing step to filter out high-frequency surface noise (e.g., aeolian features~\cite{Poizat_2024}), this process will be guided by consultation with experts in the field. Furthermore, the robustness of the model will be ensured through grid independence testing and a sensitivity analysis of model assumptions.%what does this mean? can you provide more details? 
-See Chapter~\ref{progress} for detailed information on the progress of this work.
+BedSAT is a model that comprises physically informed transfer function, leveraging an improved understanding of how ice rheology and basal sliding conditions affect the surface expression of subglacial topography. The framework encompases the following stages.
+\begin{enumerate}
+\item{\textbf{Training the Machine-Learning model}}:
+The BedSAT framework will be trained and validated using a synthetic bedrock database and a data-rich region, such as the Aurora Subglacial Basin or Wilkes Subglacial Basin, where extensive ice-penetrating radar data of the bed is available for direct comparison.\\
+\textbf{Forward Ice Flow Model}:
+The forward model of ice dynamics will be configured for the chosen study site. Key model assumptions, such as the choice of ice flow equations and the parameters governing ice rheology. The robustness of the numerical configuration will be confirmed through grid independence testing to ensure that the results are not an artifact of the model's spatial resolution.\\
+\textbf{Inversion Pre-processing}:
+The primary observational inputs for the model will be satellite-derived surface velocity~\cite{itslive, REMA} and ice thickness~\cite{Young_2011, ICECAP}. A critical pre-processing step will involve filtering high-frequency noise (e.g., aeolian features) from the surface data to ensure that the glaciological signal from the underlying bed is isolated, this step will require assesment from experts in the field.
+\item{\textbf{Inverse Modelling to Estimate Bed Topography}}:
+The core of the BedSAT framework is the inversion. BedSAT will iteratively adjust an initial estimate of the bed topography, aiming to minimize the mismatch between the forward model's simulated surface velocities and the satellite-observed velocities.
+\item{\textbf{Validation and Sensitivity Analysis}}:
+The framework's performance will be rigorously evaluated. First, the inverted bed topography will be directly validated against the "ground-truth" radar-derived bed maps for the study region. Second, a series of sensitivity analyses will be conducted to quantify the model's robustness. These tests will systematically alter key assumptions, such as the rheological parameters for different regions, to determine their impact on the final inverted topography and to establish the uncertainty bounds of the framework's results.
+\end{enumerate}
 
-\section{Derive a new bed topography for Antarctica using BedSAT}
-I will apply the validated BedSAT methodology from O1 to the entire Antarctic continent, deriving a new continent-wide bed topography dataset. Using covariance properties from existing radar surveys, I will generate multiple realisations of the bed, each with unique and statistically-consistent topographic roughness%cite the papers that have the methodology here, so it's clear taht this is a ready-to-go workflow.
+\section{BedSAT: Antarctica - Derive a new bed topography}
+I will apply the validated BedSAT methodology from O1 to the entire Antarctic continent, deriving a new continent-wide bed topography dataset. Using covariance properties from existing radar surveys, I will generate multiple realisations of the bed, each with unique and statistically-consistent topographic roughness%cite the papers that have the methodology here, so it's clear that this is a ready-to-go workflow.
 
-\section{Evaluate the impact of improved bed topography}
+\section{Evaluate the impact of new bed topography}
 The new bed topography datasets will be used to conduct a sensitivity analysis of ice sheet model projections to 2300CE. This will investigate the impact of the improved topography and different roughness realisations on ice dynamics, subglacial hydrology, and overall ice mass loss from Antarctica, directly addressing the project's main research questions.
-\\
-\textit{Note: Detailed methodological outlines for O2 and O3 will be developed following the completion and refinement of the BedSAT method in O1.}
 
-% \section{Possible Limitations}
-% This is a list of real limitations that could present constrains in the advancement of my project
-% \begin{enumerate}
-% \item The computational cost of high-resolution, non-linear, continental-scale models.
-% \item The uncertainty in observational data (e.g., surface velocity, radar tracks) used for validation.
-% \item Assumptions inherent in the physical models (e.g., thermal regime, sliding law parameterizations).
-% \end{enumerate} 
 
 
