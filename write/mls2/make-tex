@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# exit when a command fails
+set -o errexit
+
+TEXFILE=main
+
+rm -f *.aux *.bbl *.blg *.brf *.log *.out *.toc *.lof *.bcf *.xml *.tmp
+
+pdflatex -shell-escape ${TEXFILE}
+bibtex ${TEXFILE}
+pdflatex -shell-escape ${TEXFILE}
+pdflatex -shell-escape ${TEXFILE}
+
+rm -f *.aux *.bbl *.blg *.brf *.log *.out *.toc *.lof *.bcf *.xml *.tmp
