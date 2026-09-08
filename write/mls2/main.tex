@@ -114,8 +114,9 @@
 \end{titlepage}
 \begin{abstract}\label{abstract}
 The subglacial topography of Antarctica is one of the strongest controls on ice-sheet evolution. Nevertheless across most of the continent it has only been observed indirectly along sparse radio-echo sounding (RES) flight lines. This leads to a problem: the topography we want to describe is three-dimensional, but outside a few swath radar-surveyed areas we mostly observe the subglacial landscape in only one dimension, along whatever headings the aircraft happened to fly. 
-We propose that to identify subglacial landscape class it is necessary to have multiple measured statistics that characterise different landscape properties. Here we introduce Observational Data Spectral Analysis (ODSA), an integrated spectral and kinematic framework that combines RES profiles with contemporary surface data (REMA, MEaSUREs) to demonstrate that multiple statistics are needed to bound the landscape class of a RES transect. ODSA builds a morphometric vector for landscape classification. Our framework matches the vector to a literature informed catalogue of landscape archetypes based on classifier elements and descriptors. Our transect analysis scheme recovers bed texture directly along the radar profile, where bed texture 50 km apart decorrelates. By contrast a continent-wide gridded product like Bedmap3 is posted at 500~m, but 93\% of its ice-thickness cells are interpolated between flight lines~\cite{Pritchard_2025}, so texture at these scales is inferred rather than measured.
-We use ODSA to characterise seven Antarctic regions as proof of concept, quantifying how well the flight lines sample/characterise each region. We compare and validate the results for these regions to their published landscape classes\cite{Ockenden_2026}. Because each element is a number rather than a label, a classified landscape can empirically inform synthetic bed topography for the next generation of ice-sheet models.
+We propose that to bound subglacial landscape class it is necessary to have multiple measured statistics that characterise different landscape properties. Here we introduce Observational Data Spectral Analysis (ODSA), an integrated spectral and morphometric framework that combines RES transects with contemporary surface data (REMA, MEaSUREs). ODSA builds a vector for landscape classification. Our framework matches the vector to a literature informed catalogue of landscape archetypes based on classifier elements and descriptors.
+We use ODSA to characterise seven Antarctic regions as proof of concept, quantifying how well the flight lines sample their survey footprint. We compare the results for transects in these regions to their published landscape classes\cite{Ockenden_2026} and find them to be distinct but complementary, since ODSA returns a bounded set of admissible archetypes per transect window where the continent-wide product carries one class per cell. No element separates those classes on its own, and the overlaps are too large for better precision to fix, so the bound needs several elements together. 
+Because each vector element is a number rather than a label, a classified landscape can empirically inform synthetic bed topography for the next generation of ice-sheet models.
 \end{abstract}
 
 \tableofcontents
@@ -138,5 +139,3 @@ We use ODSA to characterise seven Antarctic regions as proof of concept, quantif
 \bibliographystyle{unsrturl_mod}
 \bibliography{mybib}
 \end{document}
-
-

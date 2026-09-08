@@ -1,66 +1,18 @@
 \chapter{Introduction}\label{intro}
-% Known $\rightarrow$ Unknown Gap $\rightarrow$ ODSA Approach//
 
-\section{KNOWN}
-% \begin{itemize}
-% \item Knowledge of bed topography is crucial to understand AIS evolution. Subglacial landscape features are critical for understanding ice-sheet dynamics, sliding mechanics, and historical ice flow.
-
-% \item Subglacial landscapes are difficult to observe directly because they are buried under many kilometers of ice.
-
-% \item We have a lot of surface data from satellites.
-
-% \item we have only "slices" of real but indirect subglacial bedrock observations (RES, swath, gravimetry, magnetometry, ...).
-
-% \item At present there are interpolation approaches \cite{Pritchard_2025} leverage the available radar data to generate topography maps below ice-sheets (Greenland and Antarctica) however because these methods rely heavily on interpolation the maps are not able accurately generate the bedrock roughness in regions away from radar tracks.
-
-% \item There are also inverse methods that feed on satellite obtained surface data and leverage ice flow physics. But since they are inverse in nature these methods are restricted in their resolvable bedrock roughness resolution, since bedrock features shorter than ice thickness are not directly observable at the surface.
-% \end{itemize}
 Understanding the history and evolution of the Antarctic Ice Sheet (AIS) requires knowledge of Antarctic bed topography, since it is one of the most crucial boundary 
-conditions constraining its dynamics. Unfortunately, the direct observation of subglacial landscapes is non-trivial since these are buried under kilometres of ice.
-Currently, our capabilities to observe subglacial terrain rely mostly on indirect methods such as radar echo sounding (RES) and seismic sounding which return 1D profiles of the bedrock or 2D coverage from swath-radar interferometry, gravimetry and magnetics. Ice surface data from satellites can be used to inform basal topography models though extracting this information requires complex mathematical frameworks such as inverse modelling.
-Previous studies generating realisations of bed topography have relied on relationships between the radar-derived bed topography measurements alongside inferred landscape characteristics leading to up to 93\% of their mapped output to be interpolated between observed flight lines~\cite{Pritchard_2025}, 
+conditions constraining AIS dynamics. Unfortunately, the direct observation of subglacial landscapes is non-trivial since these are buried under kilometres of ice.
+Currently, our ability to observe subglacial terrain relies mostly on indirect methods such as RES and seismic sounding, which return 1D profiles of the bedrock; gravity and magnetic surveys, which constrain composition and basin geometry in 2D; and swath radar, which returns 2D bedrock topography. Even though swath radar represents a major improvement over conventional radar sounding, the typical survey geometries (with line spacings $\geq5$ km and widths of only a couple of kilometres) still yield incomplete coverage and are subject to data degradation by interpolation and down-sampling~\cite{Holschuh_2020}. 
 
->>>>> MISSING LINK BETWEEN METHODS HERE... HOW DO I CONNECT THESE?
+Contemporary maps of the Antarctic topography fall into the following categories: 
+\textbf{Interpolated grids}, such as a continent-wide product Bedmap3, which is posted at 500~m, but this is not its resolution, the along-track sampling is metres to kilometres while across-track sampling is hundreds of metres to hundreds of kilometres, so 93\% of its ice-thickness cells are interpolated values~\cite{Pritchard_2025}, so texture at these scales is inferred rather than measured, binding to the recovered bedrock texture by the line spacing
+rather than the grid posting. Alternatively, \textbf{inversion models} do not rely on bed measurements but instead infer bed topography indirectly, using ice surface observations and inverse modelling to exploit the fact that basal variability is transmitted by the ice flow to a glacier surface as a function of wavelength~\cite{Gudmundsson_2003}. Inverse methods such as IFPA applied across Antarctica~\cite{Ockenden_2026} are limited in their spatial resolution, since ice flow over bedrock features shorter than the local ice thickness induces negligible perturbations at the ice surface. That floor is a best caseand not the delivered resolution. The IFPA product is presented as a mesoscale map covering 2 to 30~km, with its derived texture metrics: hill count and Fourier fractal dimension computed over wavelengths greater than 5~km and reported on 50~km $\times$ 50~km cells~\cite{Ockenden_2026}. Lastly, there are \textbf{hybrid models}, like BedMachine Antarctica v4~\cite{Morlighem_2026}, are suceptible to both disadvantages described above. Among its methodological strategies to improve on v3, BedMachine Antarctica v4 interpolates the bed by mass conservation in areas of fast ice surface flow (30~m~a$^{-1}$) and by IFPA in areas below that speed threshold. All these examples leave considerable uncertainty in the fine-scale character of the bed.
 
-Inverse methods on the other hand, are restricted in their resolvable spatial resolution, since bedrock features shorter than ice thickness cannot be resolved, because ice flow over these features does not induce any perturbations in the ice surface~\cite{Ockenden_2026}.
->>>>MISSING LINK HERE??
-
-Inverse methods on the other hand, are restricted in their resolvable spatial resolution, since bedrock features shorter than ice thickness cannot be resolved, because ice flow over these features does not induce any perturbations in the ice surface\cite{Ockenden_2026}.
-
-
-\section{GAP}
-% \begin{itemize}
-% \item The relationship: between morphometric landscape statistics and how they are expressed as bed topography has not been rigorously quantified at a continental scale.
-
-% \item Landscape classification models are often single-metric based, which makes them vulnerable to survey artifacts, such as, local roughness measurements bias due to dataset migration/coverage or anisotropy being largely unidentifiable due to track geometry or sampling. 
-
-% \item Existing models (namely Ockenden et al. (2026)\cite{Ockenden_2026}) often lump measurably different beds under single labels. A single morphometry measurement can represent two averaged regimes which in turn fails to capture the true continuum of the subglacial landscape.
-% \end{itemize}
-A crucial gap in subglacial mapping is that the relationship between bed topography and its corresponding morphometric landscape statistics has not been rigorously quantified at a continental scale. Additionally, landscape classification models are often limited to one or two morphometric quantities, which makes them vulnerable to survey artefacts such as local roughness measurement bias due to dataset migration or uneven coverage. Another issue with existing classification frameworks is that they frequently conflate measurably different bed properties under single discrete labels. This often results in averaged regimes which in turn fails to capture the true continuum of the subglacial landscape.
+>>>
+It is still uncommon for methods to systematically quantify the relationship between bed topography and its morphometric landscape statistics. Studies that measure the statistics report them as continuous fields 
 
 
-\section{ODSA}
-% \begin{itemize}
-% \item ODSA is a physically informed spectral analysis framework for quantifying Antarctic subglacial landscape characteristics and classifying bed morphology into archetypes for ice sheet modelling.
-
-% \item The framework explicitly addresses fundamental ambiguities inherent to historical radio-echo sounding (RES) data, specifically subglacial roughness anisotropy and spectral contamination across distinct geological domains.
 
 
-% \item To prevent physically meaningless parameter averaging, the pipeline employs landscape-directed segmentation and surface-flow confidence weighting to ensure that extracted roughness metrics represent homogeneous terrain.
-
-
-% \item This study introduces a 13-element landscape vector (combining 5 classifying axes and 8 continuous descriptors) computed over 50 km sliding windows.
-
-
-% \item Rather than forcing a single label, this approach evaluates vectors against an 11-entry archetype catalogue to yield an *admissible set* of landscapes for RES segments.
-
-
-% \item By explicitly tracking observational degeneracies (e.g., where distinct landscape archetypes produce similar spectral signatures), the pipeline explicitly names the reason for the overlap and identifies what kind of external observable is required to break the tie. %If the framework cannot distinguish between a subglacial lake (BASIN) and a relict ice stream (TRUNK-RELICT), it reports that "flow history" (Isochrones) or "reflectivity" (Specularity) is needed to separate them
-
-% \item The framework provides the empirical foundation required to generate structurally realistic synthetic bed topographies for advanced inversion models.
-% \end{itemize}
-Here we introduce Observational Data Spectral Analysis (ODSA), a physically informed analysis framework for quantifying Antarctic subglacial landscape characteristics and classifying bed morphology into archetypes for ice sheet modelling. The ODSA framework explicitly addresses fundamental ambiguities inherent to historical radio-echo sounding (RES) data, specifically subglacial roughness anisotropy and spectral contamination across distinct geological domains. 
-To prevent physically meaningless parameter averaging within RES transects, ODSA employs bedrock-gradient segmentation and surface-flow confidence weighting to ensure that extracted metrics represent homogeneous terrain. ODSA uses 50 km sliding windows to spatially analyse the RES transects, and each sliding window is described by a 13-element morphometric vector combining 5 classifying axes and 8 continuous descriptors. ODSA evaluates the morphometric vector against an 11-entry archetype catalogue, yielding an admissible set of landscapes for each analysed window, this prevents forced assignment of a single landscape label when the information available is ambiguous. 
-Notably, since radar geometry alone cannot always distinguish between different landscapes, ODSA is built to flag classification ambiguities by tracking cases where distinct landscape archetypes produce similar spectral signatures (observational degeneracies). For instance, classifier axes are treated as Normal distributions with a variance based on regression scatter. If the uncertainty envelope of a classifier intersects with the allowed sets of multiple catalogue entries, ODSA admits all of them rather than forcing a deterministic fit. When a unit is labelled as degenerate, the pipeline explicitly names the reason for the overlap and identifies the external observable required to break the tie. Our framework provides the empirical foundation required to generate structurally realistic synthetic bed topographies for advanced inversion models.
 
 %JR: I think it is worth noting the value these abilities bring to Antarctic survey design and field planning.
