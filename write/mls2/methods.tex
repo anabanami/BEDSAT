@@ -1,34 +1,76 @@
 \chapter{Methods}
 
+ 1. Data
+  	
+  	- Bedmap3 along-track picks rather than a gridded product~\cite{Pritchard_2025}
+	
+	- \texttt{processing\_flag}: migration status, uniform per CSV
+  	
+  	- Seven regions with boundaries~\cite{Ockenden_2025_data}
 
-% \item The vector elements in short: 
-%     \begin{enumerate}
-%     \item The spectral slope ($\beta$) is a first-order summary of basal character. High $\beta$ indicates smooth, soft beds (sedimentary basins, active ice streams), while low $\beta$ indicates hard, jagged crystalline shields (e.g., Jordan et al. (2017)\cite{Jordan_2017}; Bingham et al (2009)\cite{Bingham_2009}). 
-%     \item Roughness anisotropy ($\Delta\beta$): Topographic roughness varies relative to ice flow. Smoothness along-flow implies glacial erosion and streamlining, while cross-flow roughness often indicates geological structure like rifts (e.g., Hubbard et al (2000)\cite{Hubbard_2000}; Rippin et al. 2014 \cite{Rippin_2014}).
+	- REMA and MEaSUREs
 
+2. Processing and Analysis
 
+	- ANALYSIS UNIT: 50 km sliding window at 50\% overlap
 
-%     \item
+	- Landscape splitting via gradient segmentation and the limitation of excluded
+    transition windows. Relief is \texttt{elevation\_max - elevation\_min} with no detrend, so
+    on a straddling window it returns the elevation offset between two terrains
+    rather than the elevation range within either one.
+
+	- Survey grading: \texttt{coverage\_tags.py}, A/B/C tiers on interpolation distance,
+   azimuth concentration and homogeneous window count,
+
+   - Spectral method
+
+\begin{figure}[H]
+    \includegraphics[scale=0.038]{figures/Fig2.png}
+    \caption{} 
+    \label{fig:pipeline_workflow}
+\end{figure}
+3. The vector elements:
+ \begin{itemize}
+ 
+ \item Classifying axes and their thresholds
+    \begin{enumerate}
+
+    \item{\texttt{$\beta$}}: The spectral slope is a first-order summary of basal character. High $\beta$ indicates smooth, soft beds (sedimentary basins, active ice streams), while low $\beta$ indicates hard, jagged crystalline shields (e.g., Jordan et al. (2017)~\cite{Jordan_2017}; Bingham et al (2009)~\cite{Bingham_2009}). 
+
+    \item{\texttt{relief\_m}}:
+
+    \item{\texttt{bed\_elev\_mean}}:
     
-%     \item
+    \item{\texttt{measures\_speed\_mean}}:
 
-%     \item DESCRIPTORS
+    \end{enumerate}
 
-%         \item Roughness amplitude ($A_{1\text{km}}$), is necessary to separate features like flat crystalline plains from mountainous rift flanks (e.g., Cooper et al (2019)\cite{Cooper_2019}).
+\item Descriptors
 
-%             \item 
+    \begin{enumerate}
 
-%             \item 
+    \item{\texttt{A\_1km}}: The roughness amplitude is necessary to separate features like flat crystalline plains from mountainous rift flanks (e.g., Cooper et al (2019)~\cite{Cooper_2019}).
 
-%             \item 
+    \item{\texttt{rms\_roughness}}:
 
-%             \item 
+    \item{\texttt{xi\_band}}:
 
-%             \item 
+    \item{\texttt{eta\_wavelength\_m}}:
 
-%             \item 
+    \item{\texttt{hill\_count}}:
 
-%             \item 
-            
+    \item{\texttt{skewness}}:
 
-%     \end{enumerate}
+    \item{\texttt{kurtosis}}:
+
+    \end{enumerate}
+    \end{itemize}
+
+	- The descriptors are continuous because I found no defensible literature threshold.
+
+	- Dependence structure of vector elements:
+% \begin{figure}[H]
+%     \includegraphics[scale=0.58]{figures/vector_independence_matrix.png}
+%     \caption{} 
+%     \label{fig:independence_matrix}
+% \end{figure}
