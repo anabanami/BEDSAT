@@ -12,14 +12,11 @@
 \usepackage{float} 
 \usepackage{pdflscape} 
 \usepackage{cite}
-
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-
 \usepackage{datetime}
 \newdateformat{monthyeardate}{%
   \monthname[\THEMONTH], \THEYEAR}
-
 \usepackage{graphicx}
 \newenvironment{Figure}
     {\par\medskip\noindent\minipage{\linewidth}}
@@ -28,10 +25,6 @@
 
 \newenvironment{abstract}
 {\clearpage \thispagestyle{empty} \null \vfill \begin{center} \bfseries \large Abstract \end{center}}
-{\vfill \null \clearpage}
-
-\newenvironment{impactstatement}
-{\clearpage \thispagestyle{empty} \null \vfill \begin{center} \bfseries \large Impact Statement \end{center}}
 {\vfill \null \clearpage}
 
 \usepackage{booktabs}
@@ -103,8 +96,8 @@
 
 \begin{titlepage}
 \begin{center}
-    {\Huge BedSAT: Antarctica}\\ [1cm] 
-    {\Large Exploring what lies beneath using big data and modelling}\\
+    {\Huge Classifying Antarctic Landscapes using Observational Data Spectral Analysis (ODSA)}\\ [1cm] 
+    {\Large paper 1: BedSAT Antarctica}\\
     \vspace{5cm}
     {\large Ana Fabela Hinojosa\footnote{ana.fabelahinojosa@monash.edu}}\\
     \monthyeardate\today\\ [1cm]
@@ -119,26 +112,30 @@
     \includegraphics[scale=0.2]{figures/logos.png}
     \end{center}
 \end{titlepage}
+\begin{abstract}\label{abstract}
+The subglacial topography of Antarctica is one of the strongest controls on ice-sheet evolution. Nevertheless across most of the continent it has only been observed indirectly along sparse radio-echo sounding (RES) flight lines. This leads to a problem: the topography we want to describe is three-dimensional, but outside a few swath radar-surveyed areas we mostly observe the subglacial landscape in only one dimension, along whatever headings the aircraft happened to fly. 
+We propose that to bound subglacial landscape class it is necessary to have multiple measured statistics that characterise different landscape properties. Here we introduce Observational Data Spectral Analysis (ODSA), an integrated spectral and morphometric framework that combines RES transects with contemporary surface data (REMA, MEaSUREs). ODSA builds a vector for landscape classification. Our framework matches the vector to a literature informed catalogue of landscape archetypes based on classifier elements and descriptors.
+We use ODSA to characterise seven Antarctic regions as proof of concept, quantifying how well the flight lines sample their survey footprint. We compare the results for transects in these regions to their published landscape classes\cite{Ockenden_2026} and find them to be distinct but complementary, since ODSA returns a bounded set of admissible archetypes per transect window where the continent-wide product carries one class per cell. No element separates those classes on its own, and the overlaps are too large for better precision to fix, so the bound needs several elements together. 
+Because each vector element is a number rather than a label, a classified landscape can empirically inform synthetic bed topography for the next generation of ice-sheet models.
+\end{abstract}
 
 \tableofcontents
 
-\include{aims} 
-\wordcount{aims} words in this section. AIMS should be (130-200 words)
 
-\include{literature_review} 
-\wordcount{literature_review} words in this section. LR should be (1000-1500 words)
+\include{scope} 
+\wordcount{scope} words in this section should be (130 - 200 words)
 
-\include{research_significance} 
-\wordcount{research_significance} words in this section. RS should be (500 words)
+\include{intro} 
+\wordcount{intro} words in this section should be (1000 - 2000 words)
 
-\include{project_methodology}
-\wordcount{project_methodology} words in this section. PM should be (200-500 words)
+\include{methods}
+\wordcount{methods} words in this section should be (500 words)
 
 \include{progress}
-\wordcount{progress} words in this section. P should be (350-500 words)
+\wordcount{progress} words in this section should be (500 words)
+
+% ~3200 words max
 
 \bibliographystyle{unsrturl_mod}
 \bibliography{mybib}
 \end{document}
-
-
