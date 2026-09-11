@@ -1,20 +1,17 @@
 \chapter{Project Methodology}
 
-\section{Analysis of Bed-to-Surface Signal Transfer}\label{paper1}
-% SUPERVISOR FEEDBACK: can you be more explicit about what you will consider. e.g. talk to the phase / amplitude relationship between bed-surface that you're focussing on>>>>
-The first step is to systematically quantify how fundamental physical assumptions influence the expression of subglacial topography at the ice surface.
-This directly addresses my first research question: ``How does the bed topography manifest on the ice surface?''. This work will leverage the well-tested and robust Ice-sheet and Sea-level System Model (ISSM)~\cite{Larour_2012}. ISSM is a state-of-the-art ice sheet model that is well tested and supported by multiple developers, making it a robust choice for my project. 
-I have developed tools that quantify the the bed-to-surface phase signal transfer by tracking the evolution of the surface with respect to the base using cross-correlations to calculate the spatial lag and phase shift between signals for each time step. This verifies and validates the necessary set of constraints for realistic ice dynamics, taking into consideration different parameterisations, sliding laws and parameter values.
+\section{}\label{paper1}
+
 
 \section{Development of the BedSAT Inversion Framework}
-BedSAT is a model that comprises physically informed transfer function, leveraging an improved understanding of how ice rheology and basal sliding conditions affect the surface expression of subglacial topography. The framework encompases the following stages.
+BedSAT is a model that comprises physically informed transfer function, leveraging an improved understanding of how ice rheology and basal sliding conditions affect the surface expression of subglacial topography. The framework encompasses the following stages.
 \begin{enumerate}
 \item{\textbf{Training the Machine-Learning model}}:
 The BedSAT framework will be trained and validated using a synthetic bedrock database and a data-rich region, such as the Aurora Subglacial Basin, where extensive ice-penetrating radar data of the bed is available for direct comparison.\\
 \textbf{Forward Ice Flow Model}:
-The forward model of ice dynamics will be configured for the chosen study site, including key model assumptions, such as the choice of ice flow equations and the parameters governing ice rheology. The robustness of the numerical configuration will be confirmed through grid independence testing to ensure that the results are not an artifact of the model's spatial resolution.\\
+The forward model of ice dynamics will be configured for the chosen study site, including key model assumptions, such as the choice of ice flow equations and the parameters governing ice rheology. The robustness of the numerical configuration will be confirmed through grid independence testing to ensure that the results are not an artefact of the model's spatial resolution.\\
 \textbf{Inversion Pre-processing}:
-The primary observational inputs for the model will be satellite-derived surface velocity, surface elevation~\cite{itslive, REMA} and ice thickness~\cite{Young_2011, ICECAP}. A critical pre-processing step will involve filtering high-frequency noise (e.g., aeolian features) from the surface data to ensure that the glaciological signal from the underlying bed is isolated, this step will require assesment from experts in the field.
+The primary observational inputs for the model will be satellite-derived surface velocity, surface elevation~\cite{Gardner_2019, REMA} and ice thickness~\cite{Young_2011, ICECAP}. A critical pre-processing step will involve filtering high-frequency noise (e.g., aeolian features) from the surface data to ensure that the glaciological signal from the underlying bed is isolated, this step will require assessment from experts in the field.
 \item{\textbf{Inverse Modelling to Estimate Bed Topography}}:
 The core of the BedSAT framework is the inversion. BedSAT will iteratively adjust an initial estimate of the bed topography, aiming to minimize the mismatch between the forward model's simulated surface velocities and the satellite-observed velocities.
 \item{\textbf{Validation and Sensitivity Analysis}}:
