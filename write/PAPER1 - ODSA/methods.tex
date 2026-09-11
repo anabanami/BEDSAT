@@ -29,42 +29,80 @@
     \caption{} 
     \label{fig:pipeline_workflow}
 \end{figure}
+
 3. The vector elements:
- \begin{itemize}
+\begin{table}[htbp]
+\centering
+\caption{Classification axes and descriptors of the landscape classification vector}
+\label{tab:axes_descriptors}
+\begin{tabularx}{\textwidth}{l p{3.5cm} X}
+\toprule
+\textbf{Category} & \textbf{Variable} & \textbf{Description / Threshold} \\
+\midrule
+\textbf{Classifying axes} 
+  & \texttt{$\beta$} & The spectral slope is a first-order summary of basal character. High $\beta$ indicates smooth, soft beds (sedimentary basins, active ice streams), while low $\beta$ indicates hard, jagged crystalline shields (e.g., Jordan et al. (2017)~\cite{Jordan_2017}; Bingham et al (2009)~\cite{Bingham_2009}). \\
+  \addlinespace[0.5em]
+  & \texttt{relief\_m} & \\
+  \addlinespace[0.5em]
+  & \texttt{bed\_elev\_mean} & \\
+  \addlinespace[0.5em]
+  & \texttt{measures\_speed\_mean} & \\
+\midrule
+\textbf{Descriptors} 
+  & \texttt{A\_1km} & The roughness amplitude is necessary to separate features like flat crystalline plains from mountainous rift flanks (e.g., Cooper et al (2019)~\cite{Cooper_2019}). \\
+  \addlinespace[0.5em]
+  & \texttt{rms\_roughness} & \\
+  \addlinespace[0.5em]
+  & \texttt{xi\_band} & \\
+  \addlinespace[0.5em]
+  & \texttt{eta\_wavelength\_m} & \\
+  \addlinespace[0.5em]
+  & \texttt{hill\_count} & \\
+  \addlinespace[0.5em]
+  & \texttt{skewness} & \\
+  \addlinespace[0.5em]
+  & \texttt{kurtosis} & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+
+%  \begin{itemize}
  
- \item Classifying axes and their thresholds
-    \begin{enumerate}
+%  \item Classifying axes and their thresholds
+%     \begin{enumerate}
 
-    \item{\texttt{$\beta$}}: The spectral slope is a first-order summary of basal character. High $\beta$ indicates smooth, soft beds (sedimentary basins, active ice streams), while low $\beta$ indicates hard, jagged crystalline shields (e.g., Jordan et al. (2017)~\cite{Jordan_2017}; Bingham et al (2009)~\cite{Bingham_2009}). 
+%     \item{\texttt{$\beta$}}: The spectral slope is a first-order summary of basal character. High $\beta$ indicates smooth, soft beds (sedimentary basins, active ice streams), while low $\beta$ indicates hard, jagged crystalline shields (e.g., Jordan et al. (2017)~\cite{Jordan_2017}; Bingham et al (2009)~\cite{Bingham_2009}). 
 
-    \item{\texttt{relief\_m}}:
+%     \item{\texttt{relief\_m}}:
 
-    \item{\texttt{bed\_elev\_mean}}:
+%     \item{\texttt{bed\_elev\_mean}}:
     
-    \item{\texttt{measures\_speed\_mean}}:
+%     \item{\texttt{measures\_speed\_mean}}:
 
-    \end{enumerate}
+%     \end{enumerate}
 
-\item Descriptors
+% \item Descriptors
 
-    \begin{enumerate}
+%     \begin{enumerate}
 
-    \item{\texttt{A\_1km}}: The roughness amplitude is necessary to separate features like flat crystalline plains from mountainous rift flanks (e.g., Cooper et al (2019)~\cite{Cooper_2019}).
+%     \item{\texttt{A\_1km}}: The roughness amplitude is necessary to separate features like flat crystalline plains from mountainous rift flanks (e.g., Cooper et al (2019)~\cite{Cooper_2019}).
 
-    \item{\texttt{rms\_roughness}}:
+%     \item{\texttt{rms\_roughness}}:
 
-    \item{\texttt{xi\_band}}:
+%     \item{\texttt{xi\_band}}:
 
-    \item{\texttt{eta\_wavelength\_m}}:
+%     \item{\texttt{eta\_wavelength\_m}}:
 
-    \item{\texttt{hill\_count}}:
+%     \item{\texttt{hill\_count}}:
 
-    \item{\texttt{skewness}}:
+%     \item{\texttt{skewness}}:
 
-    \item{\texttt{kurtosis}}:
+%     \item{\texttt{kurtosis}}:
 
-    \end{enumerate}
-    \end{itemize}
+%     \end{enumerate}
+%     \end{itemize}
 
 	- The descriptors are continuous because I found no defensible literature threshold.
 
