@@ -1,28 +1,50 @@
-\chapter{Methods}
+\chapter{Methods}\label{methods}
 
  1. Data
-  	
-  	- Bedmap3 along-track picks rather than a gridded product~\cite{Pritchard_2025}
-	
-	- \texttt{processing\_flag}: migration status, uniform per CSV
-  	
-  	- Seven regions with boundaries~\cite{Ockenden_2025_data}
+% Detail the exact data flow, windowing choices, or tapering steps
 
-	- REMA and MEaSUREs
+  - All measurements are made on the Bedmap3 point data at the original sample positions~\cite{Pritchard_2025}, rather than on an interpolated grid. 
+
+  - \texttt{processing\_flag}: migration status, uniform per CSV
+  	
+  	- We apply the framework to seven reference regions, which cover low-relief, alpine and selective-erosion landscapes as reported by Ockenden et al.~\cite{Ockenden_2026} with the boundaries set as per~\cite{Ockenden_2025_data}
+
+  - The REMA surface elevation model gives ice thickness and the local ice-flow direction, and therefore the orientation of each profile relative to ice flow is also recorded. 
+
+  -MEaSUREs?
 
 2. Processing and Analysis
 
-	- ANALYSIS UNIT: 50 km sliding window at 50\% overlap
+	- ANALYSIS UNIT: $50~\mathrm{km}$ sliding window at 50\% overlap
+
+  - Gap cuts ( \texttt{split\_into\_segments} module in  \texttt{segmentation.py}). The track is cut wherever two consecutive points are more than $2000~m$ apart. Pieces shorter than 50 points or $10~\mathrm{km}$ are dropped.
 
 	- Landscape splitting via gradient segmentation and the limitation of excluded
     transition windows. Relief is \texttt{elevation\_max - elevation\_min} with no detrend, so
     on a straddling window it returns the elevation offset between two terrains
     rather than the elevation range within either one.
+    (Transition zones are not excluded from the analysis. They are processed like any other   segment, and \texttt{is\_transition} is written to the segment and window outputs)
 
 	- Survey grading: \texttt{coverage\_tags.py}, A/B/C tiers on interpolation distance,
-   azimuth concentration and homogeneous window count,
+   azimuth concentration and homogeneous window count, more in Chapter~\ref{discussion}
 
-   - Spectral method
+3.  Spectral method
+
+  - The detrended bed profile in each window is analysed with a Lomb--Scargle periodogram (over 500 geomspace frequencies), which accommodates uneven along-track sample spacing~\cite{VanderPlas_2018}
+
+  - Hann taper
+
+  - Segment PSD is the average over the segment's windows; the fit runs on that
+
+  - Fit band 250 m to the shorter of segment length and $50~\mathrm{km}$; the upper edge tracks \texttt{WINDOW\_SIZE}
+
+  - Two-pass fit: unmasked pass, peak detection at height $2.0$ on the residual, five-bin
+  buffer mask, refit weighted by $1/\mathrm{std}(\log_10 (\mathrm{PSD}))$; unweighted below three windows
+
+  - A power law fitted to the spectrum gives the spectral slope $\beta$ and the spectral amplitude at $1~\mathrm{km}$ wavelength~\cite{Hubbard_2000, Jordan_2017}. We also compute the characteristic wavelength~\cite{Li_2010, Rippin_2014} and a transect version of the subglacial hill count~\cite{Ockenden_2026}. 
+
+  - Untapered residuals are kept separately for \texttt{rms\_roughness}, skewness and kurtosis, since the taper would bias a moment
+
 
 \begin{figure}[H]
     \includegraphics[scale=0.038]{figures/Fig2.png}
@@ -44,12 +66,12 @@
   \addlinespace[0.5em]
   & \texttt{relief\_m} & \\
   \addlinespace[0.5em]
-  & \texttt{bed\_elev\_mean} & \\
-  \addlinespace[0.5em]
   & \texttt{measures\_speed\_mean} & \\
+  \addlinespace[0.5em]
+  & \texttt{bed\_elev\_mean} & \\
 \midrule
 \textbf{Descriptors} 
-  & \texttt{A\_1km} & The roughness amplitude is necessary to separate features like flat crystalline plains from mountainous rift flanks (e.g., Cooper et al (2019)~\cite{Cooper_2019}). \\
+  & \texttt{A\_km} & The roughness amplitude is necessary to separate features like flat crystalline plains from mountainous rift flanks (e.g., Cooper et al (2019)~\cite{Cooper_2019}). \\
   \addlinespace[0.5em]
   & \texttt{rms\_roughness} & \\
   \addlinespace[0.5em]
@@ -66,49 +88,48 @@
 \end{tabularx}
 \end{table}
 
+4. Uncertainty envelopes
+  - Two standard deviations either side of the measured value, on the four classifying axes only
 
+- $\beta$: formal fit error in quadrature with \texttt{BETA\_SYSTEMATIC\_ERROR} = 0.05, a floor rather than an estimate
 
-%  \begin{itemize}
- 
-%  \item Classifying axes and their thresholds
-%     \begin{enumerate}
+- Relief $30~\mathrm{m}$, from $\sqrt{2} \times 20~\mathrm{m}$; the $\pm7~\mathrm{m}$ surface term is common-mode over $50~\mathrm{km}$ and cancels
 
-%     \item{\texttt{$\beta$}}: The spectral slope is a first-order summary of basal character. High $\beta$ indicates smooth, soft beds (sedimentary basins, active ice streams), while low $\beta$ indicates hard, jagged crystalline shields (e.g., Jordan et al. (2017)~\cite{Jordan_2017}; Bingham et al (2009)~\cite{Bingham_2009}). 
+- Elevation 10 m; velocity per window from the ERRX/ERRY sidecar on a $3\times3$ stencil at $\pm15~\mathrm{km}$, projected onto flow direction above $5~\mathrm{m/yr}$ and isotropic RMS below it
 
-%     \item{\texttt{relief\_m}}:
+- A failed measurement widens to every band and reads unavailable; it never narrows the
+admissible set
 
-%     \item{\texttt{bed\_elev\_mean}}:
-    
-%     \item{\texttt{measures\_speed\_mean}}:
+- The descriptors are continuous because I found no defensible literature threshold.
 
-%     \end{enumerate}
+- Dependence structure of vector elements:
+  How much duplicated information do two vector elements (classifiers and descriptors) provide the scheme?
+  \begin{figure}[H]
+      \includegraphics[scale=0.58]{figures/vector_independence_matrix.png}
+      \caption{} 
+      \label{fig:independence_matrix}
+  \end{figure}
 
-% \item Descriptors
+5. Catalogue matching
 
-%     \begin{enumerate}
+  - The operation is exclusion, not identification.
 
-%     \item{\texttt{A\_1km}}: The roughness amplitude is necessary to separate features like flat crystalline plains from mountainous rift flanks (e.g., Cooper et al (2019)~\cite{Cooper_2019}).
+  - 11 entries; an entry is a set of allowed values per axis, and an unconstrained axis can never exclude that entry
+  
+  - Definitions the results depend on: RESOLVED, DEGENERATE, out-of-catalogue, and the separable flag
+  
+  - Degeneracy reporting: name the axis responsible and the observable that would break the tie
 
-%     \item{\texttt{rms\_roughness}}:
+6. Validation procedures
 
-%     \item{\texttt{xi\_band}}:
+  - Concordance against Ockenden et al.~\cite{Ockenden_2026}: \texttt{ockenden\_class.py} reproduces the masks from the Zenodo metric NetCDFs, $50~\mathrm{km}$ cells against $50~\mathrm{km}$ windows, matched-scale join, \texttt{MIN\_N} = 10, separation criteria $z \geq 2$ and $d \geq 1$, pooled and non-straddling runs
 
-%     \item{\texttt{eta\_wavelength\_m}}:
+  - Catalogue-blind test at segment level: seven of the eight descriptors, since \texttt{beta\_iqr} has no within-unit spread of its own
 
-%     \item{\texttt{hill\_count}}:
+  - Reproducibility: co-located $30~\mathrm{km}$ and $50~\mathrm{km}$ windows within one trajectory; note that $\beta$'s figure is a floor because the fit band tracks the window size
 
-%     \item{\texttt{skewness}}:
+  - Decorrelation: \texttt{window\_atom\_test.py}; define chance as $\Sigma p^2$ per axis and state it wherever an excess is quoted
 
-%     \item{\texttt{kurtosis}}:
+  - Within-cell variance ordering: report as ordering only, never as a number or a range
 
-%     \end{enumerate}
-%     \end{itemize}
-
-	- The descriptors are continuous because I found no defensible literature threshold.
-
-	- Dependence structure of vector elements:
-% \begin{figure}[H]
-%     \includegraphics[scale=0.58]{figures/vector_independence_matrix.png}
-%     \caption{} 
-%     \label{fig:independence_matrix}
-% \end{figure}
+ODSA measures bed statistics from radar data at the original sample positions, therefore the synthetic beds used to train BedSAT are based on observed Antarctic bed properties rather than on interpolated grids. The continuous elements of the landscape vector provide the morphometric statistics that a synthetic bedrock generator can take as inputs to generate physically  informed beds at ice-sheet model resolution. Since Bed topography is expressed at the ice surface~\cite{Gudmundsson_2003, DeRydt_2013}, and BedSAT will use ISSM ice flow simulations over these synthetic beds. BedSAT will learn bed-to-surface transfer and invert it, so that satellite observations of the ice surface can be mapped back to bed topography at greater accuracy. Because 
