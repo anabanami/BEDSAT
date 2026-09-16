@@ -1,58 +1,56 @@
 \chapter{Project Methodology}
 
+% ROUGHLY Outline the conceptual/theoretical framework of the project, the project design and methods. Demonstrate that methodologies are robust and adequately developed.
 \section{Development of the BedSAT Inversion Framework}
-BedSAT is a model that comprises physically informed transfer function, leveraging an improved understanding of how ice rheology and basal sliding conditions affect the surface expression of subglacial topography. The framework encompasses the following stages.
+BedSAT's goal is to leverage a physically informed transfer function with improved understanding of how ice rheology and basal sliding conditions affect the surface expression of subglacial topography. Its development requires the following stages.
+
 \begin{enumerate}
-
-\item{\textbf{}}:
-% \begin{figure}[H]
-%     \includegraphics[scale=0.038]{figures/antarctica_tracks_tier.png}
-%     \caption{} 
-%     \label{fig:coverage_tiers}
-% \end{figure}
-
-
-\item{\textbf{}}:
-
-\item{\textbf{Training the Machine-Learning model}}:
-The BedSAT framework will be trained and validated using a synthetic bedrock database and a data-rich region, such as the Aurora Subglacial Basin, where extensive ice-penetrating radar data of the bed is available for direct comparison.\\
+\item{\textbf{Training}}:
+BedSAT will be trained and validated using a physically informed (ODSA) synthetic bedrock database (Bedrock Factory) and a data-rich region, such as the Aurora Subglacial Basin, where extensive ice-penetrating radar data of the bed is available for direct comparison.\\
 \textbf{Forward Ice Flow Model}:
 The forward model of ice dynamics will be configured for the chosen study site, including key model assumptions, such as the choice of ice flow equations and the parameters governing ice rheology. The robustness of the numerical configuration will be confirmed through grid independence testing to ensure that the results are not an artefact of the model's spatial resolution.\\
 \textbf{Inversion Pre-processing}:
-The primary observational inputs for the model will be satellite-derived surface velocity, surface elevation~\cite{Gardner_2019, REMA} and ice thickness~\cite{Young_2011, ICECAP}. A critical pre-processing step will involve filtering high-frequency noise (e.g., aeolian features) from the surface data to ensure that the glaciological signal from the underlying bed is isolated, this step will require assessment from experts in the field.
+The primary observational inputs for the model will be satellite-derived surface velocity, surface elevation~\cite{Rignot_2011, REMA} and ice thickness~\cite{Young_2011, ICECAP}. A critical pre-processing step will involve filtering high-frequency noise (e.g., aeolian features) from the surface data to ensure that the glaciological signal from the underlying bed is isolated.
 
 \item{\textbf{Inverse Modelling to Estimate Bed Topography}}:
-The core of the BedSAT framework is the inversion. BedSAT will iteratively adjust an initial estimate of the bed topography, aiming to minimize the mismatch between the forward model's simulated surface velocities and the satellite-observed velocities.
+The core of the BedSAT is the inversion. BedSAT will iteratively adjust an initial estimate of the bed topography, aiming to minimize the mismatch between the forward model's simulated surface velocities and the satellite-observed velocities.
 
 \item{\textbf{Validation and Sensitivity Analysis}}:
-The framework's performance will be rigorously evaluated. First, the inverted bed topography will be directly validated against the "ground-truth" radar-derived bed maps for the study region. Second, a series of sensitivity analyses will be conducted to quantify the model's robustness. These tests will systematically alter key assumptions, such as the rheological parameters for different regions, to determine their impact on the final inverted topography and to establish the uncertainty bounds of the framework's results.
+BedSAT's performance will be rigorously evaluated. First, the inverted bed topography will be directly validated against the "ground-truth" radar-derived bed maps for the study region. Second, a series of sensitivity analyses will be conducted to quantify the model's robustness. These tests will systematically alter key assumptions, such as the rheological parameters for different regions, to determine their impact on the final inverted topography and to establish the uncertainty bounds of the framework's results.
 \end{enumerate}
 
-\section{}\label{paper1}
+\section{ODSA's Morphometric Statistics}\label{paper1}
 
-% Outline the conceptual/theoretical framework of the project, the project design and methods.
-% Demonstrate that methodologies are robust and adequately developed.
+To inform the synthetic bedrock database that will be used in the training, we need bed morphometric statistics to describe a landscape class. We apply ODSA to seven reference regions as proof of concept (see Fig.~\ref{fig:7regions}), quantifying how well the flight lines sample their survey footprint.
 
-3. The vector elements:
-\begin{table}[htbp]
+\begin{figure}
+    \includegraphics[scale=0.58]{figures/antarctica_tracks_overview.png}
+    \caption{The seven RES survey regions we analysed with ODSA. Five regions use the PS71 boxes from~\cite{Ockenden_2025_data}. The Aurora low-relief region is restricted to the low-relief cells of the Ockenden classification, and the Pensacola Pole Basin region uses a box that we defined.} 
+    \label{fig:7regions}
+\end{figure}
+
+Our proposal is that to bound subglacial landscape class it is necessary to have multiple measured statistics that characterise different landscape properties. ODSA's landscape vector carries 11 elements measured per window. Four classify and seven do not. Each classifier carries an uncertainty envelope of two standard deviations at either side of the measured value, taken from the spectral fit covariance in the case of the roughness slope ($\beta$) and from measurement error budgets for relief, velocity and elevation.
+
+\begin{table}[H]
 \centering
 \caption{Classification axes and descriptors of the landscape classification vector}
 \label{tab:axes_descriptors}
-\begin{tabularx}{\textwidth}{l p{3.5cm} X}
+\begin{tabularx}{\textwidth}{l p{4.0cm} X}
 \toprule
-\textbf{Category} & \textbf{Variable} & \textbf{Description / Threshold} \\
+\textbf{Category} & \textbf{Variable} & \textbf{Description and Thresholds} \\
 \midrule
-\textbf{Classifying axes} 
-  & \texttt{$\beta$} & The spectral slope is a first-order summary of basal character. High $\beta$ indicates smooth, soft beds (sedimentary basins, active ice streams), while low $\beta$ indicates hard, jagged crystalline shields (e.g., Jordan et al. (2017)~\cite{Jordan_2017}; Bingham et al (2009)~\cite{Bingham_2009}). \\
+\textbf{Classifiers} 
+  & \texttt{$\beta$} & The slope of the bed power spectrum over the fitted band. Low $\beta$ 
+  distributes power to the short wavelengths; high $\beta$ concentrates it at long wavelengths. Literature reported values range from around 1.5 on exposed crystalline terrain to above 2.5 on sedimentary beds~\cite{Bingham_2009} with thawed beds in northern Greenland averaging 2.48 against 2.08 when frozen~\cite{Jordan_2017}. \\
   \addlinespace[0.5em]
-  & \texttt{relief\_m} & \\
+  & \texttt{relief\_m} & The elevation range within a window, $\max\mathrm{(bed)} - \min\mathrm{(bed)}$ over the raw 50 km profile, in metres. It gives the amplitude of the largest structure a window contains. Regional slope enters the range directly. Relief class thresholds are set to flat: $<350~\mathrm{m}$; mountainous: $\geq~800~\mathrm{m}$~\cite{Ockenden_2026}; while values in between these are labelled as subdued. \\
   \addlinespace[0.5em]
-  & \texttt{measures\_speed\_mean} & \\
+  & \texttt{measures\_speed\_mean} & The mean MEaSUREs InSAR surface speed at the window's track points, in m/yr, sampled over the same points that enter the spectral fit. Bands are \texttt{very\_low} ($<5$), \texttt{low} ($5$ to $\leq10$), \texttt{moderate} ($10$ to $\leq50$) and \texttt{fast} ($>50$), anchored on the bimodality in~\cite{Rignot_2011}. Each window carries a sampled error from the \texttt{ERRX/ERRY} fields of that product.\\
   \addlinespace[0.5em]
-  & \texttt{bed\_elev\_mean} & \\
+  & \texttt{bed\_elev\_mean} & The mean bed elevation within a window, in metres above present-day sea level. Class thresholds are set to submerged: $\leq~0~\mathrm{m}$; elevated at $\geq~1000~\mathrm{m}$, and emerged for values in between. \\
 \midrule
 \textbf{Descriptors} 
-  & \texttt{A\_1km} & The roughness amplitude is necessary to separate features like flat crystalline plains from mountainous rift flanks (e.g., Cooper et al (2019)~\cite{Cooper_2019}). \\
+  & \texttt{A\_1km} & \\
   \addlinespace[0.5em]
   & \texttt{rms\_roughness} & \\
   \addlinespace[0.5em]
@@ -69,11 +67,16 @@ The framework's performance will be rigorously evaluated. First, the inverted be
 \end{tabularx}
 \end{table}
 
-The continuous elements of the landscape vector provide the morphometric statistics that
-the Bedrock factory takes as inputs to generate synthetic beds at ice-sheet model
+
+
+
+
+
+
+The continuous elements of ODSA's landscape vector provide the morphometric statistics that
+the Bedrock Factory suite takes as inputs to generate synthetic beds at ice-sheet model
 resolution. Bed topography is expressed in the ice surface~\cite{Gudmundsson_2003,
 DeRydt_2013}, and BedSAT uses ISSM simulations over these synthetic beds to learn this
 bed-to-surface transfer and invert it, so that satellite observations of the ice surface
-can be mapped back to bed topography. Because ODSA measures bed statistics from radar data
-at the original sample positions, the synthetic beds used to train BedSAT are based on
+can be mapped back to bed topography. The synthetic beds used to train BedSAT are based on
 observed Antarctic bed properties rather than on interpolated grids.

@@ -9,22 +9,20 @@
   	
   - We apply the framework to seven reference regions, which cover low-relief, alpine and selective-erosion landscapes as reported by Ockenden et al.~\cite{Ockenden_2026}. Five
   regions use the PS71 boxes from~\cite{Ockenden_2025_data}. The Aurora low-relief region is restricted to the low-relief cells of the Ockenden classification, and the Pensacola Pole
-  Basin region uses a box that we defined, with two isolated flight legs south of $88.5^\circ$S removed. 
+  Basin region uses a box that we defined, with two isolated flight legs equatorward of $88.5^\circ$S trimmed. 
 
+  - The REMA surface elevation model~\cite{REMA} gives ice thickness and the local ice-flow direction, and therefore the orientation of each profile relative to ice flow is also recorded. Ice thickness is the REMA surface elevation minus the Bedmap3 bed elevation. The flow direction comes from the REMA surface gradient with a baseline of $10\times$ the ice thickness following McCormack et al.~\cite{McCormack_2019}. Where the elevation difference across the stencil is below $3\sqrt{2} \times 1~\mathrm{m}$, the direction is set to undefined.
 
-  - The REMA surface elevation model~\cite{REMA} gives ice thickness and the local ice-flow direction, and therefore the orientation of each profile relative to ice flow is also recorded. Ice thickness is the REMA surface elevation minus the Bedmap3 bed elevation. The flow direction comes from the REMA surface gradient with a baseline of $10\times$ the ice thickness. Where the elevation difference across the stencil is below $3\sqrt{2} \times 1~\mathrm{m}$, the direction is set to undefined.
-
-  -MEaSUREs: The pipeline uses the $450~\mathrm{m}$ v2 product~\cite{Rignot_2011}. At each point it gives the speed and the angle between the MEaSUREs velocity direction and the REMA flow direction. These are exported per window as \texttt{measures\_speed\_mean}, \texttt{flow\_error\_mean} and \texttt{flow\_error\_median}. The \texttt{ERRX/ERRY} error fields feed the velocity uncertainty.
-
+  - MEaSUREs: The pipeline uses the $450~\mathrm{m}$ v2 product~\cite{Rignot_2011}. At each point it gives the speed and the angle between the MEaSUREs velocity direction and the REMA flow direction. These are exported per window as \texttt{measures\_speed\_mean}, \texttt{flow\_error\_mean} and \texttt{flow\_error\_median}. The \texttt{ERRX/ERRY} error fields feed the velocity uncertainty.
 
 2. Processing and Analysis
 
-	- ANALYSIS UNIT: $50~\mathrm{km}$ sliding window at 50\% overlap (Not every window is 50 km. A segment shorter than 50 km is analysed as a
-     single window the length of the segment)
+	- ANALYSIS UNIT: $50~\mathrm{km}$ sliding window at 50\% overlap (Not every window is 50 km. A segment shorter than 50 km is analysed as a single window the length of the segment)
 
   - Gap cuts ( \texttt{split\_into\_segments} module in  \texttt{segmentation.py}). The track is cut wherever two consecutive points are more than $2000~\mathrm{m}$ apart. Pieces shorter than 50 points or $10~\mathrm{km}$ are dropped.
 
   - Landscape splitting (\texttt{split\_by\_landscape} in \texttt{segmentation.py}). After the gap cuts, each piece of track is smoothed with a $50~\mathrm{km}$ running mean, and every point where the smoothed bed gradient exceeds $15~\mathrm{m/km}$ is marked as a transition. Transition zones less than $5~\mathrm{km}$ apart are merged, and the track is cut at the start and end of each zone. Pieces shorter than 50 points or $10~\mathrm{km}$ are dropped. Transition segments go through the same spectral analysis as every other segment, and \texttt{is\_transition} is written to the window and segment outputs. Transition windows are excluded from classification and from the validation tests. Relief is \texttt{elevation\_max - elevation\_min} of the bed elevations in the window, with no detrending. A change in terrain with a smoothed gradient below $15~\mathrm{m/km}$ is not marked as a transition, so a window can still straddle two terrains, and its relief then includes the elevation offset between them as well as the elevation range within each one.
+  Splitting fallback: if both pieces fail the gates, the parent reverts to one unsplit segment.
 
   - A segment with less than 20\% valid ice thickness is skipped.
 
@@ -39,6 +37,8 @@
 
   - Fit band 250 m to the shorter of segment length and $50~\mathrm{km}$; the upper edge tracks \texttt{WINDOW\_SIZE}
 
+  - Nyquist floor, $1/(2\times\mathrm{max}(\mathrm{dx}_{\mathrm{{median}}}, 15~\mathrm{m}))$, which sets the $30~\mathrm{m}$ short-wavelength limit
+
   - Peak-masked power-law fit. For each segment, the window periodograms are averaged, and a first-pass straight line is fitted to $\log_{10}$ PSD against $\log_{10}$ frequency
   over the fit band. Every peak at which the averaged PSD is at least twice the fitted value is masked, together with five frequency bins either side. Each window's own periodogram
   is then fitted by unweighted least squares over the masked band, which gives the window  $\beta$, its formal error and $A_{1\mathrm{km}}$; this window $\beta$ is the one in the
@@ -46,12 +46,24 @@
   with fewer than three windows. For a single-window segment, the segment $\beta$ is the window $\beta$. The segment $\beta$ is written to the segment outputs and does not enter
   the vector, since a segment unit in the vector uses the median of its window values.
 
-  - A power law fitted to the spectrum gives the spectral slope $\beta$ and the spectral amplitude at $1~\mathrm{km}$ wavelength~\cite{Hubbard_2000, Jordan_2017}. We also compute the characteristic wavelength~\cite{Li_2010, Rippin_2014} and a transect version of the subglacial hill count~\cite{Ockenden_2026}. 
+  - A power law fitted to the spectrum gives the spectral slope $\beta$ and the spectral
+  amplitude at $1~\mathrm{km}$ wavelength~\cite{Hubbard_2000, Jordan_2017}. We also
+  compute the characteristic wavelength~\cite{Li_2010, Rippin_2014} and a transect version of the subglacial hill count~\cite{Ockenden_2026}. We detrend each window, then count a point
+  as a hill if it is the maximum of a $5~\mathrm{km}$ box centred on it and the relief of
+  box exceeds $20~\mathrm{m}$. Runs of adjacent flagged points count once, and runs that
+  touch a window edge are dropped. Ockenden et al. release the areal count at four gates,
+  $20$, $50$, $100$ and $250~\mathrm{m}$~\cite{Ockenden_2025_data}; we emit the
+  $20~\mathrm{m}$ column, the only one of the four that stays usable in every region here.
+  A one-dimensional transect through a two-dimensional field does not reproduce an areal
+  count, so \texttt{hill\_count} is our own descriptor built on their recipe rather than a
+  reproduction of their metric.
 
   - Untapered residuals are kept separately for \texttt{rms\_roughness}, skewness and kurtosis, since the taper would bias a moment
 
   - \texttt{xi\_band} is the integral of the PSD over the $300$ to $1200~\mathrm{m}$ band. \texttt{eta\_wavelength\_m} is calculated over the same band.
 
+  - the window formal error exists only where the masked band keeps more than two points
+  
 
 \begin{figure}[H]
     \includegraphics[scale=0.038]{figures/Fig2.png}
@@ -98,32 +110,33 @@
 5. Uncertainty envelopes
   - Two standard deviations either side of the measured value, on the four classifying axes only
 
-- $\beta$: formal fit error in quadrature with \texttt{BETA\_SYSTEMATIC\_ERROR} = 0.05, a floor rather than an estimate
+  - $\beta$: formal fit error in quadrature with \texttt{BETA\_SYSTEMATIC\_ERROR} = 0.05, a floor rather than an estimate
 
-- Relief $30~\mathrm{m}$, from $\sqrt{2} \times 20~\mathrm{m}$; the $\pm7~\mathrm{m}$ surface term is common-mode over $50~\mathrm{km}$ and cancels
+  - Relief $30~\mathrm{m}$, from $\sqrt{2} \times 20~\mathrm{m}$; the $\pm7~\mathrm{m}$ surface term is common-mode over $50~\mathrm{km}$ and cancels
 
-- Elevation 10 m; velocity per window from the ERRX/ERRY sidecar on a $3\times3$ stencil at $\pm15~\mathrm{km}$, projected onto flow direction above $5~\mathrm{m/yr}$ and isotropic RMS below it
+  - \texttt{VELOCITY\_ERROR\_M\_YR} = 5 fires only where a region has no sidecar, which does not happen anywhere in the seven region set
 
-- A failed measurement widens to every band and reads unavailable; it never narrows the
-admissible set
+  - Elevation 10 m; velocity per window from the ERRX/ERRY sidecar on a $3\times3$ stencil at $\pm15~\mathrm{km}$, projected onto flow direction above $5~\mathrm{m/yr}$ and isotropic RMS below it
 
-- The descriptors are continuous because we found no defensible literature threshold.
+  - A failed measurement widens to every band and reads unavailable; it never narrows the
+  admissible set
 
-- Dependence structure of vector elements:
-  How much duplicated information do two vector elements (classifiers and descriptors) provide the scheme?
-  \begin{figure}[H]
-      \includegraphics[scale=0.58]{figures/vector_independence_matrix.png}
-      \caption{} 
-      \label{fig:independence_matrix}
-  \end{figure}
+  - The descriptors are continuous because we found no defensible literature threshold.
 
-
+  - Dependence structure of vector elements:
+    How much duplicated information do two vector elements (classifiers and descriptors) provide the scheme?
+    \begin{figure}[H]
+        \includegraphics[scale=0.58]{figures/vector_independence_matrix.png}
+        \caption{} 
+        \label{fig:independence_matrix}
+    \end{figure}
+    
 
 6. Catalogue matching
 
-  - The operation is exclusion, not identification.
+  - The operation is exclusion, not identification. 
 
-  - 11 entries; an entry is a set of allowed values per axis, and an unconstrained axis can never exclude that entry
+  - 11 entries; an entry is a set of allowed values per axis, and an unconstrained axis can never exclude that entry. An ambiguous axis keeps an entry in.
   
   - Definitions the results depend on: RESOLVED, RESOLVED-WITH-EXTERNAL, DEGENERATE and  OUT-OF-CATALOGUE, and the separable flag
   
@@ -133,17 +146,16 @@ admissible set
 
   - Concordance against Ockenden et al.~\cite{Ockenden_2026}: \texttt{ockenden\_class.py} reproduces the masks from the Zenodo metric NetCDFs, $50~\mathrm{km}$ cells against $50~\mathrm{km}$ windows, matched-scale join, \texttt{MIN\_N} = 10, separation criteria $z \geq 2$ and $d \geq 1$, run on all windows and on non-straddling windows only
 
-  - Catalogue-blind test at segment level: seven of the eight descriptors, since \texttt{beta\_iqr} has no within-unit spread of its own. A single-window segment cannot enter it.
+  - Catalogue-blind test at segment level, on the seven descriptors. A single-window
+  segment cannot enter it, since the test needs a within-unit spread on both members.
+
 
   - Reproducibility: co-located $30~\mathrm{km}$ and $50~\mathrm{km}$ windows within one trajectory; note that $\beta$'s figure is a floor because the fit band tracks the window size
 
   - Decorrelation (\texttt{window\_atom\_test.py}). For every pair of non-transition windows, we record whether the two windows share each class ($\beta$ class, relief class,
-    velocity band and elevation class) and whether they share all four, binned by the distance between window centres. We do this for pairs within one trajectory and for all pairs
-    within a region. The class used here is the class of the measured value, without the uncertainty envelope. Chance agreement is the fraction of randomly shuffled window pairs
-    that share all four classes. The distance at which agreement on all four classes falls to chance sets the decimation distance, \texttt{COMPOSITION\_DECIMATE\_KM} $=
-    200~\mathrm{km}$. We count independent windows by greedily selecting windows with centres at least $200~\mathrm{km}$ apart.
-
+  velocity band and elevation class) and whether they share all four, binned by the distance between window centres. We do this for pairs within one trajectory and for all pairs within a region. The class used here is the class of the measured value, without the uncertainty envelope. Chance agreement is the fraction of randomly shuffled window pairs that share all four classes. The distance at which agreement on all four classes is still about twice chance between 200 and 300 km and reaches chance only beyond 300 km, so \texttt{COMPOSITION\_DECIMATE\_KM} $= 200~\mathrm{km}$ is a practical floor rather than a demonstrated independence distance, and \texttt{n\_independent} is an upper bound. We count independent windows by greedily selecting windows with centres at least $200~\mathrm{km}$ apart.
 
   - Within-cell variance ordering: report as ordering only, never as a number or a range
+
 
 ODSA measures bed statistics from radar data at the original sample positions, therefore the synthetic beds used to train BedSAT will be based on observed Antarctic bed properties rather than on interpolated grids. The continuous elements of the landscape vector provide the morphometric statistics that a synthetic bedrock generator can take as inputs to generate physically  informed beds at ice-sheet model resolution. Bed topography is expressed at the ice surface~\cite{Gudmundsson_2003, DeRydt_2013}. BedSAT will use ISSM ice flow simulations over these synthetic beds, resulting in a synthetic bedrock and resultant surface expression pair. BedSAT will learn bed-to-surface transfer from these synthetic pairs and invert it, so that satellite observations of the ice surface can be mapped back to bed topography at greater accuracy. 
