@@ -9,13 +9,13 @@
 % - a brief timetable of planned research activities
 % - a statement of the resources required to achieve these outcomes
 
-The ODSA pipeline feeds on the REMA surface elevation model~\cite{REMA} ice thickness and the local ice-flow direction. The flow direction comes from the REMA surface gradient with a baseline of $10\times$ the ice thickness following the smoothing function recommendation from McCormack et al.~\cite{McCormack_2019}. ODSA also uses the $450~\mathrm{m}$ MEaSUREs v2 product~\cite{Rignot_2011}. At each point it gives the speed and the angle between the MEaSUREs velocity direction and the REMA flow direction. Allowing us to obtain the velocity uncertainties per window. A $50~\mathrm{km}$ sliding window at 50\% overlap is the unit in the spectral analysis of the bed RES data, (Not every window is 50 km. A segment shorter than 50 km is analysed as a single window the length of the segment).
+The ODSA pipeline feeds on the REMA surface elevation model~\cite{REMA} ice thickness and the local ice-flow direction. The flow direction comes from the REMA surface gradient with a baseline of $10\times$ the ice thickness following the smoothing function recommendation from McCormack et al.~\cite{McCormack_2019}. ODSA also uses the $450~\mathrm{m}$ MEaSUREs v2 product~\cite{Rignot_2017}. At each point it gives the speed and the angle between the MEaSUREs velocity direction and the REMA flow direction. Allowing us to obtain the velocity uncertainties per window. A $50~\mathrm{km}$ sliding window at 50\% overlap is the unit in the spectral analysis of the bed RES data, (Not every window is 50 km. A segment shorter than 50 km is analysed as a single window the length of the segment).
 
 The detrended bed profile for each Hann tapered window is analysed with a Lomb--Scargle periodogram (over 500 geomspace frequencies), which accommodates uneven along-track sample spacing~\cite{VanderPlas_2018}. 
 
 
-% \begin{figure}
-%     \includegraphics[scale=0.37]{figures/catalogue_examples.png}
-%     \caption{} 
-%     \label{fig:catalogue_examples}
-% \end{figure}
+\begin{figure}
+    \includegraphics[scale=0.37]{figures/catalogue_examples.png}
+    \caption{} 
+    \label{fig:catalogue_examples}
+\end{figure}
