@@ -1,28 +1,33 @@
 \chapter{Progress}\label{progress}
 
-% % Detailed statement of progress to date, including:
-% % - a summary of key research activities and outcomes
-% % - a list of any publications generated from your research (if applicable)
-% % - a summary of any major changes in research direction
-% % - a summary of thesis progress, chapters and their preliminary titles
-% % Anticipated progress in next 12 months including:
-% % - a brief timetable of planned research activities
-% % - a statement of the resources required to achieve these outcomes
+% Detailed statement of progress to date, including:
+% [X] a summary of key research activities and outcomes
+% [X] a list of any publications generated from your research (if applicable)
+% [] a summary of any major changes in research direction
+% [X] a summary of thesis progress, chapters and their preliminary titles
+% [X] Anticipated progress in next 12 months including:
+% [X] a brief timetable of planned research activities
+% [X] a statement of the resources required to achieve these outcomes
 
-% ODSA operates on the along-track picks published with Bedmap3 instead of a gridded product, which allows us to measure the survey data directly and avoid the interpolation issues described earlier. The tracks used are visible in Fig.~\ref{fig:Bedmap+Ockenden_map}. 
+\section{Key research achieved (ODSA)}
 
-% The ODSA pipeline feeds on the REMA surface elevation model~\cite{REMA} ice thickness and the local ice-flow direction. The flow direction comes from the REMA surface gradient with a baseline of $10\times$ the ice thickness following the smoothing function recommendation from McCormack et al.~\cite{McCormack_2019}. ODSA also uses the $450~\mathrm{m}$ MEaSUREs v2 product~\cite{Rignot_2017}. At each point it gives the speed and the angle between the MEaSUREs velocity direction and the REMA flow direction. Allowing us to obtain the velocity uncertainties per window. A $50~\mathrm{km}$ sliding window at 50\% overlap is the unit in the spectral analysis of the bed RES data, (Not every window is 50 km. A segment shorter than 50 km is analysed as a single window the length of the segment).
+ODSA operates on the along-track picks published with Bedmap3 instead of a gridded product, which allows us to measure the survey data directly and avoid the interpolation issues described in Ch.~\ref{review}. The tracks used are visible in Fig.~\ref{fig:Bedmap+Ockenden_map}. 
+The ODSA pipeline splits tracks into segments, cuts them into $50~\mathrm{km}$ windows (when possible) with a $25\mathrm{km}$ step, applies a Hann taper, and fits the spectrum over $250~\mathrm{m}$ to $50~\mathrm{km}$ using a Lomb--Scargle periodogram. The morphometric statistics obtained from the RES data is checked against an 11-element landscape vector~\ref{tab:axes, tab:descriptors}. Every vector classifier has a $\pm 2\sigma$ uncertainty envelope, so no axis is assumed to be exact. The resultant vector is compared to a literature-based catalogue of 11 landscape archetypes. ODSA reports when a window matches more than one archetype, the pipeline names the axis responsible and the observable needed to break the tie.
 
-% The detrended bed profile for each Hann tapered window is analysed with a Lomb--Scargle periodogram (over 500 geomspace frequencies), which accommodates uneven along-track sample spacing~\cite{VanderPlas_2018}. 
 
+\begin{figure}[H]
+    \includegraphics[scale=0.37]{figures/catalogue_examples.png}
+    \caption{} 
+    \label{fig:catalogue_examples}
+\end{figure}
 
-% \begin{figure}
-%     \includegraphics[scale=0.37]{figures/catalogue_examples.png}
-%     \caption{} 
-%     \label{fig:catalogue_examples}
-% \end{figure}
-
-% point back to §4.2 for the definitions instead of redefining the vector.
+For the seven regions analysed~\ref{fig:7regions} we found a total of 651 windows. Our main results include: landscape class is bounded by a transect but a single landscape class is not always identified with only RES data. Of the 11 catalogue entries, the median number still admissible per window is 2. The windows split is 402 degenerate, 135 resolved, 30 resolved-with-external, 84 out-of-catalogue.
+We validated that our hypothesis that No single statistic identifies class~\ref{fig:hypothesis_test}. 
+\begin{figure}[H]
+    \includegraphics[scale=1]{figures/hypothesis_test.png}
+    \caption{} 
+    \label{fig:hypothesis_test}
+\end{figure}
 
 % % EXTERNALS REPORTED NOW:
 
@@ -50,3 +55,45 @@
 % % Required by: DISSECTED
 % % Separates: the three possible origins of DISSECTED, and DISSECTED from RIFT
 % % Why ODSA can't measure it: needs independent geological context
+
+
+\section{Thesis Progress Summary}
+
+For this project we plan to submit a ``Thesis Including Published Works''.
+The thesis chapters will include: An introduction, the three journal articles (papers) as outlined in~\ref{aims}, and a synthesis of the outputs for each as a conclusion.
+The current status in the timeline~\ref{fig:timeline} for each these thesis elements is: 
+\begin{itemize}
+    \item\textbf{Introduction}: complete (pending additions for papers 2 and 3)
+    \item\textbf{Paper 1 — ODSA}: code workflow exists, paper writing started in September 2026 and is near complete.
+    \item\textbf{Paper 2 — Bedrock factory}: code workflow exists, paper writing has not started.
+    \item\textbf{Paper 3 — BedSAT: Antarctica}: code workflow does not exist, paper writing has not started.
+    \item\textbf{Conclusion}: writing has not started.
+\end{itemize}
+The anticipated progress in the next 12 months includes finalising the writing of \textbf{Paper 1 — ODSA}, and continuing with the next stages of \textbf{Paper 2 — Bedrock factory}. However, the next 12 months of this project will be interrupted for 8 months total by maternity leave as shown on the timeline~\ref{fig:timeline}. The study load will also potentially be reduced to part-time after maternity leave ends, which moves the pending milestones for this project. 
+
+\section{Resources}\label{resources}
+
+I require high performance computing resources (including compute and storage) from the National Computing Infrastructure (NCI). These resources are already available via a Flagship between NCI and the Monash-led Australian Research Council project Securing Antarctica’s Environmental Future (SAEF).\\
+\begin{itemize}
+    \item\textbf{HPC time} for ISSM forward models.
+    \item\textbf{GPU time} for PhysicsNeMo training (Forward model-ML and Inverse model-ML).
+    \item\textbf{Software}: Python, ISSM and NVIDIA PhysicsNeMo.
+\end{itemize}
+
+Already accessed for \textbf{Paper 1 — ODSA}:
+\begin{itemize}
+    \item\textbf{Data}: Bedmap1 to 3~\cite{Lythe_2001, Fretwell_2013, Pritchard_2025}, MEaSUREs velocity~\cite{Rignot_2017}, REMA~\cite{REMA}, and Ockenden data release~\cite{Ockenden_2025_data}.
+    \item\textbf{Software}: Python.
+\end{itemize}
+
+\section*{Data Management}
+
+Data will be published adhering to FAIR principles (Findable, Accessible, Interoperable, Reusable), ensuring transparency and accessibility. The final bed topography datasets will be published at the Australian Antarctic Data Centre (AADC) under an open source licence. All production model outputs will be published with unique DOIs at repositories aligned with the corresponding papers. Model outputs will be archived to tape at NCI using existing SAEF resources, as well as backed up to storage available through Monash MASSIVE M3 account aligned with project supervisor Dr McCormack. All papers published through this project will be open source, and tier 1 journals will be targeted.
+
+\section{Timeline}
+\begin{figure}[H]
+\includegraphics[width=1\linewidth]{figures/timeline.png}
+\caption{Project timeline. In the Project Objective section, the
+  colour of each bar shows which paper the task contributes to. The circle next to each item is an estimate of how complete it is: a quarter-filled circle means that the prototype of the code and workflow exists. A half-filled circle means that the task workflow is in progress. A three-quarter-filled circle means that the results are complete and a paper needs to be written up or the task needs to be officially approved by the panel. A filled circle means that the task is complete.}
+  \label{fig:timeline}
+\end{figure}

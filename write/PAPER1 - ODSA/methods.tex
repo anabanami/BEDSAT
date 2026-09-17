@@ -3,6 +3,42 @@
  1. Data
 % Detail the exact data flow, windowing choices, or tapering steps
 
+
+% The ODSA pipeline feeds on the REMA surface elevation model~\cite{REMA} ice thickness and the local ice-flow direction. The flow direction comes from the REMA surface gradient with a baseline of $10\times$ the ice thickness following the smoothing function recommendation from McCormack et al.~\cite{McCormack_2019}. ODSA also uses the $450~\mathrm{m}$ MEaSUREs v2 product~\cite{Rignot_2017}. At each point it gives the speed and the angle between the MEaSUREs velocity direction and the REMA flow direction. Allowing us to obtain the velocity uncertainties per window. A $50~\mathrm{km}$ sliding window at 50\% overlap is the unit in the spectral analysis of the bed RES data, (Not every window is 50 km. A segment shorter than 50 km is analysed as a single window the length of the segment).
+
+% The detrended bed profile for each Hann tapered window is analysed with a Lomb--Scargle periodogram (over 500 geomspace frequencies), which accommodates uneven along-track sample spacing~\cite{VanderPlas_2018}. 
+
+
+
+% % EXTERNALS REPORTED NOW:
+
+% % External: reflectivity
+% % Description (EXTERNAL, line 123): ice-water vs ice-sediment interface (specularity)
+% % Required by: BASIN
+% % Separates: water from sediment under a flat, soft, submerged bed
+% % Why ODSA can't measure it: needs raw radargram waveform amplitude
+% % ────────────────────────────────────────
+% % External: composition
+% % Description (EXTERNAL, line 123): gravity / magnetics (sediment vs smooth bedrock)
+% % Required by: BASIN-HIGH
+% % Separates: smooth hard bedrock from soft sediment
+% % Why ODSA can't measure it: needs airborne gravity or magnetics
+% % ────────────────────────────────────────
+% % External: flow_history
+% % Description (EXTERNAL, line 123): disrupted internal layers, dating (active vs relict)
+% % Required by: TRUNK-RELICT
+% % Separates: TRUNK-RELICT from BASIN
+% % Why ODSA can't measure it: needs disrupted internal layers or dating
+% % ────────────────────────────────────────
+% % External: origin
+% % Description (EXTERNAL, line 123): erosional vs structural provenance of the trough-ridge
+% % contrast
+% % Required by: DISSECTED
+% % Separates: the three possible origins of DISSECTED, and DISSECTED from RIFT
+% % Why ODSA can't measure it: needs independent geological context
+
+
+
   - All measurements are made on the Bedmap3 point data at the original sample positions~\cite{Pritchard_2025}, rather than on an interpolated grid. 
 
   - \texttt{processing\_flag}: migration status, uniform per CSV (reported only)
@@ -170,3 +206,5 @@
 
 
 ODSA measures bed statistics from radar data at the original sample positions, therefore the synthetic beds used to train BedSAT will be based on observed Antarctic bed properties rather than on interpolated grids. The continuous elements of the landscape vector provide the morphometric statistics that a synthetic bedrock generator can take as inputs to generate physically  informed beds at ice-sheet model resolution. Bed topography is expressed at the ice surface~\cite{Gudmundsson_2003, DeRydt_2013}. BedSAT will use ISSM ice flow simulations over these synthetic beds, resulting in a synthetic bedrock and resultant surface expression pair. BedSAT will learn bed-to-surface transfer from these synthetic pairs and invert it, so that satellite observations of the ice surface can be mapped back to bed topography at greater accuracy. 
+
+
