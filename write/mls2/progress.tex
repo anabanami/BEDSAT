@@ -16,16 +16,22 @@ The ODSA pipeline splits tracks into segments, cuts them into $50~\mathrm{km}$ w
 the RES data form an 11-element landscape vector (Tables~\ref{tab:axes} and~\ref{tab:descriptors}). Every vector classifier has a $\pm 2\sigma$ uncertainty envelope, so no axis is assumed to be exact. The vector is compared to a literature-based catalogue of 11 landscape archetypes. When a window matches more than one archetype, the pipeline names the axis responsible and the observable needed to break the tie (Table~\ref{tab:externals}). 
 
 \begin{figure}
-    \includegraphics[scale=0.37]{figures/catalogue_examples.png}
-    \caption{Each catalogue entry is paired with a measured window, showing which entries the four classifying axes isolate and which they leave degenerate. One row per landscape catalogue entry. Each row shows a window admissible for this entry, taken from the 7 regions tested. Admissibility does not claim that the archetype is correct. Left: the entry's cartoon exemplifying what that landscape may look like. Centre: the region's windows as 50 km along-track footprints in grey, and the example window in its archetype colour. The title gives the region and the window's unit ID. Right, first block: the entry's bound on each of the four classifying axes, the window's value with its envelope, and the classes admitted by that envelope. Admissibility is decided on the envelope, so the class of the value itself can fall outside the entry's bound. Right, second block: the window's measured values of the seven continuous descriptors. Rows with more than one admissible entry name the others. Externals named on a row are observables that ODSA cannot supply from RES data (Table~\ref{tab:externals}).} 
-    \label{fig:catalogue_examples}
+    \centering
+    \begin{minipage}[c]{0.79\textwidth}
+        \includegraphics[width=\linewidth]{figures/catalogue_examples.pdf}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.19\textwidth}
+        \captionsetup{justification=raggedright,singlelinecheck=false}
+        \caption{Each catalogue entry is paired with a measured window, showing which entries the four classifying axes isolate and which they leave degenerate. One row per landscape catalogue entry. Each row shows a window admissible for this entry, taken from the 7 regions tested (HD: Hercules Dome, GSM: Golicyna Subglacial Mountains, PPB: Pensacola Pole Basin, HA: Highland A, MSB: Maud Subglacial Basin, RSL: Recovery Subglacial Lakes and ASB-LR: Aurora Subglacial Basin (Ockenden et al.'s low-relief cells)). Admissibility does not claim that the archetype is correct. Left: the entry's cartoon exemplifying what that landscape may look like. Centre: the region's windows as 50 km along-track footprints in grey, and the example window in its archetype colour. The title gives the region and the window's unit ID. Right, first block: the entry's bound on each of the four classifying axes, the window's value with its envelope, and the classes admitted by that envelope. Admissibility is decided on the envelope, so the class of the value itself can fall outside the entry's bound. Right, second block: the window's measured values of the seven continuous descriptors. Rows with more than one admissible entry name the others. Externals named on a row are observables that ODSA cannot supply from RES data (Table~\ref{tab:externals}).} 
+        \label{fig:catalogue_examples}
+    \end{minipage}
 \end{figure}
 
 Fig.~\ref{fig:catalogue_examples} shows ODSA's catalogue applied to the seven regions (Fig.~\ref{fig:7regions}) , with each catalogue entry paired with an analysed window. We analysed a total of 651 windows. Our main results include: a transect bounds the landscape class but does not identify it with only RES data. Of the 11 catalogue entries, the median number still admissible per window is 2. The windows split into 402 degenerate, 135 resolved, 30 resolved-with-external, 84 out-of-catalogue. 
 In the case of our catalogue we found that a combination of our classifiers outperformed a single classifier in minimising the set of admissible landscape classes for the windows analysed (Fig.~\ref{fig:hypothesis_test}). The figure shows the best combination at each number of classifiers. Resolution peaks with $\beta$, relief and velocity (27\%). Adding elevation lowers it to 25\% and nearly doubles the out-of-catalogue rate,  from 7\% to 13\%, so elevation converts windows rather than resolving them.
 
 \begin{figure}
-    \includegraphics[scale=0.58]{figures/hypothesis_test.png}
+    \includegraphics[scale=0.3]{figures/hypothesis_test.pdf}
     \caption{Best axis combination at each size (each unit is a window). $\beta$ (B), relief (R), velocity (V), elevation (E). A set of one is a bound that excluded ten entries, not an identification.} 
     \label{fig:hypothesis_test}
 \end{figure}
@@ -33,7 +39,7 @@ In the case of our catalogue we found that a combination of our classifiers outp
 % We found that in our analysed dataset combining our classifiers distinguishes the low-relief class from  other three landscape classes published by Ockenden et al.~\cite{Ockenden_2026}. This is done mainly through bed elevation, but no combination of our classifiers separate the alpine and selective-erosion classes from one another (Fig.~\ref{fig:ockenden_matrix}).
 
 % \begin{figure}
-%     \includegraphics[scale=0.58]{figures/ockenden_combinations_matrix.png}
+%     \includegraphics[scale=0.58]{figures/ockenden_combinations_matrix.pdf}
 %     \caption{Separation of the Ockenden et al. landscape classes by each combination of the four classifying axes in our vector, over 650 analysed windows. Each column is one combination, and the black dots in the lower panel show the axes it uses. Each row in the upper panel is a pair of Ockenden et al. classes, and a blue square means that the classifier combination separates the two classes. The number above each column is the count of separated pairs. Two classes are separated when the vector of their median differences is at least 2 standard errors and at least 1 pooled standard deviation long, measured with the covariance of the combined axes. Classes with fewer than 10 windows (Alpine (subaerial)) are not tested.} 
 %     \label{fig:ockenden_matrix}
 % \end{figure}
@@ -73,7 +79,7 @@ Data will be published adhering to FAIR principles (Findable, Accessible, Intero
 
 \section{Timeline}
 \begin{figure}[H]
-\includegraphics[width=0.8\linewidth]{figures/timeline.png}
+\includegraphics[width=0.8\linewidth]{figures/timeline.pdf}
 \caption{Project timeline. In the Project Objective section, the
   colour of each bar shows which paper the task contributes to. The circle next to each item is an estimate of how complete it is: a quarter-filled circle means that the prototype of the code and workflow exists. A half-filled circle means that the task workflow is in progress. A three-quarter-filled circle means that the results are complete and a paper needs to be written up or the task needs to be officially approved by the panel. A filled circle means that the task is complete.}
   \label{fig:timeline}
