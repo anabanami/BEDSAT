@@ -12,56 +12,28 @@
 \section{Key research achieved (ODSA)}
 
 ODSA operates on the along-track picks published with Bedmap3 instead of a gridded product, which allows us to measure the survey data directly and avoid the interpolation issues described in Ch.~\ref{review}. The tracks used are visible in Fig.~\ref{fig:Bedmap+Ockenden_map}. 
-The ODSA pipeline splits tracks into segments, cuts them into $50~\mathrm{km}$ windows (when possible) with a $25\mathrm{km}$ step, applies a Hann taper, and fits the spectrum over $250~\mathrm{m}$ to $50~\mathrm{km}$ using a Lomb--Scargle periodogram. The morphometric statistics obtained from the RES data is checked against an 11-element landscape vector~\ref{tab:axes, tab:descriptors}. Every vector classifier has a $\pm 2\sigma$ uncertainty envelope, so no axis is assumed to be exact. The resultant vector is compared to a literature-based catalogue of 11 landscape archetypes. ODSA reports when a window matches more than one archetype, the pipeline names the axis responsible and the observable needed to break the tie.
+The ODSA pipeline splits tracks into segments, cuts them into $50~\mathrm{km}$ windows (when possible) with a $25\mathrm{km}$ step, applies a Hann taper, and fits the spectrum over $250~\mathrm{m}$ to $50~\mathrm{km}$ using a Lomb--Scargle periodogram. The morphometric statistics obtained from the RES data is checked against an 11-element landscape vector (Tables~\ref{tab:axes}and~\ref{tab:descriptors}. Every vector classifier has a $\pm 2\sigma$ uncertainty envelope, so no axis is assumed to be exact. The resultant vector is compared to a literature-based catalogue of 11 landscape archetypes. ODSA reports when a window matches more than one archetype, the pipeline names the axis responsible and the observable needed to break the tie.
 
-
-\begin{figure}[H]
+\begin{figure}
     \includegraphics[scale=0.37]{figures/catalogue_examples.png}
-    \caption{} 
+    \caption{Each catalogue entry is paired with a measured window, showing which entries the four classifying axes isolate and which they leave degenerate. One row per landscape catalogue entry. Each row shows a window admissible for this entry, taken from the 7 regions tested. Admissibility does not claim that the archetype is correct. Left: the entry's cartoon exemplifying what that landscape may look like. Centre: the region's windows as 50 km along-track footprints in grey, and the example window in its archetype colour. The title gives the region and the window's unit ID. Right, first block: the entry's bound on each of the four classifying axes, the window's value with its envelope, and the classes admitted by that envelope. Admissibility is decided on the envelope, so the class of the value itself can fall outside the entry's bound. Right, second block: the window's measured values of the seven continuous descriptors. Rows with more than one admissible entry name the others. Externals named on a row are observables that ODSA cannot supply from RES data (Table~\ref{tab:externals}).} 
     \label{fig:catalogue_examples}
 \end{figure}
 
-For the seven regions analysed~\ref{fig:7regions} we found a total of 651 windows. Our main results include: landscape class is bounded by a transect but a single landscape class is not always identified with only RES data. Of the 11 catalogue entries, the median number still admissible per window is 2. The windows split is 402 degenerate, 135 resolved, 30 resolved-with-external, 84 out-of-catalogue.
-We validated that our hypothesis that No single statistic identifies class~\ref{fig:hypothesis_test}. 
-\begin{figure}[H]
-    \includegraphics[scale=1]{figures/hypothesis_test.png}
-    \caption{} 
+For the seven regions analysed (Fig.~\ref{fig:7regions}) we found a total of 651 windows. Our main results include: landscape class is bounded by a transect but a single landscape class is not always identified with only RES data. Of the 11 catalogue entries, the median number still admissible per window is 2. The windows split is 402 degenerate, 135 resolved, 30 resolved-with-external, 84 out-of-catalogue.
+We validated that our hypothesis that No single statistic identifies class (Fig.~\ref{fig:hypothesis_test}). 
+
+\begin{figure}
+    \includegraphics[scale=0.58]{figures/hypothesis_test.png}
+    \caption{Best axis combination at each size (window units). $\beta$ (B), relief (R), velocity (V), elevation (E). A set of one is a bound that excluded ten entries, not an identification.} 
     \label{fig:hypothesis_test}
 \end{figure}
-
-% % EXTERNALS REPORTED NOW:
-
-% % External: reflectivity
-% % Description (EXTERNAL, line 123): ice-water vs ice-sediment interface (specularity)
-% % Required by: BASIN
-% % Separates: water from sediment under a flat, soft, submerged bed
-% % Why ODSA can't measure it: needs raw radargram waveform amplitude
-% % ────────────────────────────────────────
-% % External: composition
-% % Description (EXTERNAL, line 123): gravity / magnetics (sediment vs smooth bedrock)
-% % Required by: BASIN-HIGH
-% % Separates: smooth hard bedrock from soft sediment
-% % Why ODSA can't measure it: needs airborne gravity or magnetics
-% % ────────────────────────────────────────
-% % External: flow_history
-% % Description (EXTERNAL, line 123): disrupted internal layers, dating (active vs relict)
-% % Required by: TRUNK-RELICT
-% % Separates: TRUNK-RELICT from BASIN
-% % Why ODSA can't measure it: needs disrupted internal layers or dating
-% % ────────────────────────────────────────
-% % External: origin
-% % Description (EXTERNAL, line 123): erosional vs structural provenance of the trough-ridge
-% % contrast
-% % Required by: DISSECTED
-% % Separates: the three possible origins of DISSECTED, and DISSECTED from RIFT
-% % Why ODSA can't measure it: needs independent geological context
-
 
 \section{Thesis Progress Summary}
 
 For this project we plan to submit a ``Thesis Including Published Works''.
-The thesis chapters will include: An introduction, the three journal articles (papers) as outlined in~\ref{aims}, and a synthesis of the outputs for each as a conclusion.
-The current status in the timeline~\ref{fig:timeline} for each these thesis elements is: 
+The thesis chapters will include: An introduction, the three journal articles (papers) as outlined in Ch.~\ref{aims}, and a synthesis of the outputs for each as a conclusion.
+The current status in the Project Timeline~\ref{fig:timeline} for each these thesis elements is: 
 \begin{itemize}
     \item\textbf{Introduction}: complete (pending additions for papers 2 and 3)
     \item\textbf{Paper 1 — ODSA}: code workflow exists, paper writing started in September 2026 and is near complete.
@@ -69,7 +41,7 @@ The current status in the timeline~\ref{fig:timeline} for each these thesis elem
     \item\textbf{Paper 3 — BedSAT: Antarctica}: code workflow does not exist, paper writing has not started.
     \item\textbf{Conclusion}: writing has not started.
 \end{itemize}
-The anticipated progress in the next 12 months includes finalising the writing of \textbf{Paper 1 — ODSA}, and continuing with the next stages of \textbf{Paper 2 — Bedrock factory}. However, the next 12 months of this project will be interrupted for 8 months total by maternity leave as shown on the timeline~\ref{fig:timeline}. The study load will also potentially be reduced to part-time after maternity leave ends, which moves the pending milestones for this project. 
+The anticipated progress in the next 12 months includes finalising the writing of \textbf{Paper 1 — ODSA}, and continuing with the next stages of \textbf{Paper 2 — Bedrock factory}. However, the next 12 months of this project will be interrupted for 8 months total by maternity leave as shown on the Project Timeline~\ref{fig:timeline}. The study load will also potentially be reduced to part-time after maternity leave ends, which moves the pending milestones for this project. 
 
 \section{Resources}\label{resources}
 
@@ -92,7 +64,7 @@ Data will be published adhering to FAIR principles (Findable, Accessible, Intero
 
 \section{Timeline}
 \begin{figure}[H]
-\includegraphics[width=1\linewidth]{figures/timeline.png}
+\includegraphics[width=0.8\linewidth]{figures/timeline.png}
 \caption{Project timeline. In the Project Objective section, the
   colour of each bar shows which paper the task contributes to. The circle next to each item is an estimate of how complete it is: a quarter-filled circle means that the prototype of the code and workflow exists. A half-filled circle means that the task workflow is in progress. A three-quarter-filled circle means that the results are complete and a paper needs to be written up or the task needs to be officially approved by the panel. A filled circle means that the task is complete.}
   \label{fig:timeline}
