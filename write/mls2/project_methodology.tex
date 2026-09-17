@@ -13,39 +13,39 @@ The forward model of ice dynamics will be configured for the chosen study site, 
 The primary observational inputs for the model will be satellite-derived surface velocity, surface elevation~\cite{Rignot_2017, REMA} and ice thickness~\cite{Young_2011, ICECAP}. A critical pre-processing step will involve filtering high-frequency noise (e.g., aeolian features) from the surface data to ensure that the glaciological signal from the underlying bed is isolated.
 
 \item{\textbf{Inverse Modelling to Estimate Bed Topography}}:
-The core of the BedSAT is the inversion. BedSAT will iteratively adjust an initial estimate of the bed topography, aiming to minimize the mismatch between the forward model's simulated surface velocities and the satellite-observed velocities.
+The core of BedSAT is the inversion. BedSAT will iteratively adjust an initial estimate of the bed topography, aiming to minimise the mismatch between the forward model's simulated surface velocities and the satellite-observed velocities.
 
 \item{\textbf{Validation and Sensitivity Analysis}}:
-BedSAT's performance will be rigorously evaluated. First, the inverted bed topography will be directly validated against the "ground-truth" radar-derived bed maps for the study region. Second, a series of sensitivity analyses will be conducted to quantify the model's robustness. These tests will systematically alter key assumptions, such as the rheological parameters for different regions, to determine their impact on the final inverted topography and to establish the uncertainty bounds of the framework's results.
+BedSAT's performance will be rigorously evaluated. First, the inverted bed topography will be directly validated against the ``ground-truth'' radar-derived bed maps for the study region. Second, a series of sensitivity analyses will be conducted to quantify the model's robustness. These tests will systematically alter key assumptions, such as the rheological parameters for different regions, to determine their impact on the final inverted topography and to establish the uncertainty bounds of the framework's results.
 \end{enumerate}
 
 \section{ODSA's Landscape Classification Vector}\label{vector}
 
-To inform the synthetic bedrock database that will be used in the training, we need bed morphometric statistics to describe a landscape class. We apply ODSA to seven reference regions as proof of concept (see Fig.~\ref{fig:7regions}), quantifying how well the flight lines sample their survey footprint.
+To inform the synthetic bedrock database that will be used in the training, we need bed morphometric statistics to describe a landscape class. We apply ODSA to seven reference regions as proof of concept (Fig.~\ref{fig:7regions}), quantifying how well the flight lines sample their survey footprint.
 
 \begin{figure}
     \includegraphics[scale=0.58]{figures/antarctica_tracks_overview.png}
-    \caption{The seven RES survey regions we analysed with ODSA. Five regions use the PS71 boxes from~\cite{Ockenden_2025_data}. The Aurora low-relief region is restricted to the low-relief cells of the Ockenden classification, and the Pensacola Pole Basin region uses a box that we defined.} 
+    \caption{The seven RES survey regions we analysed with ODSA. Five regions use the PS71 boxes from~\cite{Ockenden_2025_data} directly, while the Pensacola Pole Basin region and the Aurora low-relief region (restricted to low-relief cells of the Ockenden classification) use boxes that we defined.} 
     \label{fig:7regions}
 \end{figure}
 
-Our proposal is that to bound subglacial landscape class it is necessary to have multiple measured statistics that characterise different landscape properties. ODSA's landscape vector carries 11 elements measured per window. Four classify and seven do not. Each classifier carries an uncertainty envelope of two standard deviations at either side of the measured value, taken from the spectral fit covariance in the case of the roughness slope ($\beta$) and from measurement error budgets for relief, velocity and elevation. The landscape vector provides the morphometric statistics that the Bedrock Factory suite will take as inputs to generate synthetic beds at ice-sheet model resolution.
+Our proposal is that to bound subglacial landscape class it is necessary to have multiple measured statistics that characterise different landscape properties. ODSA's landscape vector carries 11 elements measured per window. Four classify and seven do not. Each classifier carries an uncertainty envelope of two standard deviations on either side of the measured value, taken from the spectral fit covariance in the case of the roughness slope ($\beta$) and from measurement error budgets for relief, velocity and elevation.
 
 \begin{table}[H]
 \centering
-\caption{Classification axes of the landscape classification vector. Across all four, the framework classifies each axis on value $\pm2\sigma$, so a window can be admissible in more than one band}
+\caption{Classification axes of the landscape classification vector. Across all four, the framework classifies each axis on value $\pm2\sigma$, so a window can be admissible in more than one band.}
 \label{tab:axes}
 \begin{tabularx}{\textwidth}{p{4.0cm} X}
 \toprule
 \textbf{Variable} & \textbf{Description/Thresholds} \\
 \midrule
 \textbf{Classifiers} 
-  $\beta$ & Slope of the bed power spectrum over the fitted band. A measure of bed roughness shape: low $\beta$ distributes power to the short wavelengths; high $\beta$ concentrates it at long wavelengths. The fit band spans $250~\mathrm{m}$ to $50~\mathrm{km}$. The class thresholds are: chaotic $< 1.5$, hard $1.5$ to $2.0$, transitional $2.0$ to $2.5$ and soft $\geq2.5$. The $2.0$ and $2.5$ breaks follow the Hurst-exponent splits of~\cite{Jordan_2017}. The $1.5$ break is an operational choice. Beds in the hard class are interpreted as scoured crystalline terrain, like in the areal-scouring landscapes of~\cite{Sugden_1978}. \\
+  $\beta$ & Slope of the bed power spectrum over the fitted band (the first of two degrees of freedom obtained by the fit: $\beta$ and \texttt{A\_1km}). A measure of bed roughness shape: low $\beta$ distributes power to the short wavelengths; high $\beta$ concentrates it at long wavelengths. The fit band spans $250~\mathrm{m}$ to $50~\mathrm{km}$. The class thresholds are: chaotic $< 1.5$, hard $1.5$ to $2.0$, transitional $2.0$ to $2.5$ and soft $\geq2.5$. The $2.0$ and $2.5$ breaks follow the Hurst-exponent splits of~\cite{Jordan_2017}. The $1.5$ break is an operational choice. Beds in the hard class are interpreted as scoured crystalline terrain, like in the areal-scouring landscapes of~\cite{Sugden_1978}. \\
   \addlinespace[0.5em]
-  \texttt{relief\_m} & Elevation range within a window, calculated as $\max\mathrm{(bed)} - \min\mathrm{(bed)}$ over the raw 50 km profile, in metres. It gives the amplitude of the largest structure a window contains. Regional slope enters the range directly. Relief class thresholds are set to flat: $<350~\mathrm{m}$; mountainous: $\geq~800~\mathrm{m}$; while values in between these are labelled as subdued. these are set based on the median relief for the tested regions.\\
+  \texttt{relief\_m} & Elevation range within a window, calculated as $\max\mathrm{(bed)} - \min\mathrm{(bed)}$ over the raw 50 km profile, in metres. It gives the amplitude of the largest structure a window contains. Regional slope enters the range directly. Relief class thresholds are set to flat: $<350~\mathrm{m}$; mountainous: $\geq~800~\mathrm{m}$; while values in between these are labelled as subdued. These are set based on the median relief for the tested regions.\\
   \addlinespace[0.5em]
   \texttt{measures\_speed\_mean} & Mean MEaSUREs InSAR surface speed at the window's track points, sampled over the same points that enter the spectral fit. Bands are \texttt{very\_low} ($<5$), \texttt{low} ($5$ to $<10$), \texttt{moderate} ($10$ to $<50$) and \texttt{fast} ($\geq50$) all in m/yr and set operationally. Antarctic surface speed is bimodal, with a slow
-  mode at $\approx5~mathrm{m/yr}$ and a fast mode at $250~\mathrm{m/yr}$, and measured speed departs from internal deformation above about $15~\mathrm{m/yr}$~\cite{Rignot_2017}. Each window carries a sampled error from the \texttt{ERRX/ERRY} fields of that product.\\
+  mode at $4$ to $5~\mathrm{m/yr}$ and a fast mode at $250~\mathrm{m/yr}$, and measured speed departs from internal deformation above about $15~\mathrm{m/yr}$~\cite{Rignot_2011}. Each window carries a sampled error from the \texttt{ERRX/ERRY} fields of that product~\cite{Rignot_2017}.\\
   \addlinespace[0.5em]
   \texttt{bed\_elev\_mean} & The mean bed elevation within a window, in metres above present-day sea level. Class thresholds are set to submerged: $<0~\mathrm{m}$; elevated at $\geq~1000~\mathrm{m}$, and emerged for values in between. Motivated by~\cite{Siegert_2004, Rippin_2014, Frederick_2016}. \\
 \bottomrule
@@ -54,21 +54,21 @@ Our proposal is that to bound subglacial landscape class it is necessary to have
 
 \begin{table}
 \centering
-\caption{Descriptors of the landscape classification vector, these are continuous variables with no breaks.}
+\caption{Descriptors of the landscape classification vector. These are continuous variables with no breaks.}
 \label{tab:descriptors}
 \begin{tabularx}{\textwidth}{p{4.0cm} X}
 \toprule
 \textbf{Variable} & \textbf{Description} \\
 \midrule
-  \texttt{A\_1km} & $\log_{10}$ of bed power spectrum at a $1~\mathrm{km}$ reference wavelength. Evaluated from the fit as $\mathrm{psd\_intercept} + 3\beta$. It gives magnitude of the roughness in in $\log_{10}(\mathrm{m}^3)$ and fixes the level inside the fitted wavelength band. It carries a propagated uncertainty that includes the slope and intercept covariance. \\
+  \texttt{A\_1km} & $\log_{10}$ of bed power spectrum at a $1~\mathrm{km}$ reference wavelength evaluated from the fit. It gives the magnitude of the roughness in $\log_{10}(\mathrm{m}^3)$ and fixes the level inside the fitted wavelength band. It carries a propagated uncertainty that includes the slope and intercept covariance. The spectral fit returns two degrees of freedom ($\beta$ and \texttt{A\_1km}) following the conclusion established by~\cite{Li_2010, Jordan_2017, Rippin_2014}. \\
   \addlinespace[0.5em]
-  \texttt{rms\_roughness} & Root mean square height~\cite{Sheppard_1995} of the window's detrended elevation residuals, in metres. It gives the amplitude of the topography with the regional ramp removed, which distinguishes it from relief. It depends on profile length, and is retained for comparability with the space-domain roughness literature rather than as a separate degree of freedom. \\
+  \texttt{rms\_roughness} & Root mean square height~\cite{Shepard_1995} of the window's detrended elevation residuals, in metres. It gives the amplitude of the topography with the regional ramp removed, which distinguishes it from relief. It depends on profile length, and is retained for comparability with the space-domain roughness literature rather than as a separate degree of freedom. \\
   \addlinespace[0.5em]
-  $\xi$ & Integral of the bed power spectrum over the bedform band spanned from $300~\mathrm{m}$ to $1200~\mathrm{m}$, in $\mathrm{m^2}$, it is the numerator of $\eta$~\cite{Li_2010}. Supported by~\cite{King_2007, Spagnolo_2017}. \\
+  $\xi$ & Integral of the bed power spectrum over the bedform band from $300~\mathrm{m}$ to $1200~\mathrm{m}$, in $\mathrm{m^2}$. $\xi$ is the numerator of $\eta$~\cite{Li_2010}. Supported by~\cite{King_2007, Spagnolo_2017}. \\
   \addlinespace[0.5em]
-  $\eta$ & Characteristic wavelength for the window, in metres, following~\cite{Li_2010}. It square root of the weighted harmonic mean of the square of the wavelength at each frequency in the band spanned from $300~\mathrm{m}$ to $1200~\mathrm{m}$ with the spectrum as the weight. \\
+  $\eta$ & Characteristic wavelength for the window, in metres, following~\cite{Li_2010}. It is the square root of the weighted harmonic mean of the square of the wavelength at each frequency in the band from $300~\mathrm{m}$ to $1200~\mathrm{m}$ with the spectrum as the weight. \\
   \addlinespace[0.5em]
-  \texttt{hill\_count} & Number of distinct local maxima in the window's detrended bed profile, similar to the bumpiness metric by \cite{Ockenden_2026} but in transect form (1D). A point counts if it is the maximum of a $5~\mathrm{km}$ box centred on it and the box relief exceeds $20~\mathrm{m}$; adjacent flagged points count once and maxima touching a window edge are dropped. Two hills must be at least $2.5~\mathrm{km}$ apart, so the count cannot exceed $10$ per $50~\mathrm{km}$ window. \\
+  \texttt{hill\_count} & Number of distinct local maxima in the window's detrended bed profile, similar to the bumpiness metric by \cite{Ockenden_2026} but in transect form (1D). A point counts if it is the maximum of a $5~\mathrm{km}$ box centred on it and the box relief exceeds $20~\mathrm{m}$; adjacent flagged points count once and maxima touching a window edge are dropped. Two hills must be at least $2.5~\mathrm{km}$ apart, so the count cannot exceed $20$ per $50~\mathrm{km}$ window. \\
   \addlinespace[0.5em]
   \texttt{skewness} & Third standardised moment of the window's detrended, untapered bed elevation residuals (bias-corrected). Positive values imply narrow highs on a broad low base, negative values mean narrow lows cut into a broad high surface, following the qualitative hills-against-troughs distinction in~\cite{Sugden_1978}. It is the only phase-asymmetry information in the vector.\\
   \addlinespace[0.5em]
@@ -77,3 +77,4 @@ Our proposal is that to bound subglacial landscape class it is necessary to have
 \end{tabularx}
 \end{table}
 
+  
