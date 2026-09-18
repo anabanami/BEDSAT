@@ -27,22 +27,22 @@ the RES data form an 11-element landscape vector (Tables~\ref{tab:axes} and~\ref
     \end{minipage}
 \end{figure}
 
-Fig.~\ref{fig:catalogue_examples} shows ODSA's catalogue applied to the seven regions (Fig.~\ref{fig:7regions}) , with each catalogue entry paired with an analysed window. We analysed a total of 651 windows. Our main results include: a transect bounds the landscape class but does not identify it with only RES data. Of the 11 catalogue entries, the median number still admissible per window is 2. The windows split into 402 degenerate, 135 resolved, 30 resolved-with-external, 84 out-of-catalogue. 
-In the case of our catalogue we found that a combination of our classifiers outperformed a single classifier in minimising the set of admissible landscape classes for the windows analysed (Fig.~\ref{fig:hypothesis_test}). The figure shows the best combination at each number of classifiers. Resolution peaks with $\beta$, relief and velocity (27\%). Adding elevation lowers it to 25\% and nearly doubles the out-of-catalogue rate,  from 7\% to 13\%, so elevation converts windows rather than resolving them.
-
+Fig.~\ref{fig:catalogue_examples} shows ODSA's catalogue applied to the seven regions (Fig.~\ref{fig:7regions}), with each catalogue entry paired with an analysed window. We analysed a total of 651 windows, 650 of which fall in a classified (non-dune) cell. Our main results include: a transect bounds the landscape class but does not identify it with only RES data. Of the 11 catalogue entries, the median number still admissible per window is 2. The windows split into 402 degenerate, 135 resolved, 84 out-of-catalogue and 30 resolved-with-external.
+In the case of our catalogue we found that a combination of our classifiers narrowed down the set of admissible landscape classes more than any single classifier for the windows analysed (Fig.~\ref{fig:hypothesis_test}).  The figure shows the best combination at each number of classifiers. Resolution peaks with $\beta$, relief and velocity (27\%). Adding elevation lowers it to 25\% and nearly doubles the out-of-catalogue rate, from 7\% to 13\%, so elevation converts windows rather than resolving them. However, elevation is the classifier that separates the most classes of the Ockenden et al.~\cite{Ockenden_2026} classification (Fig.~\ref{fig:ockenden_matrix}). Their classification is constructed from gridded bed elevation, so this is expected. Yet we found that no combination of our classifiers separates their alpine and selective-erosion classes from one another.
 \begin{figure}
-    \includegraphics[scale=0.3]{figures/hypothesis_test.pdf}
+    \includegraphics[scale=0.7]{figures/hypothesis_test.pdf}
     \caption{Best axis combination at each size (each unit is a window). $\beta$ (B), relief (R), velocity (V), elevation (E). A set of one is a bound that excluded ten entries, not an identification.} 
     \label{fig:hypothesis_test}
 \end{figure}
 
-% We found that in our analysed dataset combining our classifiers distinguishes the low-relief class from  other three landscape classes published by Ockenden et al.~\cite{Ockenden_2026}. This is done mainly through bed elevation, but no combination of our classifiers separate the alpine and selective-erosion classes from one another (Fig.~\ref{fig:ockenden_matrix}).
+\begin{figure}
+    \includegraphics[scale=0.48]{figures/ockenden_combinations_matrix.pdf}
+    \caption{Separation of the Ockenden et al.~\cite{Ockenden_2026} landscape classes by combinations of vector elements, over 650 analysed (non-dune) windows. Each column is one combination of the four classifying axes, the 7 descriptors together or all 11 elements together, and the black dots in the lower panel show the elements it uses. Each row in the upper panel is a pair of Ockenden et al. classes. Each window is 50 km and so is her cell, so a window can straddle two Ockenden cells of different class: the test runs over all 650 co-located windows and again over the 421 windows whose second-nearest cell carries the same class as the nearest. Square colour gives the two outcomes, and the numbers above each column are the counts of separated pairs in the two sets. Two classes are separated when the vector of their median differences is at least 1 pooled standard deviation long and at least a threshold number of standard errors long, both measured with the covariance of the combined elements. Classes with fewer than 10 windows (Alpine (subaerial)) are not tested.} 
+    \label{fig:ockenden_matrix}
+\end{figure}
 
-% \begin{figure}
-%     \includegraphics[scale=0.58]{figures/ockenden_combinations_matrix.pdf}
-%     \caption{Separation of the Ockenden et al. landscape classes by each combination of the four classifying axes in our vector, over 650 analysed windows. Each column is one combination, and the black dots in the lower panel show the axes it uses. Each row in the upper panel is a pair of Ockenden et al. classes, and a blue square means that the classifier combination separates the two classes. The number above each column is the count of separated pairs. Two classes are separated when the vector of their median differences is at least 2 standard errors and at least 1 pooled standard deviation long, measured with the covariance of the combined axes. Classes with fewer than 10 windows (Alpine (subaerial)) are not tested.} 
-%     \label{fig:ockenden_matrix}
-% \end{figure}
+The classes reported by Ockenden et al.~\cite{Ockenden_2026} are partly defined by roughness metrics (rms slope, hill counts, Fourier fractal dimension), yet over all valid 650 windows our roughness measures ($\beta$, relief, and the descriptors) separate them barely at all. 
+One of our windows can straddle two different class cells. When we restricted to the 421 windows whose second-nearest cell carries the same class as the nearest, the seven descriptors together separate three of the six class pairs, including Alpine (subglacial) from Selective erosion (relict). The differing outcomes for roughness may be due to their classes resulting from an inverted, interpolated 2D grid (space-domain), while ours result from spectral measurements from 1D picks along track. The two roughness descriptions of the same ground therefore disagree, which is consistent with a gridded product not carrying the texture that a transect measures.
 
 \section{Thesis Progress Summary}
 

@@ -26,7 +26,7 @@ Despite the success of these approaches, their practical application has been li
 With Physics-Informed Machine Learning (Physics-ML), we can solve the computational bottleneck that has forced previous methods to rely on unrealistic simplifications. By leveraging NVIDIA PhysicsNeMo, a framework designed to blend governing physics (PDEs) with training data~\cite{NVIDIA_NeMo_2025}, BedSAT can learn the non-linear mapping between surface expressions and bed topography without linearising the physics. This approach would transform what was previously computationally intractable into a fast, accurate inverse solver. Through an iterative process where initially inverted bed topography is integrated into forward models for progressive refinement, BedSAT will deliver physically consistent reconstructions validated against independent datasets.
 
 \begin{figure}
-    \includegraphics[scale=0.2]{figures/bedmap123_on_ockenden.pdf}
+    \includegraphics[scale=0.6]{figures/bedmap123_on_ockenden.pdf}
     \caption{Bedmap1, Bedmap2 and Bedmap3 along-track survey points (black) over the continental landscape classification map by Ockenden et al.~\cite{Ockenden_2026} (coloured cells, cells masked as invalid data (dunes) are drawn white). We reproduce the classification from the published metric grids~\cite{Ockenden_2025_data} on 50~km cells.
     The point counts in the legend show the number of subsampled plotted points rather than published picks. ODSA operates on these along-track data, so the figure shows the sampling available to us across a continental landscape classification.} 
     \label{fig:Bedmap+Ockenden_map}
