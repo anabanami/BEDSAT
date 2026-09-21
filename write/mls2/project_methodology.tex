@@ -24,12 +24,12 @@ BedSAT's performance will be rigorously evaluated. First, the inverted bed topog
 To inform the synthetic bedrock database that will be used in the training, we need bed morphometric statistics to describe a landscape class. We apply ODSA to seven reference regions as proof of concept (Fig.~\ref{fig:7regions}), quantifying how well the flight lines sample their survey footprint.
 
 \begin{figure}
-    \includegraphics[scale=0.2]{figures/antarctica_tracks_overview.pdf}
+    \includegraphics[scale=0.5]{figures/antarctica_tracks_overview.pdf}
     \caption{The seven RES survey regions we analysed with ODSA. Five regions use the PS71 boxes from~\cite{Ockenden_2025_data} directly, while the Pensacola Pole Basin region and the Aurora low-relief region use boxes that we defined, with the Aurora low-relief region restricted to cells selected as low-relief from the published metric grids of~\cite{Ockenden_2025_data}.} 
     \label{fig:7regions}
 \end{figure}
 
-Our proposal is that to bound subglacial landscape class it is necessary to have multiple measured statistics that characterise different landscape properties. ODSA's landscape vector carries 11 elements measured per window. Four classify and seven do not. Each classifier carries an uncertainty envelope of two standard deviations on either side of the measured value, taken from the spectral fit covariance in the case of the roughness slope ($\beta$) and from measurement error budgets for relief, velocity and elevation.
+Our proposal is that to bound subglacial landscape class it is necessary to have multiple measured statistics that characterise different landscape properties. Each classifier carries a $\pm2\sigma$ envelope, from the spectral fit covariance for $\beta$ and from measurement error budgets for relief, velocity and elevation. A window is admissible for an entry if its envelope overlaps the entry's bounds, even when the central value lies outside them.
 
 \begin{table}[H]
 \centering
@@ -40,14 +40,14 @@ Our proposal is that to bound subglacial landscape class it is necessary to have
 \textbf{Variable} & \textbf{Description/Thresholds} \\
 \midrule
 \textbf{Classifiers} 
-  $\beta$ & Slope of the bed power spectrum over the fitted band (the first of two degrees of freedom obtained by the fit: $\beta$ and \texttt{A\_1km}). A measure of bed roughness shape: low $\beta$ distributes power to the short wavelengths; high $\beta$ concentrates it at long wavelengths. The fit band spans $250~\mathrm{m}$ to $50~\mathrm{km}$. The class thresholds are: chaotic $< 1.5$, hard $1.5$ to $2.0$, transitional $2.0$ to $2.5$ and soft $\geq2.5$. The $2.0$ and $2.5$ breaks follow the Hurst-exponent splits of~\cite{Jordan_2017}. The $1.5$ break is an operational choice. Beds in the hard class are interpreted as scoured crystalline terrain, like in the areal-scouring landscapes of~\cite{Sugden_1978}. \\
+  $\beta$ & Slope of the bed power spectrum over the fitted band (the first of two degrees of freedom obtained by the fit: $\beta$ and \texttt{A\_1km}). A measure of bed roughness shape: low $\beta$ distributes power to the short wavelengths; high $\beta$ concentrates it at long wavelengths. The fit band spans $250~\mathrm{m}$ to $50~\mathrm{km}$. The classes are: chaotic $< 1.5$, hard $1.5$ to $2.0$, transitional $2.0$ to $2.5$ and soft $\geq2.5$. The $2.0$ and $2.5$ breaks follow the Hurst-exponent splits of~\cite{Jordan_2017}. The $1.5$ break is an operational choice. Beds in the hard class are interpreted as scoured crystalline terrain, like in the areal-scouring landscapes of~\cite{Sugden_1978}. \\
   \addlinespace[0.5em]
-  \texttt{relief\_m} & Elevation range within a window, calculated as $\max\mathrm{(bed)} - \min\mathrm{(bed)}$ over the raw 50 km profile, in metres. It gives the amplitude of the largest structure a window contains. Regional slope enters the range directly. Relief class thresholds are set to flat: $<350~\mathrm{m}$; mountainous: $\geq~800~\mathrm{m}$; while values in between these are labelled as subdued. These are set based on the median relief for the tested regions.\\
+  \texttt{Relief} & Elevation range within a window, calculated as $\max\mathrm{(bed)} - \min\mathrm{(bed)}$ over the raw 50 km profile, in metres. It gives the amplitude of the largest structure a window contains. Regional slope enters the range directly. Relief classes are flat: $<350~\mathrm{m}$; mountainous: $\geq~800~\mathrm{m}$; while values in between these are labelled as subdued. These are set based on the median relief for the tested regions.\\
   \addlinespace[0.5em]
-  \texttt{measures\_speed\_mean} & Mean MEaSUREs InSAR surface speed at the window's track points, sampled over the same points that enter the spectral fit. Bands are \texttt{very\_low} ($<5$), \texttt{low} ($5$ to $<10$), \texttt{moderate} ($10$ to $<50$) and \texttt{fast} ($\geq50$) all in m/yr and set operationally. Antarctic surface speed is bimodal, with a slow
+  \texttt{MEaSUREs speed} & Mean MEaSUREs InSAR surface speed at the window's track points, sampled over the same points that enter the spectral fit. Bands are \texttt{very\_low} ($<5$), \texttt{low} ($5$ to $<10$), \texttt{moderate} ($10$ to $<50$) and \texttt{fast} ($\geq50$) all in m/yr and set operationally. Antarctic surface speed is bimodal, with a slow
   mode at $4$ to $5~\mathrm{m/yr}$ and a fast mode at $250~\mathrm{m/yr}$, and measured speed departs from internal deformation above about $15~\mathrm{m/yr}$~\cite{Rignot_2011}. Each window carries a sampled error from the \texttt{ERRX/ERRY} fields of that product~\cite{Rignot_2017}.\\
   \addlinespace[0.5em]
-  \texttt{bed\_elev\_mean} & The mean bed elevation within a window, in metres above present-day sea level. Class thresholds are set to submerged: $<0~\mathrm{m}$; elevated at $\geq~1000~\mathrm{m}$, and emerged for values in between. Motivated by~\cite{Siegert_2004, Rippin_2014, Frederick_2016}. \\
+  \texttt{Elevation} & The mean bed elevation within a window, in metres above present-day sea level. Classes are submerged: $<0~\mathrm{m}$; elevated at $\geq~1000~\mathrm{m}$, and emerged for values in between. Motivated by~\cite{Siegert_2004, Rippin_2014, Frederick_2016}. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -62,24 +62,24 @@ Our proposal is that to bound subglacial landscape class it is necessary to have
 \midrule
   \texttt{A\_1km} & $\log_{10}$ of bed power spectrum at a $1~\mathrm{km}$ reference wavelength evaluated from the fit. It gives the magnitude of the roughness in $\log_{10}(\mathrm{m}^3)$ and fixes the level inside the fitted wavelength band. It carries a propagated uncertainty that includes the slope and intercept covariance. The spectral fit returns two degrees of freedom ($\beta$ and \texttt{A\_1km}) following the conclusion established by~\cite{Li_2010, Jordan_2017, Rippin_2014}. \\
   \addlinespace[0.5em]
-  \texttt{rms\_roughness} & Root mean square height~\cite{Shepard_1995} of the window's detrended elevation residuals, in metres. It gives the amplitude of the topography with the regional ramp removed, which distinguishes it from relief. It depends on profile length, and is retained for comparability with the space-domain roughness literature rather than as a separate degree of freedom. \\
+  \texttt{RMS Roughness} & Root mean square height~\cite{Shepard_1995} of the window's detrended elevation residuals, in metres. It gives the amplitude of the topography with the regional ramp removed, which distinguishes it from relief. It depends on profile length, and is retained for comparability with the space-domain roughness literature rather than as a separate degree of freedom. \\
   \addlinespace[0.5em]
   $\xi$ & Integral of the bed power spectrum over the bedform band from $300~\mathrm{m}$ to $1200~\mathrm{m}$, in $\mathrm{m^2}$. $\xi$ is the numerator of $\eta$~\cite{Li_2010}. Supported by~\cite{King_2007, Spagnolo_2017}. \\
   \addlinespace[0.5em]
   $\eta$ & Characteristic wavelength for the window, in metres, following~\cite{Li_2010}. It is the square root of the weighted harmonic mean of the square of the wavelength at each frequency in the band from $300~\mathrm{m}$ to $1200~\mathrm{m}$ with the spectrum as the weight. \\
   \addlinespace[0.5em]
-  \texttt{hill\_count} & Number of distinct local maxima in the window's detrended bed profile, similar to the bumpiness metric by \cite{Ockenden_2026} but in transect form (1D). A point counts if it is the maximum of a $5~\mathrm{km}$ box centred on it and the box relief exceeds $20~\mathrm{m}$; adjacent flagged points count once and maxima touching a window edge are dropped. Two hills must be at least $2.5~\mathrm{km}$ apart, so the count cannot exceed $20$ per $50~\mathrm{km}$ window. \\
+  \texttt{Hill count} & Number of distinct local maxima in the window's detrended bed profile, similar to the bumpiness metric by \cite{Ockenden_2026} but in transect form (1D). A point counts if it is the maximum of a $5~\mathrm{km}$ box centred on it and the box relief exceeds $20~\mathrm{m}$; adjacent flagged points count once and maxima touching a window edge are dropped. Two hills must be at least $2.5~\mathrm{km}$ apart, so the count cannot exceed $20$ per $50~\mathrm{km}$ window. \\
   \addlinespace[0.5em]
-  \texttt{skewness} & Third standardised moment of the window's detrended, untapered bed elevation residuals (bias-corrected). Positive values imply narrow highs on a broad low base, negative values mean narrow lows cut into a broad high surface, following the qualitative hills-against-troughs distinction in~\cite{Sugden_1978}. It is the only phase-asymmetry information in the vector.\\
+  \texttt{Skewness} & Third standardised moment of the window's detrended, untapered bed elevation residuals (bias-corrected). Positive values imply narrow highs on a broad low base, negative values mean narrow lows cut into a broad high surface, following the qualitative hills-against-troughs distinction in~\cite{Sugden_1978}. It is the only phase-asymmetry information in the vector.\\
   \addlinespace[0.5em]
-  \texttt{kurtosis} & Excess kurtosis of the window's detrended, untapered bed elevation residuals (bias-corrected). Positive values mean a few extreme highs or lows against a flat background, negative values mean a flat-topped or evenly spread distribution.\\
+  \texttt{Kurtosis} & Excess kurtosis of the window's detrended, untapered bed elevation residuals (bias-corrected). Positive values mean a few extreme highs or lows against a flat background, negative values mean a flat-topped or evenly spread distribution.\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \begin{table}
 \centering
-\caption{Observables that ODSA cannot supply from RES data. They are required to separate the admissible entries, or to confirm the entry on a row with one admissible entry}
+\caption{Observables that ODSA cannot supply from RES data. They are required to separate the admissible entries, or to confirm the entry on a row with one admissible entry.}
 \label{tab:externals}
 \begin{tabularx}{\textwidth}{p{4.0cm} X}
 \toprule

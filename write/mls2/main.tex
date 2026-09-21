@@ -81,13 +81,18 @@
   {\normalfont\bfseries}{}{0pt}{\Huge}
 
 \usepackage{catchfile}
-% Command to execute texcount and capture the word count
-\newcommand\wordcount[1]{
-    \immediate\write18{texcount #1.tex | grep "Words in text" | cut -d: -f2 > #1.wordcount.tmp}
-    \CatchFileDef{\mywordcount}{#1.wordcount.tmp}{}
-    \immediate\write18{rm #1.wordcount.tmp} % to remove the temporary file
-    \mywordcount % to print the word count
+\newcounter{totalwords}
+\setcounter{totalwords}{0}
+
+\makeatletter
+\newcommand\wordcount[1]{%
+    \immediate\write18{texcount -1 -sum=1,0,0,0,0,0,0 -merge #1.tex | tr -cd '0-9' > #1.wordcount.tmp}%
+    \CatchFileDef{\tempcount}{#1.wordcount.tmp}{\catcode`\^^M=9 \catcode`\ =9 }%
+    \immediate\write18{rm -f #1.wordcount.tmp}%
+    \addtocounter{totalwords}{\tempcount}%
+    \tempcount%
 }
+\makeatother
 
 \usepackage{enumitem}
 
@@ -133,12 +138,12 @@
 \include{progress}
 
 Word count:\\
-(\wordcount{aims} / 200 ) words in Aims,\\
-(\wordcount{literature_review} / 1500 ) words in Preliminary Literature Review,\\
-(\wordcount{research_significance} / 500 ) words in Research Significance,\\
-(\wordcount{project_methodology} / 500 ) words in Project Methodology,\\
-(\wordcount{progress} / 500 ) words in Progress.\\
-actual total words = 2963\\
+(\wordcount{aims} / 200) words in Aims,\\
+(\wordcount{literature_review} / 1500) words in Preliminary Literature Review,\\
+(\wordcount{research_significance} / 500) words in Research Significance,\\
+(\wordcount{project_methodology} / 500) words in Project Methodology,\\
+(\wordcount{progress} / 500) words in Progress.\\
+actual total words = \arabic{totalwords} (not including captions)\\
 allowed total words = 3200
 
 \bibliographystyle{unsrturl_mod}

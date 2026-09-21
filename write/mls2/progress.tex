@@ -11,48 +11,44 @@
 
 \section{Key research achieved (ODSA)}
 
-ODSA operates on the along-track picks published with Bedmap1 to 3 instead of a gridded product, which allows us to measure the survey data directly and avoid the interpolation issues described in Ch.~\ref{review}. The tracks used are visible in Fig.~\ref{fig:Bedmap+Ockenden_map}. 
-The ODSA pipeline splits tracks into segments, cuts them into $50~\mathrm{km}$ windows (when possible) with a $25~\mathrm{km}$ step, applies a Hann taper, and fits the spectrum over $250~\mathrm{m}$ to $50~\mathrm{km}$ using a Lomb--Scargle periodogram. The morphometric statistics measured from
-the RES data form an 11-element landscape vector (Tables~\ref{tab:axes} and~\ref{tab:descriptors}). Every vector classifier has a $\pm 2\sigma$ uncertainty envelope, so no axis is assumed to be exact. The vector is compared to a literature-based catalogue of 11 landscape archetypes. When a window matches more than one archetype, the pipeline names the axis responsible and the observable needed to break the tie (Table~\ref{tab:externals}). 
+ODSA operates on the along-track picks published with Bedmap1 to 3 rather than a
+gridded product (Ch.~\ref{review}). The tracks we use are shown in Fig.~\ref{fig:Bedmap+Ockenden_map}. The ODSA pipeline splits tracks into segments, cuts them into $50~\mathrm{km}$ windows (when possible) with a $25~\mathrm{km}$ step, applies a Hann taper, and fits the spectrum over $250~\mathrm{m}$ to $50~\mathrm{km}$ using a Lomb--Scargle periodogram. 
+Fig.~\ref{fig:catalogue_examples} shows a subset of ODSA's catalogue, catalogue entries are paired with an analysed window in five of the seven regions in(Fig.~\ref{fig:7regions}) as proof of concept. We analysed a total of 651 windows, 650 of which fall in a classified (non-dune) cell. Our main results include: a transect bounds the landscape class but does not identify it with only RES data. Of the 11 catalogue entries, the median number still admissible per window is 2. The windows split into 402 degenerate, 135 resolved, 84 out-of-catalogue and 30 resolved-with-external.
+
+In the case of our catalogue we found that a combination of our classifiers narrowed down the set of admissible landscape classes more than any single classifier for the windows analysed (Fig.~\ref{fig:hypothesis_test}). The figure shows the best combination at each number of classifiers. Resolved fraction peaks with $\beta$, relief and velocity (27\%). Adding elevation lowers it to 25\% and nearly doubles the out-of-catalogue rate, from 7\% to 13\%. However, elevation is the classifier that separates the most classes of the Ockenden et al.~\cite{Ockenden_2026} classification (Fig.~\ref{fig:ockenden_matrix}). Their classification is constructed from gridded bed elevation, so this is expected. Yet we found that no combination of our classifiers separates their alpine and selective-erosion classes from one another.
+
+The classes reported by Ockenden et al.~\cite{Ockenden_2026} are partly defined by roughness metrics (rms slope, hill counts, Fourier fractal dimension), yet over all valid 650 windows our roughness measures ($\beta$, relief, and the descriptors) barely separate them. 
+A window can straddle two cells of different class. When we restricted to the 421 windows whose second-nearest cell carries the same class as the nearest, the seven descriptors together separate three of the six class pairs, including Alpine (subglacial) from Selective erosion (relict). The differing outcomes for roughness may be due to their classes resulting from an inverted, interpolated 2D grid (space-domain), while ours result from spectral measurements from 1D picks along track. The two roughness descriptions of the same ground therefore disagree, which is consistent with a gridded product not carrying the texture that a transect measures.
+
 
 \begin{figure}
-    \centering
-    \begin{minipage}[c]{0.79\textwidth}
-        \includegraphics[width=\linewidth]{figures/catalogue_examples.pdf}
-    \end{minipage}\hfill
-    \begin{minipage}[c]{0.19\textwidth}
-        \captionsetup{justification=raggedright,singlelinecheck=false}
-        \caption{Each catalogue entry is paired with a measured window, showing which entries the four classifying axes isolate and which they leave degenerate. One row per landscape catalogue entry. Each row shows a window admissible for this entry, taken from the 7 regions tested (HD: Hercules Dome, GSM: Golicyna Subglacial Mountains, PPB: Pensacola Pole Basin, HA: Highland A, MSB: Maud Subglacial Basin, RSL: Recovery Subglacial Lakes and ASB-LR: Aurora Subglacial Basin (Ockenden et al.'s low-relief cells)). Admissibility does not claim that the archetype is correct. Left: the entry's cartoon exemplifying what that landscape may look like. Centre: the region's windows as 50 km along-track footprints in grey, and the example window in its archetype colour. The title gives the region and the window's unit ID. Right, first block: the entry's bound on each of the four classifying axes, the window's value with its envelope, and the classes admitted by that envelope. Admissibility is decided on the envelope, so the class of the value itself can fall outside the entry's bound. Right, second block: the window's measured values of the seven continuous descriptors. Rows with more than one admissible entry name the others. Externals named on a row are observables that ODSA cannot supply from RES data (Table~\ref{tab:externals}).} 
-        \label{fig:catalogue_examples}
-    \end{minipage}
+    \includegraphics[width=1.05\linewidth]{figures/catalogue_examples.pdf}
+    \caption{Five of the eleven catalogue entries, each paired with an admissible window, showing which entries the four classifying axes isolate and which they leave degenerate.  Each row shows a window admissible for this entry, taken from the seven regions tested (Fig.~\ref{fig:7regions}). Admissibility does not claim that the archetype is correct. Left: the entry's cartoon exemplifying what that landscape may look like. Centre: the region's windows as 50 km along-track footprints in grey, and the example window in its archetype colour. The title gives the region and the window's unit ID. Right, first block: the entry's bound on each of the four classifying axes, the window's value with its envelope, and the classes admitted by that envelope. Right, second block: the window's measured values of the seven continuous descriptors. Rows with more than one admissible entry name the others. Externals named on a row are observables that ODSA cannot supply from RES data (Table~\ref{tab:externals}).} 
+    \label{fig:catalogue_examples}
 \end{figure}
 
-Fig.~\ref{fig:catalogue_examples} shows ODSA's catalogue applied to the seven regions (Fig.~\ref{fig:7regions}), with each catalogue entry paired with an analysed window. We analysed a total of 651 windows, 650 of which fall in a classified (non-dune) cell. Our main results include: a transect bounds the landscape class but does not identify it with only RES data. Of the 11 catalogue entries, the median number still admissible per window is 2. The windows split into 402 degenerate, 135 resolved, 84 out-of-catalogue and 30 resolved-with-external.
-In the case of our catalogue we found that a combination of our classifiers narrowed down the set of admissible landscape classes more than any single classifier for the windows analysed (Fig.~\ref{fig:hypothesis_test}).  The figure shows the best combination at each number of classifiers. Resolution peaks with $\beta$, relief and velocity (27\%). Adding elevation lowers it to 25\% and nearly doubles the out-of-catalogue rate, from 7\% to 13\%, so elevation converts windows rather than resolving them. However, elevation is the classifier that separates the most classes of the Ockenden et al.~\cite{Ockenden_2026} classification (Fig.~\ref{fig:ockenden_matrix}). Their classification is constructed from gridded bed elevation, so this is expected. Yet we found that no combination of our classifiers separates their alpine and selective-erosion classes from one another.
 \begin{figure}
     \includegraphics[scale=0.7]{figures/hypothesis_test.pdf}
-    \caption{Best axis combination at each size (each unit is a window). $\beta$ (B), relief (R), velocity (V), elevation (E). A set of one is a bound that excluded ten entries, not an identification.} 
+    \caption{Best axis combination at each size (each unit is a window). $\beta$ (B), relief (R), velocity (V), elevation (E). A window resolved to one entry has had the other ten excluded by its bounds; this is not an identification.} 
     \label{fig:hypothesis_test}
 \end{figure}
 
 \begin{figure}
     \includegraphics[scale=0.48]{figures/ockenden_combinations_matrix.pdf}
-    \caption{Separation of the Ockenden et al.~\cite{Ockenden_2026} landscape classes by combinations of vector elements, over 650 analysed (non-dune) windows. Each column is one combination of the four classifying axes, the 7 descriptors together or all 11 elements together, and the black dots in the lower panel show the elements it uses. Each row in the upper panel is a pair of Ockenden et al. classes. Each window is 50 km and so is her cell, so a window can straddle two Ockenden cells of different class: the test runs over all 650 co-located windows and again over the 421 windows whose second-nearest cell carries the same class as the nearest. Square colour gives the two outcomes, and the numbers above each column are the counts of separated pairs in the two sets. Two classes are separated when the vector of their median differences is at least 1 pooled standard deviation long and at least a threshold number of standard errors long, both measured with the covariance of the combined elements. Classes with fewer than 10 windows (Alpine (subaerial)) are not tested.} 
+    \caption{Separation of the Ockenden et al.~\cite{Ockenden_2026} landscape classes by combinations of vector elements, over 650 analysed (non-dune) windows. Each column is one combination of the four classifying axes, the 7 descriptors together or all 11 elements together, and the black dots in the lower panel show the elements it uses. Square colour gives the two outcomes, and the numbers above each column are the counts of separated pairs in the two sets defined in the text (all 650 co-located windows, and the 421-window restricted set). Two classes are separated when the vector of their median differences is at least 1 pooled standard deviation long and at least a threshold number of standard errors long (depending on the number of elements in the combination), both measured with the covariance of the combined elements. Classes with fewer than 10 windows (Alpine (subaerial)) are not tested.} 
     \label{fig:ockenden_matrix}
 \end{figure}
 
-The classes reported by Ockenden et al.~\cite{Ockenden_2026} are partly defined by roughness metrics (rms slope, hill counts, Fourier fractal dimension), yet over all valid 650 windows our roughness measures ($\beta$, relief, and the descriptors) separate them barely at all. 
-One of our windows can straddle two different class cells. When we restricted to the 421 windows whose second-nearest cell carries the same class as the nearest, the seven descriptors together separate three of the six class pairs, including Alpine (subglacial) from Selective erosion (relict). The differing outcomes for roughness may be due to their classes resulting from an inverted, interpolated 2D grid (space-domain), while ours result from spectral measurements from 1D picks along track. The two roughness descriptions of the same ground therefore disagree, which is consistent with a gridded product not carrying the texture that a transect measures.
-
+ \clearpage
 \section{Thesis Progress Summary}
 
 We plan to submit a ``Thesis Including Published Works''.
-The thesis chapters will include: An introduction, the three journal articles (papers) as outlined in Ch.~\ref{aims}, and a synthesis of the outputs for each as a conclusion.
+The thesis chapters will include: an introduction, the three journal articles (papers) as outlined in Ch.~\ref{aims}, and a synthesis of the outputs for each as a conclusion.
 The current status in Fig.~\ref{fig:timeline} for each of these thesis chapters is: 
 \begin{itemize}
     \item\textbf{Introduction}: complete (pending additions for papers 2 and 3)
     \item\textbf{Paper 1 — ODSA}: code workflow exists, paper writing started in September 2026 and is in progress.
-    \item\textbf{Paper 2 — Bedrock factory}: code workflow exists, paper writing has not started.
+    \item\textbf{Paper 2 — Bedrock factory}: code exists, paper writing has not started.
     \item\textbf{Paper 3 — BedSAT: Antarctica}: code workflow does not exist, paper writing has not started.
     \item\textbf{Conclusion}: writing has not started.
 \end{itemize}
@@ -69,7 +65,7 @@ I require high performance computing resources (including compute and storage) f
 
 Already accessed for \textbf{Paper 1 — ODSA}:
 \begin{itemize}
-    \item\textbf{Data}: Bedmap1 to 3~\cite{Lythe_2001, Fretwell_2013, Pritchard_2025}, MEaSUREs velocity~\cite{Rignot_2017}, REMA~\cite{REMA}, and Ockenden data release~\cite{Ockenden_2025_data}.
+    \item\textbf{Data}: Bedmap1 to 3~\cite{Lythe_2001, Fretwell_2013, Pritchard_2025}, MEaSUREs speed~\cite{Rignot_2017}, REMA~\cite{REMA}, and Ockenden data release~\cite{Ockenden_2025_data}.
     \item\textbf{Software}: Python.
 \end{itemize}
 
@@ -80,7 +76,6 @@ Data will be published adhering to FAIR principles (Findable, Accessible, Intero
 \section{Timeline}
 \begin{figure}[H]
 \includegraphics[width=0.8\linewidth]{figures/timeline.pdf}
-\caption{Project timeline. In the Project Objective section, the
-  colour of each bar shows which paper the task contributes to. The circle next to each item is an estimate of how complete it is: a quarter-filled circle means that the prototype of the code and workflow exists. A half-filled circle means that the task workflow is in progress. A three-quarter-filled circle means that the results are complete and a paper needs to be written up or the task needs to be officially approved by the panel. A filled circle means that the task is complete.}
+\caption{Project timeline. In the Project Objective section, the colour of each bar shows which paper the task contributes to. Completion status for each task and what it means: quarter-filled—the code workflow exists, half-filled—results pending, three-quarter—results are complete with write-up pending.}
   \label{fig:timeline}
 \end{figure}
