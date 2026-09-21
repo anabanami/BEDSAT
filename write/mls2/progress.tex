@@ -1,28 +1,19 @@
 \chapter{Progress}\label{progress}
 
-% Detailed statement of progress to date, including:
-% [X] a summary of key research activities and outcomes
-% [X] a list of any publications generated from your research (if applicable)
-% [] a summary of any major changes in research direction
-% [X] a summary of thesis progress, chapters and their preliminary titles
-% [X] Anticipated progress in next 12 months including:
-% [X] a brief timetable of planned research activities
-% [X] a statement of the resources required to achieve these outcomes
-
 \section{Key research achieved (ODSA)}
 
 ODSA operates on the along-track picks published with Bedmap1 to 3 rather than a
-gridded product (Ch.~\ref{review}). The tracks we use are shown in Fig.~\ref{fig:Bedmap+Ockenden_map}. The ODSA pipeline splits tracks into segments, cuts them into $50~\mathrm{km}$ windows (when possible) with a $25~\mathrm{km}$ step, applies a Hann taper, and fits the spectrum over $250~\mathrm{m}$ to $50~\mathrm{km}$ using a Lomb--Scargle periodogram. 
-Fig.~\ref{fig:catalogue_examples} shows a subset of ODSA's catalogue, catalogue entries are paired with an analysed window in five of the seven regions in(Fig.~\ref{fig:7regions}) as proof of concept. We analysed a total of 651 windows, 650 of which fall in a classified (non-dune) cell. Our main results include: a transect bounds the landscape class but does not identify it with only RES data. Of the 11 catalogue entries, the median number still admissible per window is 2. The windows split into 402 degenerate, 135 resolved, 84 out-of-catalogue and 30 resolved-with-external.
+gridded product (Ch.~\ref{review}). The tracks used are shown in Fig.~\ref{fig:Bedmap+Ockenden_map}. The ODSA pipeline splits tracks into segments, cuts them into $50~\mathrm{km}$ windows (when possible) with a $25~\mathrm{km}$ step, applies a Hann taper, and fits the spectrum over $250~\mathrm{m}$ to $50~\mathrm{km}$ using a Lomb--Scargle periodogram. 
+Fig.~\ref{fig:catalogue_examples} shows a subset of ODSA's catalogue, catalogue entries are paired with an analysed window in five of the seven regions in(Fig.~\ref{fig:7regions}) as proof of concept. I analysed a total of 651 windows, 650 of which fall in a classified (non-dune) cell. My main results include: a transect bounds the landscape class but does not identify it with only RES data. Of the 11 catalogue entries, the median number still admissible per window is 2. The windows split into 402 degenerate, 135 resolved, 84 out-of-catalogue and 30 resolved-with-external.
 
-In the case of our catalogue we found that a combination of our classifiers narrowed down the set of admissible landscape classes more than any single classifier for the windows analysed (Fig.~\ref{fig:hypothesis_test}). The figure shows the best combination at each number of classifiers. Resolved fraction peaks with $\beta$, relief and velocity (27\%). Adding elevation lowers it to 25\% and nearly doubles the out-of-catalogue rate, from 7\% to 13\%. However, elevation is the classifier that separates the most classes of the Ockenden et al.~\cite{Ockenden_2026} classification (Fig.~\ref{fig:ockenden_matrix}). Their classification is constructed from gridded bed elevation, so this is expected. Yet we found that no combination of our classifiers separates their alpine and selective-erosion classes from one another.
+In the case of my catalogue I found that a combination of classifiers narrowed down the set of admissible landscape classes more than any single classifier for the windows analysed (Fig.~\ref{fig:hypothesis_test}). The figure shows the best combination at each number of classifiers. Resolved fraction peaks with $\beta$, relief and velocity (27\%). Adding elevation lowers it to 25\% and nearly doubles the out-of-catalogue rate, from 7\% to 13\%. However, elevation is the classifier that separates the most classes of the Ockenden et al.~\cite{Ockenden_2026} classification (Fig.~\ref{fig:ockenden_matrix}). Their classification is constructed from gridded bed elevation, so this is expected. Yet I found that no combination of classifiers separates their alpine and selective-erosion classes from one another.
 
-The classes reported by Ockenden et al.~\cite{Ockenden_2026} are partly defined by roughness metrics (rms slope, hill counts, Fourier fractal dimension), yet over all valid 650 windows our roughness measures ($\beta$, relief, and the descriptors) barely separate them. 
-A window can straddle two cells of different class. When we restricted to the 421 windows whose second-nearest cell carries the same class as the nearest, the seven descriptors together separate three of the six class pairs, including Alpine (subglacial) from Selective erosion (relict). The differing outcomes for roughness may be due to their classes resulting from an inverted, interpolated 2D grid (space-domain), while ours result from spectral measurements from 1D picks along track. The two roughness descriptions of the same ground therefore disagree, which is consistent with a gridded product not carrying the texture that a transect measures.
+The classes reported by Ockenden et al.~\cite{Ockenden_2026} are partly defined by roughness metrics (RMS slope, hill counts, Fourier fractal dimension), yet over all valid 650 windows my roughness measures ($\beta$, relief, and the descriptors) barely separate them. 
+A window can straddle two cells of different class. When I restricted to the 421 windows whose second-nearest cell carries the same class as the nearest, the seven descriptors together separate three of the six class pairs, including Alpine (subglacial) from Selective erosion (relict). The differing outcomes for roughness may be due to their classes resulting from an inverted, interpolated 2D grid (space-domain), while mine result from spectral measurements from 1D picks along track. The two roughness descriptions of the same ground therefore disagree, which is consistent with a gridded product not carrying the texture that a transect measures.
 
 
 \begin{figure}
-    \includegraphics[width=1.05\linewidth]{figures/catalogue_examples.pdf}
+    \includegraphics[width=\linewidth]{figures/catalogue_examples.pdf}
     \caption{Five of the eleven catalogue entries, each paired with an admissible window, showing which entries the four classifying axes isolate and which they leave degenerate.  Each row shows a window admissible for this entry, taken from the seven regions tested (Fig.~\ref{fig:7regions}). Admissibility does not claim that the archetype is correct. Left: the entry's cartoon exemplifying what that landscape may look like. Centre: the region's windows as 50 km along-track footprints in grey, and the example window in its archetype colour. The title gives the region and the window's unit ID. Right, first block: the entry's bound on each of the four classifying axes, the window's value with its envelope, and the classes admitted by that envelope. Right, second block: the window's measured values of the seven continuous descriptors. Rows with more than one admissible entry name the others. Externals named on a row are observables that ODSA cannot supply from RES data (Table~\ref{tab:externals}).} 
     \label{fig:catalogue_examples}
 \end{figure}
@@ -42,7 +33,7 @@ A window can straddle two cells of different class. When we restricted to the 42
  \clearpage
 \section{Thesis Progress Summary}
 
-We plan to submit a ``Thesis Including Published Works''.
+I plan to submit a ``Thesis Including Published Works''.
 The thesis chapters will include: an introduction, the three journal articles (papers) as outlined in Ch.~\ref{aims}, and a synthesis of the outputs for each as a conclusion.
 The current status in Fig.~\ref{fig:timeline} for each of these thesis chapters is: 
 \begin{itemize}
