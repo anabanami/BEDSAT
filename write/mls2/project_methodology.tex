@@ -44,8 +44,8 @@ My proposal is that to bound subglacial landscape class it is necessary to have 
   \addlinespace[0.5em]
   \texttt{Relief} & Elevation range within a window, calculated as $\max\mathrm{(bed)} - \min\mathrm{(bed)}$ over the raw 50 km profile, in metres. It gives the amplitude of the largest structure a window contains. Regional slope enters the range directly. Relief classes are flat: $<350~\mathrm{m}$; mountainous: $\geq~800~\mathrm{m}$; while values in between these are labelled as subdued. These are set based on the median relief for the tested regions.\\
   \addlinespace[0.5em]
-  \texttt{MEaSUREs speed} & Mean MEaSUREs InSAR surface speed at the window's track points, sampled over the same points that enter the spectral fit. Bands are \texttt{very\_low} ($<5$), \texttt{low} ($5$ to $<10$), \texttt{moderate} ($10$ to $<50$) and \texttt{fast} ($\geq50$) all in m/yr and set operationally. Antarctic surface speed is bimodal, with a slow
-  mode at $4$ to $5~\mathrm{m/yr}$ and a fast mode at $250~\mathrm{m/yr}$, and measured speed departs from internal deformation above about $15~\mathrm{m/yr}$~\cite{Rignot_2011}. Each window carries a sampled error from the \texttt{ERRX/ERRY} fields of that product~\cite{Rignot_2017}.\\
+  \texttt{MEaSUREs speed} & Mean MEaSUREs InSAR surface ice speed at the window's track points, sampled over the same points that enter the spectral fit. Bands are \texttt{very\_low} ($<5$), \texttt{low} ($5$ to $<10$), \texttt{moderate} ($10$ to $<50$) and \texttt{fast} ($\geq50$) all in m/yr and set operationally. Antarctic surface speed is bimodal, with a slow
+  mode at $4$ to $5~\mathrm{m/yr}$ and a fast mode at $250~\mathrm{m/yr}$, and measured speed departs from internal deformation above about $15~\mathrm{m/yr}$~\cite{Rignot_2011}. Each window carries a sampled error from the \texttt{ERRX/ERRY} fields of MEaSUREs~\cite{Rignot_2017}.\\
   \addlinespace[0.5em]
   \texttt{Elevation} & The mean bed elevation within a window, in metres above present-day sea level. Classes are submerged: $<0~\mathrm{m}$; elevated at $\geq~1000~\mathrm{m}$, and emerged for values in between. Motivated by~\cite{Siegert_2004, Rippin_2014, Frederick_2016}. \\
 \bottomrule
@@ -79,19 +79,19 @@ My proposal is that to bound subglacial landscape class it is necessary to have 
 
 \begin{table}
 \centering
-\caption{Observables that ODSA cannot supply from RES data. They are required to separate the admissible entries, or to confirm the entry on a row with one admissible entry.}
+\caption{Observables that ODSA cannot supply from the picked ice-bed interface. They are required to separate the admissible entries, or to confirm the entry on a row with one admissible entry.}
 \label{tab:externals}
 \begin{tabularx}{\textwidth}{p{4.0cm} X}
 \toprule
 \textbf{External} & \textbf{Description} \\
 \midrule
-  Reflectivity & Ice-water vs ice-sediment interface (specularity). Required by: BASIN. Separates: water from sediment under a flat, soft, submerged bed. Why ODSA can't measure it: needs raw radargram waveform amplitude. \\
+  Reflectivity & Bed-echo strength and specularity. An ice–water interface returns a bright, specular echo. Required by: BASIN. Separates: water from sediment under a flat, soft, submerged bed. Why ODSA doesn't measure it: ODSA uses the picked ice-bed interface, not the returned power and phase from which reflectivity and specularity are measured. \\
   \addlinespace[0.5em]
-  Composition & Gravity / magnetics (sediment vs smooth bedrock). Required by: BASIN-HIGH. Separates: smooth hard bedrock from soft sediment. Why ODSA can't measure it: needs airborne gravity or magnetics\\
+  Composition & Gravity / magnetics (sediment vs smooth bedrock). Required by: BASIN-HIGH. Separates: smooth hard bedrock from soft sediment. Why ODSA doesn't measure it: needs airborne gravity or magnetics.\\
   \addlinespace[0.5em]
-  Flow history & Disrupted internal layers, dating (active vs relict). Required by: TRUNK-RELICT. Separates: TRUNK-RELICT from BASIN. Why ODSA can't measure it: needs disrupted internal layers or dating. \\
+  Flow history & Disrupted internal layers, dating (active vs relict). Required by: TRUNK-RELICT. Separates: TRUNK-RELICT from BASIN. Why ODSA doesn't measure it: needs disrupted internal layers or dating. \\
   \addlinespace[0.5em]
-  Origin & Erosional vs structural provenance of the trough-ridge contrast. Required by: DISSECTED. Separates: the three possible origins of DISSECTED, and DISSECTED from RIFT. Why ODSA can't measure it: needs independent geological context\\
+  Origin & Erosional vs structural provenance of the trough-ridge contrast. Required by: DISSECTED. Separates: the three possible origins of DISSECTED, and DISSECTED from RIFT. Why ODSA doesn't measure it: needs independent geological context\\
 \bottomrule
 \end{tabularx}
 \end{table}

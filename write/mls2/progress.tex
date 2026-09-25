@@ -2,19 +2,29 @@
 
 \section{Key research achieved (ODSA)}
 
-ODSA operates on the along-track picks published with Bedmap1 to 3 rather than a
-gridded product (Ch.~\ref{review}). The tracks used are shown in Fig.~\ref{fig:Bedmap+Ockenden_map}. The ODSA pipeline splits tracks into segments, cuts them into $50~\mathrm{km}$ windows (when possible) with a $25~\mathrm{km}$ step, applies a Hann taper, and fits the spectrum over $250~\mathrm{m}$ to $50~\mathrm{km}$ using a Lomb--Scargle periodogram. 
-Fig.~\ref{fig:catalogue_examples} shows a subset of ODSA's catalogue, catalogue entries are paired with an analysed window in five of the seven regions in(Fig.~\ref{fig:7regions}) as proof of concept. I analysed a total of 651 windows, 650 of which fall in a classified (non-dune) cell. My main results include: a transect bounds the landscape class but does not identify it with only RES data. Of the 11 catalogue entries, the median number still admissible per window is 2. The windows split into 402 degenerate, 135 resolved, 84 out-of-catalogue and 30 resolved-with-external.
+I have built ODSA and applied it to $651$ windows in seven Antarctic regions: a single
+transect narrows the landscape class to a median of two of the eleven catalogue entries,
+resolves $21$\% of windows to one entry, and ODSA's roughness measures barely separate the
+classes of the gridded Ockenden et al.~\cite{Ockenden_2026} classification.
+ODSA operates on the along-track picks of ice-bed interface elevation published with
+Bedmap1 to 3 rather than a gridded product (Ch.~\ref{review}). The tracks used are shown
+in Fig.~\ref{fig:Bedmap+Ockenden_map}. The ODSA pipeline splits tracks into segments, cuts
+them into $50~\mathrm{km}$ windows (when possible) with a $25~\mathrm{km}$ step (i.e.
+$50$\% overlap), applies a Hann taper, and fits the spectrum over $250~\mathrm{m}$ to
+$50~\mathrm{km}$ using a Lomb--Scargle periodogram.
+Fig.~\ref{fig:catalogue_examples} shows a subset of ODSA's catalogue, in which each entry
+is paired with an analysed window from five of the seven regions
+(Fig.~\ref{fig:7regions}) as proof of concept. Of the $651$ windows, $650$ fall in an Ockenden et al. cell with a valid landscape class, and the windows split into $402$ degenerate, $135$ resolved, $84$ out-of-catalogue and $30$ resolved-with-external.
 
 In the case of my catalogue I found that a combination of classifiers narrowed down the set of admissible landscape classes more than any single classifier for the windows analysed (Fig.~\ref{fig:hypothesis_test}). The figure shows the best combination at each number of classifiers. Resolved fraction peaks with $\beta$, relief and velocity (27\%). Adding elevation lowers it to 25\% and nearly doubles the out-of-catalogue rate, from 7\% to 13\%. However, elevation is the classifier that separates the most classes of the Ockenden et al.~\cite{Ockenden_2026} classification (Fig.~\ref{fig:ockenden_matrix}). Their classification is constructed from gridded bed elevation, so this is expected. Yet I found that no combination of classifiers separates their alpine and selective-erosion classes from one another.
 
-The classes reported by Ockenden et al.~\cite{Ockenden_2026} are partly defined by roughness metrics (RMS slope, hill counts, Fourier fractal dimension), yet over all valid 650 windows my roughness measures ($\beta$, relief, and the descriptors) barely separate them. 
-A window can straddle two cells of different class. When I restricted to the 421 windows whose second-nearest cell carries the same class as the nearest, the seven descriptors together separate three of the six class pairs, including Alpine (subglacial) from Selective erosion (relict). The differing outcomes for roughness may be due to their classes resulting from an inverted, interpolated 2D grid (space-domain), while mine result from spectral measurements from 1D picks along track. The two roughness descriptions of the same ground therefore disagree, which is consistent with a gridded product not carrying the texture that a transect measures.
+The classes reported by Ockenden et al.~\cite{Ockenden_2026} are partly defined by roughness metrics (RMS slope, hill counts, Fourier fractal dimension), yet over all $650$ valid windows ODSA's roughness measures ($\beta$, relief, and the descriptors) barely separate them. 
+A window can straddle two cells of different class. When I restricted to the 421 windows whose second-nearest cell carries the same class as the nearest, the seven descriptors together separate three of the six class pairs, including Alpine (subglacial) from Selective erosion (relict). The differing outcomes for roughness may be due to their classes resulting from an inverted, interpolated 2D grid (space-domain), while mine result from spectral measurements from 1D bed elevation picks along track. The two roughness descriptions of the same ground therefore disagree, which is consistent with a gridded product not carrying the texture that a transect measures.
 
 
 \begin{figure}
     \includegraphics[width=\linewidth]{figures/catalogue_examples.pdf}
-    \caption{Five of the eleven catalogue entries, each paired with an admissible window, showing which entries the four classifying axes isolate and which they leave degenerate.  Each row shows a window admissible for this entry, taken from the seven regions tested (Fig.~\ref{fig:7regions}). Admissibility does not claim that the archetype is correct. Left: the entry's cartoon exemplifying what that landscape may look like. Centre: the region's windows as 50 km along-track footprints in grey, and the example window in its archetype colour. The title gives the region and the window's unit ID. Right, first block: the entry's bound on each of the four classifying axes, the window's value with its envelope, and the classes admitted by that envelope. Right, second block: the window's measured values of the seven continuous descriptors. Rows with more than one admissible entry name the others. Externals named on a row are observables that ODSA cannot supply from RES data (Table~\ref{tab:externals}).} 
+    \caption{Five of the eleven catalogue entries, each paired with an admissible window, showing which entries the four classifying axes isolate and which they leave degenerate.  Each row shows a window admissible for this entry, taken from the seven regions tested (Fig.~\ref{fig:7regions}). Admissibility does not claim that the archetype is correct. Left: the entry's cartoon exemplifying what that landscape may look like. Centre: the region's windows as 50 km along-track footprints in grey, and the example window in its archetype colour. The title gives the region and the window's unit ID. Right, first block: the entry's bound on each of the four classifying axes, the window's value with its envelope, and the classes admitted by that envelope. Right, second block: the window's measured values of the seven continuous descriptors. Rows with more than one admissible entry name the others. Externals named on a row are observables that ODSA cannot supply from the picked ice-bed interface (Table~\ref{tab:externals}).} 
     \label{fig:catalogue_examples}
 \end{figure}
 
@@ -26,13 +36,14 @@ A window can straddle two cells of different class. When I restricted to the 421
 
 \begin{figure}
     \includegraphics[scale=0.48]{figures/ockenden_combinations_matrix.pdf}
-    \caption{Separation of the Ockenden et al.~\cite{Ockenden_2026} landscape classes by combinations of vector elements, over 650 analysed (non-dune) windows. Each column is one combination of the four classifying axes, the 7 descriptors together or all 11 elements together, and the black dots in the lower panel show the elements it uses. Square colour gives the two outcomes, and the numbers above each column are the counts of separated pairs in the two sets defined in the text (all 650 co-located windows, and the 421-window restricted set). Two classes are separated when the vector of their median differences is at least 1 pooled standard deviation long and at least a threshold number of standard errors long (depending on the number of elements in the combination), both measured with the covariance of the combined elements. Classes with fewer than 10 windows (Alpine (subaerial)) are not tested.} 
+    \caption{Separation of the Ockenden et al.~\cite{Ockenden_2026} landscape classes by combinations of vector elements, over 650 analysed windows. Each column is one combination of the four classifying axes, the 7 descriptors together or all 11 elements together, and the black dots in the lower panel show the elements it uses. Square colour gives the two outcomes, and the numbers above each column are the counts of separated pairs in the two sets defined in the text (all 650 co-located windows, and the 421-window restricted set). Two classes are separated when the vector of their median differences is at least 1 pooled standard deviation long and at least a threshold number of standard errors long (depending on the number of elements in the combination), both measured with the covariance of the combined elements. Classes with fewer than 10 windows (Alpine (subaerial)) are not tested.} 
     \label{fig:ockenden_matrix}
 \end{figure}
 
  \clearpage
 \section{Thesis Progress Summary}
 
+The introduction is complete, Paper 1 (ODSA) is being written, Paper 2 (Bedrock factory) has working code, and Paper 3 (BedSAT: Antarctica) has not started.
 I plan to submit a ``Thesis Including Published Works''.
 The thesis chapters will include: an introduction, the three journal articles (papers) as outlined in Ch.~\ref{aims}, and a synthesis of the outputs for each as a conclusion.
 The current status in Fig.~\ref{fig:timeline} for each of these thesis chapters is: 
@@ -46,8 +57,7 @@ The current status in Fig.~\ref{fig:timeline} for each of these thesis chapters 
 The anticipated progress in the next 12 months includes finalising the writing of \textbf{Paper 1 — ODSA}, and continuing with the next stages of \textbf{Paper 2 — Bedrock factory}. However, the next 12 months of this project will be interrupted for 8 months total by maternity leave as shown in Fig.~\ref{fig:timeline}. The study load will also potentially be reduced to part-time after maternity leave ends, which moves the pending milestones for this project. 
 
 \section{Resources}\label{resources}
-
-I require high performance computing resources (including compute and storage) from the National Computing Infrastructure (NCI). These resources are already available via a Flagship between NCI and the Monash-led Australian Research Council project Securing Antarctica’s Environmental Future (SAEF).\\
+The high performance computing resources (compute and storage) that this project requires are already available from the National Computing Infrastructure (NCI), through a Flagship between NCI and the Monash-led Australian Research Council project Securing Antarctica's Environmental Future (SAEF).\\
 \begin{itemize}
     \item\textbf{HPC time} for ISSM forward models.
     \item\textbf{GPU time} for PhysicsNeMo training (Forward model-ML and Inverse model-ML).
