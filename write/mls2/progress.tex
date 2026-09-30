@@ -4,7 +4,7 @@
 
 I have built ODSA and applied it to $651$ windows in seven Antarctic regions: a single
 transect narrows the landscape class to a median of two of the eleven catalogue entries,
-resolves $21$\% of windows to one entry, and ODSA's roughness measures barely separate the
+resolves $15$\% of windows to one entry (a further $7$\% resolve pending an external), and ODSA's roughness measures barely separate the
 classes of the gridded Ockenden et al.~\cite{Ockenden_2026} classification.
 ODSA operates on the along-track picks of ice-bed interface elevation published with
 Bedmap1 to 3 rather than a gridded product (Ch.~\ref{review}). The tracks used are shown
@@ -14,9 +14,9 @@ $50$\% overlap), applies a Hann taper, and fits the spectrum over $250~\mathrm{m
 $50~\mathrm{km}$ using a Lomb--Scargle periodogram.
 Fig.~\ref{fig:catalogue_examples} shows a subset of ODSA's catalogue, in which each entry
 is paired with an analysed window from five of the seven regions
-(Fig.~\ref{fig:7regions}) as proof of concept. Of the $651$ windows, $650$ fall in an Ockenden et al. cell with a valid landscape class, and the windows split into $402$ degenerate, $135$ resolved, $84$ out-of-catalogue and $30$ resolved-with-external.
+(Fig.~\ref{fig:7regions}) as proof of concept. Of the $651$ windows, $650$ fall in an Ockenden et al. cell with a valid landscape class, and the windows split into $425$ degenerate, $97$ resolved, $82$ out-of-catalogue and $47$ resolved-with-external.
 
-In the case of my catalogue I found that a combination of classifiers narrowed down the set of admissible landscape classes more than any single classifier for the windows analysed (Fig.~\ref{fig:hypothesis_test}). The figure shows the best combination at each number of classifiers. Resolved fraction peaks with $\beta$, relief and velocity (27\%). Adding elevation lowers it to 25\% and nearly doubles the out-of-catalogue rate, from 7\% to 13\%. However, elevation is the classifier that separates the most classes of the Ockenden et al.~\cite{Ockenden_2026} classification (Fig.~\ref{fig:ockenden_matrix}). Their classification is constructed from gridded bed elevation, so this is expected. Yet I found that no combination of classifiers separates their alpine and selective-erosion classes from one another.
+In the case of my catalogue I found that a combination of classifiers narrowed down the set of admissible landscape classes more than any single classifier for the windows analysed (Fig.~\ref{fig:hypothesis_test}). The figure shows the best combination at each number of classifiers. Resolved fraction peaks with $\beta$, relief and velocity (24\%). Adding elevation lowers it to 22\% and nearly doubles the out-of-catalogue rate, from 7\% to 13\%. However, elevation is the classifier that separates the most classes of the Ockenden et al.~\cite{Ockenden_2026} classification (Fig.~\ref{fig:ockenden_matrix}). Their classification is constructed from gridded bed elevation, so this is expected. Yet I found that no combination of classifiers separates their alpine and selective-erosion classes from one another.
 
 The classes reported by Ockenden et al.~\cite{Ockenden_2026} are partly defined by roughness metrics (RMS slope, hill counts, Fourier fractal dimension), yet over all $650$ valid windows ODSA's roughness measures ($\beta$, relief, and the descriptors) barely separate them. 
 A window can straddle two cells of different class. When I restricted to the 421 windows whose second-nearest cell carries the same class as the nearest, the seven descriptors together separate three of the six class pairs, including Alpine (subglacial) from Selective erosion (relict). The differing outcomes for roughness may be due to their classes resulting from an inverted, interpolated 2D grid (space-domain), while mine result from spectral measurements from 1D bed elevation picks along track. The two roughness descriptions of the same ground therefore disagree, which is consistent with a gridded product not carrying the texture that a transect measures.
